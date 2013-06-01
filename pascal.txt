@@ -169,3 +169,179 @@ Una stringa è una sequenza di caratteri racchiusa tra apici.
 'Io sono una stringa di testo'
 ------------------------------------------------------------------------------
 
+Tipi di dato, costanti e variabili
+----------------------------------
+
+Tipi di dato
+~~~~~~~~~~~~
+
+In pascal distinguiamo tra tipi di dati sempli e strutturati; vediamo quali
+sono:
+
+* Dati di tipo semplice
+ ** Tipi Standard
+  *** Integer
+  *** Real
+  *** Char
+  *** Boolean
+ ** Tipi dichiarati
+   *** Enumerati
+   *** Sottocampi
+* Dati di tipo stringa
+* Dati strutturati
+ ** Record
+ ** Array
+ ** Set
+ ** File
+* Dati di tipo puntatore
+
+Costanti
+~~~~~~~~
+
+Una costante è un oggetto che rimane sempre con lo stesso valore per tutta la
+durata del programma.
+
+La struttura per dichiarare una costante è la seguente:
+
+------------------------------------------------------------------------------
+const <identificatore> = <valore>;
+------------------------------------------------------------------------------
+
+.esempio
+------------------------------------------------------------------------------
+const settimana = 7;
+const ore = 24;
+------------------------------------------------------------------------------
+
+Variabili
+~~~~~~~~~
+
+Le variabili sono degli oggetti che possono assumere valori di un certo tipo;
+durante l'esecuzione del programma il loro valoro può essere modificato ma il
+tipo di dato deve rimanere lo stesso (una variabile `integer` può memorizzare
+solo dati di tipo intero).
+
+Le varibili vanno dichiarate nel seguente modo:
+
+------------------------------------------------------------------------------
+var <var1>,<var2>, ... : <tipo di dato>;
+------------------------------------------------------------------------------
+
+.esempio
+------------------------------------------------------------------------------
+var nome: string;
+var numero: integer;
+------------------------------------------------------------------------------
+
+Assegnazione e dati numerici
+----------------------------
+
+Operatore di assegnazione
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dopo avere dichiarato una variabile ad essa possiamo assegnare un valore; per
+farlo ricorriamo all'operatore di assegnazione.
+
+.assegnazione
+------------------------------------------------------------------------------
+<nome_variabile> := <espressione>;
+------------------------------------------------------------------------------
+
+Un espressione può essere una costante dello stesso tipo della variabile o una
+espressione complessa il cui risultato è dello stesso tipo della variabile.
+
+.esempi
+------------------------------------------------------------------------------
+var n: integer; 	{dichiarazione}
+...
+n := 10;		{assegnazione semplice}
+n := (10 + 2) * 5;	{assegnazione complessa}
+------------------------------------------------------------------------------
+
+Dati numerici
+~~~~~~~~~~~~~
+
+I dati numerici si dividono in 2 tipi: numeri interi e numeri reali. I dati
+interi sono i numeri interi (con segno) e a questo gruppo appartengono
+varibili costanti e funzioni che producono numeri interi; in pascal il tipo
+corrispondente ai numeri interi è il tipo `integer`. 
+
+La tabella seguente riassume gli operatori aritmetici che operano sugli
+`integer`.
+
+|=============================================
+|+ 		|Addizione
+|- 		|Sottrazione
+|* 		|Moltiplicazione
+|/ 		|Divisione
+|div 		|Divisione intera
+|mod 		|Resto della divisione intera
+|=============================================
+
+Questi sono operatori binari (richiedono due operandi) che operano su dati di
+tipo `integer` e il cui risultato è di tipo `integer`; quindi la divisione tra
+due interi ha come risultato un numero intero.
+
+.test_interi.pas
+------------------------------------------------------------------------------
+program test_interi; 
+var a, b, c, d: integer;
+	r: real;
+begin
+	a := 12;
+	writeln('a = ', a);
+	b := 23;
+	writeln('b = ', b);
+	c := -25;
+	writeln('c = ', c);
+	d := a + c; 		{d = 12 -25 = -13}
+	writeln('d = ', d);
+	d := b - c; 		{d = 23 - (-25) = 48}
+	writeln('d = ', d);
+	d := b div 2; 		{23 div 2 = 11 divisione intera}
+	writeln('d = ', d);
+	d := b mod 2; 		{1 è il resto di prima}
+	writeln('d = ', d);
+	r := b / 2; 		{r = 23 / 2 =11.5 divisione reale}
+	writeln('r = ', r);
+end.
+------------------------------------------------------------------------------
+
+Le stringhe
+-----------
+
+Le stringhe di caratteri in pascal rappresentano un tipo di dato proprio del
+linguaggio: il tipo `string`. Come abbiamo visto una stringa è una qualsiasi
+sequenza di caratteri racchiusa tra apici `''`.
+
+
+.dichiarazione e assegnazione di una stringa
+------------------------------------------------------------------------------
+var str: string;
+...
+str := 'hello, world';
+------------------------------------------------------------------------------
+
+Una variabile cosi dichiarata può contene al massimo una stringa di 255
+caratteri, ma è possibile dichiarare stringhe con un'ampiezza minore usando la
+seguente forma.
+
+------------------------------------------------------------------------------
+var str: string[10]; {contiene stringhe di max 10 caratteri}
+------------------------------------------------------------------------------
+
+L'operatore di concatenazione `+` permette di fondere più stringhe in una
+sola.
+
+.stringhe.pas
+------------------------------------------------------------------------------
+program stringhe;
+var s1,s2,s3: string;
+begin
+	s1 := 'rossi';
+	s2 := ''; {stringa vuota}
+	s3 := 'carlo';
+	s2 := s3 + ' ' + s1; {s2='carlo rossi'} 
+	writeln(s2);
+end.
+------------------------------------------------------------------------------
