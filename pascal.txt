@@ -282,9 +282,9 @@ Questi sono operatori binari (richiedono due operandi) che operano su dati di
 tipo `integer` e il cui risultato è di tipo `integer`; quindi la divisione tra
 due interi ha come risultato un numero intero.
 
-.test_interi.pas
+.interi.pas
 ------------------------------------------------------------------------------
-program test_interi; 
+program interi; 
 var a, b, c, d: integer;
 	r: real;
 begin
@@ -343,5 +343,112 @@ begin
 	s3 := 'carlo';
 	s2 := s3 + ' ' + s1; {s2='carlo rossi'} 
 	writeln(s2);
+end.
+------------------------------------------------------------------------------
+
+Input e output
+--------------
+
+I comandi principali per le operazioni di input/output sono due: `read` e
+`write`; il primo legge i dati dal file `input` mentre il secondo scrive sul
+file `output`. I file `input` e `output` sono associati di default alla
+tastiera e allo schermo, ma si può cambiare l'associazione di default
+legandoli a file reali o ad altri dispositivi.
+
+.`read` e `write`
+------------------------------------------------------------------------------
+read(var1, var2, ...);
+write(exp1, exp2, ...);
+------------------------------------------------------------------------------
+
+Il comando `read` legge i dati dallo standard input e li memorizza nelle
+variabili indicate; i tipi ammessi sono `char`, `string`, `integer` e `real`.
+Nello standard input i dati sono separati da uno o più spazi o da un carattere
+di fine riga (che si ottiene digitanto `invio` quando lo standard input è la
+tastiera).
+
+Il comando `write` stampa sullo standatd output la lista di dati indicata;
+possono essere passate variabili, costanti o espressioni di tipo `string`,
+`char`, `integer` o `real`.
+
+Esistono due varianti di `read` e `write` che sono rispettivamente `writeln` e
+`readln`; il primo stampa il carattere `EOL` (end of line) dopo i dati, mentre
+il secondo dopo avere letto i dati si sposta alla riga successiva (dopo il
+carattere `EOL`).
+
+.io.pas
+------------------------------------------------------------------------------
+program io;
+var i: integer;
+	r: real; c: char;
+	s: string;
+begin
+	writeln; {stampa una riga vuota}
+	write('inserisci un numero intero :');
+	readln(i);
+	writeln('hai inserito : ', i);
+	writeln;
+	write('inserisci un numero reale :');
+	readln(r);
+	writeln('hai inserito ', r);
+	writeln('hai inserito : ', r:3:4);
+	writeln;
+	write('inserisci un carattere :');
+	readln(c);
+	writeln('hai inserito : ',c);
+	writeln;
+	write('inserisci una stringa :');
+	readln(s);
+	writeln('hai inserito : ',s);
+	writeln;
+	write('inserimento multiplo di intero e reale :');
+	readln(i,r);
+	writeln('hai inserito : ',i,' ',r);
+end.
+------------------------------------------------------------------------------
+
+Formattazione dell'output
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+E' possibile formattare l'output inserendo lo spazio che un certo dato deve
+occupare sullo schermo utilizzando la seguente forma.
+
+------------------------------------------------------------------------------
+write(exp:spazio);
+------------------------------------------------------------------------------
+
+Se il dato necessita di più spazio la formattazione viene ignoratai, mentre
+nel caso in cui il dato richiede meno spazio, questo viene preservato e il
+dato viene allineato a destra.
+
+Per i dati `real` è possibile specificare un ulteriore campo per indicare
+quante cifre dopo la virgola stampare.
+
+------------------------------------------------------------------------------
+write(exp:spazio:cifre decimali);
+------------------------------------------------------------------------------
+
+Il codice seguente chiarisce il concetto.
+
+.formatted_io.pas
+------------------------------------------------------------------------------
+program formatted_io;
+var a1,a2,a3,a4,a5,a6: integer;
+begin
+	a1 := 10;
+	a2 := 334;
+	a3 := 2103;
+	a4 := 0;
+	a5 := 46;
+	a6 := 555;
+	{testo non formattato}
+	writeln('tabella:');
+	writeln(a1, ' ', a2, ' ', a3);
+	writeln(a4, ' ', a5, ' ', a6);
+	writeln;
+	{testo formattato}
+	writeln('tabella:');
+	writeln(a1:6, a2:6, a3:6); {6 colonne per dato}
+	writeln(a4:6, a5:6, a6:6);
 end.
 ------------------------------------------------------------------------------
