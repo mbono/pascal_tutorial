@@ -1,0 +1,171 @@
+Pascal tutorial
+===============
+Mariano Bono <armaoin@gmail.com>
+v0.1, Giugno 2013: in riscrittura
+:lang: it
+:toc:
+
+[abstract]
+Contenuto
+--------
+Questo documento contiene una breve panoramica sul linguaggio di
+programmazione pascal, illustrando la struttura, i costrutti, le strutture di
+controllo e i tipi di dati tipici del linguaggio.
+
+:numbered:
+Hello world
+-----------
+
+Mostriamo il classico programma `hello world` scritto in pascal. Questo codice
+non fa altro che stampare a video la stringa di testo `hello, world`.
+
+.hello.pas
+------------------------------------------------------------------------------
+{hello_world.pas: write the string "hello, world"}
+program hello;
+begin
+	writeln('hello, world');
+end.
+------------------------------------------------------------------------------
+
+Analizziamo il programma riga per riga: alla prima troviamo un commento, il
+testo scritto tra `(* *)` oppure tra `{ }` viene completamente ignorato dal
+compilatore; la riga 2 indica l'inizio del programma con la parola chiave
+`program` seguita dal nome del programma (`hello_world`); le righe 3 e 5
+definiscono l'inizio e la fine del blocco principale del programma; tra le
+parole chiave `begin` e `end` vanno inserite le instruzioni che verranno
+eseguite; La riga 4 è quella che stampa a video la stringa `hello, world`, il
+comando `writeln('testo da stampare')` scrive a video tutto quello che si
+trova tra gli apici.
+
+Struttura di un programma pascal
+---------------------------------
+
+Un programma pascal si divide generalmente in tre parti: intestazione, blocco
+delle dichiarazioni e blocco delle istruzioni.
+
+L'intestazione comincia con la parola chiave `program` seguita dal nome del
+programma e terminata da un punto e virgola.
+
+------------------------------------------------------------------------------
+program <nome_programma>;
+------------------------------------------------------------------------------
+
+Il blocco delle dichiarazioni definisce i vari dati che si usano nel programma
+ed è cosi suddiviso:
+
+* etichette (`label`);
+* costanti (`const`);
+* tipi di dato definiti dall'utente (`type`);
+* Variabili (`var`);
+* procedure e funzioni (`procedure` e `function`);
+
+Il blocco delle istruzioni contiene le istruzioni che il programma deve
+eseguire una volta avviato.
+
+Ricapitolando abbiamo la seguente struttura:
+
+-----------------------------------------------------------------------------
+{intestazione}
+program nome_programma;
+	{dichiarazioni}
+	label
+	const 
+	type
+	var
+	procedure
+	function
+begin
+	{istruzioni}
+end.
+{fine del programma}
+-----------------------------------------------------------------------------
+
+Anche se è possibile scambiare l'ordine di alcuni elementi nel blocco delle
+dichiarazioni è consigliabile non farlo e rispettare l'ordine predefinito.
+
+TIP: Per ricordarsi facilmente l'ordine corretto basta memorizzare la frase
+'La Cosa Tre Volte Più Facile': le iniziali di ogni parola coincidono con un
+elemento del programma (`label`, `const`, `type`, `var`, `procedure` e
+`function`).
+
+Parole riservate, indentificatori, numeri e stringhe
+----------------------------------------------------
+
+Parole riservate
+~~~~~~~~~~~~~~~~
+
+La tabella che segue mostra le parole riservate del pascal ANSI.
+
+|========================================================
+|`and`		|`array`	|`begin`	|`case`
+|`const`	|`div`		|`do` 		|`downto`
+|`else`		|`end`		|`file` 	|`for`
+|`forward`	|`function` 	|`goto`		|`if`
+|`in`		|`label`	|`mod` 		|`nil`
+|`not`		|`of`		|`or` 		|`packed`
+|`procedure` 	|`program` 	|`record` 	|`repeat`
+|`set`		|`then` 	|`to` 		|`type`
+|`until`	|`var` 		|`while`	|`with`
+|========================================================
+
+Questo parole sono riservate è non possono utilizzate come identificatori.
+
+Indetificatori
+~~~~~~~~~~~~~~
+
+Un identificatore è il nome che si assegna ad una parte di un programma pascal
+quale può essere una variabile, una costante, una funzione, una proceudura, o
+una label.
+
+Un identificare è costituito da una sequenza qualsiasi di lettere e cifre,
+purchè il primo carattere sia una lettera. Non sono ammessi spazi o caratteri
+diversi da numeri e lettere con l'unica eccezione del carattere underscore
+`_`. Il pascal è case-insensitive quindi non distingue tra maniuscole e
+minuscole.
+
+.alcuni esempi sugli identificatori
+------------------------------------------------------------------------------
+Pippo Pippo21 Pippo34 	{identificatori validi}
+PIPPO pippo Pippo 	{rappresentano tutti lo stesso identificatore}
+12Pippo			{non valido in quanto inizia con un numero}
+------------------------------------------------------------------------------
+
+Numeri
+~~~~~~
+
+Distinguiamo tra numeri interi e reali.
+
+I numeri interi sono una sequenza di cifre eventualmente preceduta dal segno.
+
+.numeri interi validi
+------------------------------------------------------------------------------
+124
+2345
+-34 
++22
+------------------------------------------------------------------------------
+
+I numeri reali contengono un punto decimale oppure un esponente o entrambi
+utilizzando la notazione esponenziale in base 10 dove al posto del 10 si
+utilizza il simbolo `E`.
+
+.numeri reali validi
+------------------------------------------------------------------------------
+12.3 
+434.44 
+-342.454 
++56.33
+12.4E2  {12.4x10^2}
+8.5E-2  {8.5x10^-2} 
+------------------------------------------------------------------------------
+
+Stringhe
+~~~~~~~~
+
+Una stringa è una sequenza di caratteri racchiusa tra apici.
+
+------------------------------------------------------------------------------
+'Io sono una stringa di testo'
+------------------------------------------------------------------------------
+
