@@ -13,15 +13,18 @@ programmazione pascal, illustrando la struttura, i costrutti, le strutture di
 controllo e i tipi di dati tipici del linguaggio.
 
 :numbered:
-Hello world
------------
+Struttura di un programma pascal
+---------------------------------
 
-Mostriamo il classico programma `hello world` scritto in pascal. Questo codice
+Hello world
+~~~~~~~~~~~
+
+Partiamo il classico programma `hello world` scritto in pascal. Questo codice
 non fa altro che stampare a video la stringa di testo `hello, world`.
 
 .hello.pas
 ------------------------------------------------------------------------------
-{hello_world.pas: write the string "hello, world"}
+{hello.pas: write the string "hello, world"}
 program hello;
 begin
 	writeln('hello, world');
@@ -38,8 +41,8 @@ eseguite; La riga 4 è quella che stampa a video la stringa `hello, world`, il
 comando `writeln('testo da stampare')` scrive a video tutto quello che si
 trova tra gli apici.
 
-Struttura di un programma pascal
----------------------------------
+Struttura del programma
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Un programma pascal si divide generalmente in tre parti: intestazione, blocco
 delle dichiarazioni e blocco delle istruzioni.
@@ -233,9 +236,6 @@ var nome: string;
 var numero: integer;
 ------------------------------------------------------------------------------
 
-Assegnazione e dati numerici
-----------------------------
-
 Operatore di assegnazione
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -259,7 +259,7 @@ n := (10 + 2) * 5;	{assegnazione complessa}
 ------------------------------------------------------------------------------
 
 Dati numerici
-~~~~~~~~~~~~~
+-------------
 
 I dati numerici si dividono in 2 tipi: numeri interi e numeri reali. I dati
 interi sono i numeri interi (con segno) e a questo gruppo appartengono
@@ -453,4 +453,499 @@ begin
 end.
 ------------------------------------------------------------------------------
 
-// vim: cc=78:spell spelllang=it
+Tipi di dato `boolean`
+----------------------
+
+In pascal i valori booleani formano un vero e proprio tipo di dato
+contrassegnato dall'identificatore `boolean`. Gli operatori booleani sono
+`and`, `or` e `not`; sono operatori binari che restituiscono un dato di tipo
+`boolean`.
+
+Operatori logici
+~~~~~~~~~~~~~~~~
+
+Sono operatori che confrontano due espressioni e restituiscono un valore
+booleano (`true` o `false`).
+
+|============================
+|Maggiore		|`>`
+|Maggiore o uguale	|`>=`
+|Minore			|`<`
+|Minore o uguale	|`<=`
+|Uguale			|`=`
+|Diverso		|`<>`
+|============================
+
+E' possibile confrontare tra di loro numeri numeri (anche `integer` con
+`real`), stringhe, caratteri, dati booleani (`false` è minore di `true`) e
+caratteri con stringhe. Per stringhe e caratteri viene rispettato l'ordine
+lessicografico. Non è possibile confrontare stringhe e caratteri con dati
+numerici.
+
+.bool.pas
+------------------------------------------------------------------------------
+program bool;
+var a,b,c: boolean;
+begin
+	a := (12 < 15); 	{T}
+	a := true;		{T}
+	a := false;		{F}
+	b := (12 < 10);		{F}
+	c := a and b;		{T and F = F}
+	c := a or b;		{T or F = T}
+	c := not(a and b);	{a and b = F; not(false) = T}
+	c := ('a' < 'b');	{T}
+	c := ('hello' < 'world'); {T}
+	c := ('h' < 'world');
+end.
+------------------------------------------------------------------------------
+
+Condizione
+~~~~~~~~~~
+
+Una condizione è un espressione booleana: nel caso più semplice è una
+variabile o un letterale di tipo `boolean`, ma può anche essere un espressione
+complessa formata da operatori booleani e logici. In ogni caso una condizione
+o è `true` o è `false`.
+
+------------------------------------------------------------------------------
+(10 < 20) and (a > b);
+------------------------------------------------------------------------------
+
+Strutture di controllo
+----------------------
+
+Costrutto di scelta: `if`
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Il costrutto `if` consente di eseguire un blocco di codice solo se una
+condizione risulta vera.
+
+.costrutto `if`
+------------------------------------------------------------------------------
+if (<condizione>) then
+	<blocco>
+------------------------------------------------------------------------------
+
+Esiste la variante `if .. else` in cui se la condizione risulta `false` allora
+viene eseguito il blocco alternativo.
+
+.costrutto `if .. else`
+------------------------------------------------------------------------------
+if (<condizione>) then
+	<blocco>
+else
+	<blocco alternativo>
+------------------------------------------------------------------------------
+
+Diversi `if .. else` si possono annidare dando luogo al costrutto `if .. else
+if` che consente di effettuare scelte multiple.
+
+.costrutto `if .. else if`
+------------------------------------------------------------------------------
+if (<condizione>) then
+	<blocco>
+else if (<condizione>) then
+	<blocco 2>
+else if (<condizione>) then
+	<blocco 3>
+...
+else
+	<blocco alternativo>
+------------------------------------------------------------------------------
+
+L'ultimo `else` si riferisce sempre all'ultima occorrenza di `if`.
+
+WARNING: L'ultima istruzione prima della parola chiave `else` non deve essere
+terminata dal punto e virgola.
+
+------------------------------------------------------------------------------
+program if_else;
+var a,b: integer;
+begin
+	writeln('inserisci due numeri: ');
+	readln(a, b);
+	if (a < b) then
+		writeln(a, ' < ', b)
+	else if (a = b) then
+		writeln(a, ' = ', b)
+	else
+		writeln(a, ' > ', b);
+end.
+------------------------------------------------------------------------------
+
+Scelta multipla: `case`
+~~~~~~~~~~~~~~~~~~~~~~~
+
+La struttura `case` permette di effettuare una scelta multipla in base al
+risultato di una espressione oppure al contenuto di una variabile.  La forma
+della struttura di controllo `case` è la seguente :
+
+.struttura `case`
+------------------------------------------------------------------------------
+case (espressione o variabile) of
+  listavalori1: (blocco1)
+  listavalori2: (blocco2)
+  ...
+  listavalorin: (bloccon)
+  else (bloccoelse)
+end;
+------------------------------------------------------------------------------
+
+Viene valutato il valore dell'espressione o della variabile e viene cercato il
+corrispondente valore tra quelli indicati nelle varie liste; se il valore
+viene trovato allora viene eseguito il blocco di codice corrispondente
+altrimenti viene eseguito il blocco `else`.  Il blocco `else` è opzionale;  in
+questo caso se il valore non viene trovato allora non viene eseguito nessun
+blocco di codice e l'esecuzione prosegue senza problemi.
+
+.scelta multipla usando una variabile
+------------------------------------------------------------------------------
+case (i) of 
+	1,2,3,4,5: 
+		writeln('i <= 5');
+	6:
+		writeln('i = 6');
+	7,8:	
+		writeln('i = 7 or i = 8');
+	else
+		writeln('i out of range 1..8');
+end;
+------------------------------------------------------------------------------
+
+.scelta multipla usando il risultato di una espressione
+------------------------------------------------------------------------------
+case (i mod 9) of
+	1,2,3,7,8: 
+		writeln('blocco1');
+	4,5,6: 
+		writeln('blocco2');
+end;
+------------------------------------------------------------------------------
+
+.un semplice programma
+------------------------------------------------------------------------------
+program simple_menu;
+var scelta: integer;
+begin
+	writeln(' menu pricipale : ');
+	writeln;
+	writeln('1. opzione a');
+	writeln('2. opzione b');
+	writeln('3. opzione c');
+	writeln;
+	write('Cosa scegli? (1..3): ');
+	readln(scelta);
+	case (scelta) of
+	1: 
+		writeln('hai scelto l''opzione a !!');
+	2:
+		writeln('hai scelto l''opzione b !!');
+	3:
+		writeln('hai scelto l''opzione c !!')
+	else
+		writeln ('errore : la scelta effettuata non è corretta !!!!');
+	end;
+end.
+------------------------------------------------------------------------------
+
+Ciclo `while`
+~~~~~~~~~~~~~
+
+La struttura `while` esegue un blocco di codice in maniera ciclica fino a
+quando la variabile o l'espressione di controllo rimane `true`.
+
+------------------------------------------------------------------------------
+while (<espressione booleana>) do
+	<blocco>
+------------------------------------------------------------------------------
+
+.conteggio da 1 a 10
+------------------------------------------------------------------------------
+(1)  i := 1;
+
+(2)  while (i <= 10) do 
+       begin
+(3)       writeln(i);
+(4)       inc(i);       
+       end;
+------------------------------------------------------------------------------
+
+NOTE: le procedure `inc(var n: interger)` e `dec(var n: integer)` incrementano
+e decrementano di uno la variabile fornita come argomento.
+
+.tabellina 3
+------------------------------------------------------------------------------
+program tabellina;
+var i: integer;
+begin
+	writeln('tabellina 3');
+	i := 1;
+	while (i <= 10) do
+	begin 
+		writeln(3 * i);
+		inc(i);
+	end;
+end.
+------------------------------------------------------------------------------
+
+Ciclo `repeat`
+~~~~~~~~~~~~~~
+
+Ciclo repeat
+
+
+Ciclo `for`
+~~~~~~~~~~~
+
+La struttura `for` esegue un loop un numero prestabilito di volte.
+
+.struttura del ciclo `for`
+------------------------------------------------------------------------------
+for <variabile> := <viniziale> to <vfinale> do 
+	<blocco>
+------------------------------------------------------------------------------
+
+La variabile indicata assume tutti i valori tra <viniziale> e <vfinale>
+incrementando ogni volta di 1; il numero di loop eseguito è  <vfinale> -
+<viniziale> + 1.
+
+La seguente variante decrementa di 1 la variabile di controllo.
+
+------------------------------------------------------------------------------
+for <variabile> := <v1> downto <v2> do
+	<blocco>
+------------------------------------------------------------------------------
+
+.conteggio da 1 a 10
+------------------------------------------------------------------------------
+for i := 1 to 10 do
+	writeln(i);
+------------------------------------------------------------------------------
+
+.conteggio da 10 a 1
+------------------------------------------------------------------------------
+for i := 10 downto 1 do
+	writeln(i);
+------------------------------------------------------------------------------
+
+Procedure e funzioni
+--------------------
+
+Il pascal offre due tipi di subroutine: `procedure` e `function`.
+
+Dal punto di vista concettuale le `procedure` sono utilizzate quando il
+sottoprogramma deve eseguire delle azioni, le `function` invece sono usate per
+fornire il risultato di un elaborazione.
+
+.dichiarazione di `procedure` e `function`
+------------------------------------------------------------------------------
+procedure <nome>(<lista parametri>);
+	<corpo della procedura>
+
+function <nome>(<lista parametri>):<tipo restituito>;
+    <corpo della funzione>
+------------------------------------------------------------------------------
+
+Struttura dei sottoprogrammi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Un sottoprogramma pascal ha la stessa struttura di un programma generico.
+
+.struttura di una `procedure`
+------------------------------------------------------------------------------
+procedure <nome>(<parametri>);
+	{dichiarazioni}
+	label
+	const 
+	type
+	var
+	procedure
+	function
+begin
+	{istruzioni}
+end.
+------------------------------------------------------------------------------
+
+.struttura di una `function`
+------------------------------------------------------------------------------
+function <nome>(<parametri>): <tipo restituito>;
+	{dichiarazioni}
+	label
+	const 
+	type
+	var
+	procedure
+	function
+begin
+	{istruzioni}
+end.
+------------------------------------------------------------------------------
+
+La cosa che si nota immediatamente è che all'interno dei sottoprogrammi è
+possibile definirne altri.
+
+Per invocare un sottoprogramma si utilizza la seguente forma.
+
+------------------------------------------------------------------------------
+<procedura>(<parametri>);
+<var> := <funzione>(<parametri>);
+------------------------------------------------------------------------------
+
+.due semplici subroutine
+------------------------------------------------------------------------------
+function somma(a, b: integer): integer;
+begin
+	somma := a + b;
+end;
+
+procedure stampa_somma(a, b: integer);
+begin
+	writeln(a, ' + ', b, ' = ', a + b);
+end;
+...
+begin
+	n := somma(10, 20);
+	stampa_somma(10, 20);
+end.
+------------------------------------------------------------------------------
+
+Valore restituito da una `function`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Abbiamo visto che una funzione restituisce un valore di uscita; il metodo per
+assegnare il valore di uscita dall'interno della funzione è il seguente:
+
+------------------------------------------------------------------------------
+<nome_funzione> := <valore_uscita>;
+------------------------------------------------------------------------------
+
+.`function` che restituisce il quadrato di un numero
+------------------------------------------------------------------------------
+function sqr(a: integer): integer;
+begin
+	sqr := a * a;
+end;
+------------------------------------------------------------------------------
+
+Parametri
+~~~~~~~~~
+
+La lista dei parametri è una lista di identificatori raggruppata per tipo.
+
+------------------------------------------------------------------------------
+(p1, p2, ...: tipo1; pJ, pK, ...: tipo2; ...);
+------------------------------------------------------------------------------
+
+All'interno del sottoprogramma i parametri possono essere utilizzati
+all'interno di espressioni come se fossero delle variabili.
+
+Esistono due tipi di parametri: parametri valore e parametri variabile.
+
+Per i parametri valore viene fatta una copia locale (all'interno del
+sottoprogramma) e quindi eventuali modifiche al parametro non hanno effetto al
+di fuori del sottoprogramma.
+
+I parametri variabile invece sono passati direttamente al sottoprogramma e
+quindi ogni modifica ad esso si riflette anche all'esterno del sottoprogramma.
+
+Per dichiarare un parametro variabile si utilizza la parola chiave `var`.
+
+.parametri.pas
+------------------------------------------------------------------------------
+program parametri;
+procedure foo(a,b: integer; var c: integer);
+{a e b sono parametri valore mentre c è variabile}
+begin
+	a := a * a;	{modifica locale}
+	writeln('local a = ', a);
+	b := b * b;	{modifica locale}
+	writeln('local b = ', b);
+	c := a + b;	{modifica globale}
+	writeln('local c = ', c);
+end;
+var a, b, c: integer;
+begin
+	a := 10;
+	b := 5;
+	c := 0;
+	foo(a, b, c);
+	writeln('global a = ', a);
+	writeln('global b = ', b);
+	writeln('global c = ', c);
+end.
+------------------------------------------------------------------------------
+
+.output di parametri.pas
+------------------------------------------------------------------------------
+local a = 100
+local b = 25
+local c = 125
+global a = 10
+global b = 5
+global c = 125
+------------------------------------------------------------------------------
+
+I valori di `a` e `b` vengono modificati all'interno di `foo`, ma questa
+modifica rimane locale alla `procedure`; al contrario le modifiche a `c` sono
+globali.
+
+Facciamo un altra distinzione tra parametri formali e parametri attuali: i
+parametri formali sono quelli dichiarati nell'intestazione, quelli attuali
+invece sono i parametri forniti al momento dell'invocazione.  I parametri
+attuali devo rispettare i tipi dei parametri formali, inoltre i parametri
+attuali possono esseri passati anche come costanti e non devono rispettare i
+nome dei parametri formali.
+
+.esempi validi di invocazione di `foo`
+------------------------------------------------------------------------------
+var a, b, c, d, e: integer;
+begin
+	a := 10;
+	b := 20;
+	foo(a, b, c);
+	foo(10, 20, c); {stesso risultato di prima}
+	d := 40;
+	e := 30;
+	foo(e, d, a);	
+	foo(10 + 2, b, e);
+end.
+------------------------------------------------------------------------------
+
+Dati strutturati
+----------------
+
+Array
+~~~~~
+
+array
+
+
+Typedef
+~~~~~~~
+
+typedefs
+
+
+Record
+~~~~~~
+
+record
+
+Set
+~~~
+
+sets
+
+FILE
+----
+
+files
+
+PUNTATORI
+---------
+
+puntatori
+
+
+// vim: cc=78:spell spelllang=it:aw
