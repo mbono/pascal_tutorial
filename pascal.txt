@@ -33,7 +33,7 @@ testo scritto tra `(* *)` oppure tra `{ }` viene completamente ignorato dal
 compilatore; la riga 2 indica l'inizio del programma con la parola chiave
 `program` seguita dal nome del programma (`hello_world`); le righe 3 e 5
 definiscono l'inizio e la fine del blocco principale del programma; tra le
-parole chiave `begin` e `end` vanno inserite le instruzioni che verranno
+parole chiave `begin` e `end` vanno inserite le istruzioni che verranno
 eseguite; La riga 4 è quella che stampa a video la stringa `hello, world`, il
 comando `writeln('testo da stampare')` scrive a video tutto quello che si
 trova tra gli apici.
@@ -89,7 +89,7 @@ TIP: Per ricordarsi facilmente l'ordine corretto basta memorizzare la frase
 elemento del programma (`label`, `const`, `type`, `var`, `procedure` e
 `function`).
 
-Parole riservate, indentificatori, numeri e stringhe
+Parole riservate, identificatori, numeri e stringhe
 ----------------------------------------------------
 
 Parole riservate
@@ -111,7 +111,7 @@ La tabella che segue mostra le parole riservate del pascal ANSI.
 
 Questo parole sono riservate è non possono utilizzate come identificatori.
 
-Indetificatori
+Idetificatori
 ~~~~~~~~~~~~~~
 
 Un identificatore è il nome che si assegna ad una parte di un programma pascal
@@ -119,9 +119,9 @@ quale può essere una variabile, una costante, una funzione, una proceudura, o
 una label.
 
 Un identificare è costituito da una sequenza qualsiasi di lettere e cifre,
-purchè il primo carattere sia una lettera. Non sono ammessi spazi o caratteri
+purché il primo carattere sia una lettera. Non sono ammessi spazi o caratteri
 diversi da numeri e lettere con l'unica eccezione del carattere underscore
-`_`. Il pascal è case-insensitive quindi non distingue tra maniuscole e
+`_`. Il pascal è case-insensitive quindi non distingue tra maiuscole e
 minuscole.
 
 .alcuni esempi sugli identificatori
@@ -175,7 +175,7 @@ Tipi di dato, costanti e variabili
 Tipi di dato
 ~~~~~~~~~~~~
 
-In pascal distinguiamo tra tipi di dati sempli e strutturati; vediamo quali
+In pascal distinguiamo tra tipi di dati semplici e strutturati; vediamo quali
 sono:
 
 * Dati di tipo semplice
@@ -217,7 +217,7 @@ Variabili
 ~~~~~~~~~
 
 Le variabili sono degli oggetti che possono assumere valori di un certo tipo;
-durante l'esecuzione del programma il loro valoro può essere modificato ma il
+durante l'esecuzione del programma il loro valore può essere modificato ma il
 tipo di dato deve rimanere lo stesso (una variabile `integer` può memorizzare
 solo dati di tipo intero).
 
@@ -263,7 +263,7 @@ Dati numerici
 
 I dati numerici si dividono in 2 tipi: numeri interi e numeri reali. I dati
 interi sono i numeri interi (con segno) e a questo gruppo appartengono
-varibili costanti e funzioni che producono numeri interi; in pascal il tipo
+variabili costanti e funzioni che producono numeri interi; in pascal il tipo
 corrispondente ai numeri interi è il tipo `integer`. 
 
 La tabella seguente riassume gli operatori aritmetici che operano sugli
@@ -367,7 +367,7 @@ Nello standard input i dati sono separati da uno o più spazi o da un carattere
 di fine riga (che si ottiene digitanto `invio` quando lo standard input è la
 tastiera).
 
-Il comando `write` stampa sullo standatd output la lista di dati indicata;
+Il comando `write` stampa sullo standard output la lista di dati indicata;
 possono essere passate variabili, costanti o espressioni di tipo `string`,
 `char`, `integer` o `real`.
 
@@ -417,7 +417,7 @@ occupare sullo schermo utilizzando la seguente forma.
 write(exp:spazio);
 ------------------------------------------------------------------------------
 
-Se il dato necessita di più spazio la formattazione viene ignoratai, mentre
+Se il dato necessita di più spazio la formattazione viene ignorata, mentre
 nel caso in cui il dato richiede meno spazio, questo viene preservato e il
 dato viene allineato a destra.
 
@@ -452,3 +452,5 @@ begin
 	writeln(a4:6, a5:6, a6:6);
 end.
 ------------------------------------------------------------------------------
+
+// vim: cc=78:spell spelllang=it
