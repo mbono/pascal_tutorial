@@ -13,8 +13,8 @@ programmazione pascal, illustrando la struttura, i costrutti, le strutture di
 controllo e i tipi di dati tipici del linguaggio.
 
 :numbered:
-Struttura di un programma pascal
----------------------------------
+Basi del linguaggio
+-------------------
 
 Hello world
 ~~~~~~~~~~~
@@ -55,13 +55,9 @@ program <nome_programma>;
 ------------------------------------------------------------------------------
 
 Il blocco delle dichiarazioni definisce i vari dati che si usano nel programma
-ed è cosi suddiviso:
-
-* etichette (`label`);
-* costanti (`const`);
-* tipi di dato definiti dall'utente (`type`);
-* Variabili (`var`);
-* procedure e funzioni (`procedure` e `function`);
+è contiene: etichette (`label`), costanti (`const`), tipi definiti
+dall'utente (`type`), variabili (`var`), procedure (`procedure`) e funzioni
+(`function`).
 
 Il blocco delle istruzioni contiene le istruzioni che il programma deve
 eseguire una volta avviato.
@@ -92,13 +88,13 @@ TIP: Per ricordarsi facilmente l'ordine corretto basta memorizzare la frase
 elemento del programma (`label`, `const`, `type`, `var`, `procedure` e
 `function`).
 
-Parole riservate, identificatori, numeri e stringhe
-----------------------------------------------------
-
 Parole riservate
 ~~~~~~~~~~~~~~~~
 
-La tabella che segue mostra le parole riservate del pascal ANSI.
+Il pascal ha una serie di parole riservate che non possono essere utilizzate
+come identificatori.
+
+Le parole riservate del pascal ANSI sono mostrate nella tabella seguente.
 
 |========================================================
 |`and`		|`array`	|`begin`	|`case`
@@ -112,7 +108,6 @@ La tabella che segue mostra le parole riservate del pascal ANSI.
 |`until`	|`var` 		|`while`	|`with`
 |========================================================
 
-Questo parole sono riservate è non possono utilizzate come identificatori.
 
 Idetificatori
 ~~~~~~~~~~~~~~
@@ -129,13 +124,39 @@ minuscole.
 
 .alcuni esempi sugli identificatori
 ------------------------------------------------------------------------------
-Pippo Pippo21 Pippo34 	{identificatori validi}
+pippo Pippo21 Pippo34 	{identificatori validi}
 PIPPO pippo Pippo 	{rappresentano tutti lo stesso identificatore}
 12Pippo			{non valido in quanto inizia con un numero}
 ------------------------------------------------------------------------------
 
+Tipi di dato
+~~~~~~~~~~~~
+
+In pascal distinguiamo tra tipi di dati semplici e strutturati; vediamo quali
+sono:
+
+* Dati di tipo semplice
+ ** Tipi Standard
+  *** Integer
+  *** Real
+  *** Char
+  *** Boolean
+ ** Tipi dichiarati
+   *** Enumerati
+   *** Sottocampi
+* Dati di tipo stringa
+* Dati strutturati
+ ** Record
+ ** Array
+ ** Set
+ ** File
+* Dati di tipo puntatore
+
+Letterali
+~~~~~~~~~
+
 Numeri
-~~~~~~
+^^^^^^
 
 Distinguiamo tra numeri interi e reali.
 
@@ -163,40 +184,28 @@ utilizza il simbolo `E`.
 8.5E-2  {8.5x10^-2} 
 ------------------------------------------------------------------------------
 
-Stringhe
-~~~~~~~~
+Caratteri
+^^^^^^^^^
 
-Una stringa è una sequenza di caratteri racchiusa tra apici.
+Un carattere è rappresentato da un qualsiasi carattere alfanumerico tra apici:
+
+------------------------------------------------------------------------------
+'a' 'b' 'c' '1' '0'
+------------------------------------------------------------------------------
+
+Stringhe
+^^^^^^^^
+
+Una stringa è una sequenza di caratteri alfanumerici racchiusa tra apici.
 
 ------------------------------------------------------------------------------
 'Io sono una stringa di testo'
 ------------------------------------------------------------------------------
 
-Tipi di dato, costanti e variabili
-----------------------------------
+Letterali booleani
+^^^^^^^^^^^^^^^^^^
 
-Tipi di dato
-~~~~~~~~~~~~
-
-In pascal distinguiamo tra tipi di dati semplici e strutturati; vediamo quali
-sono:
-
-* Dati di tipo semplice
- ** Tipi Standard
-  *** Integer
-  *** Real
-  *** Char
-  *** Boolean
- ** Tipi dichiarati
-   *** Enumerati
-   *** Sottocampi
-* Dati di tipo stringa
-* Dati strutturati
- ** Record
- ** Array
- ** Set
- ** File
-* Dati di tipo puntatore
+Esistono due letterali booleani e sono `true` e `false`.
 
 Costanti
 ~~~~~~~~
@@ -258,16 +267,17 @@ n := 10;		{assegnazione semplice}
 n := (10 + 2) * 5;	{assegnazione complessa}
 ------------------------------------------------------------------------------
 
-Dati numerici
--------------
+Tipi di dati semplici
+---------------------
 
-I dati numerici si dividono in 2 tipi: numeri interi e numeri reali. I dati
-interi sono i numeri interi (con segno) e a questo gruppo appartengono
-variabili costanti e funzioni che producono numeri interi; in pascal il tipo
-corrispondente ai numeri interi è il tipo `integer`. 
+Numeri
+~~~~~~
 
-La tabella seguente riassume gli operatori aritmetici che operano sugli
-`integer`.
+I numeri interi in pascal sono rappresentati dal tipo `integer`, mentre i
+numeri in virgola mobile sono del tipo `real`.
+
+La tabella seguente riassume gli operatori aritmetici che operano su dati
+numerici.
 
 |=============================================
 |+ 		|Addizione
@@ -279,12 +289,12 @@ La tabella seguente riassume gli operatori aritmetici che operano sugli
 |=============================================
 
 Questi sono operatori binari (richiedono due operandi) che operano su dati di
-tipo `integer` e il cui risultato è di tipo `integer`; quindi la divisione tra
-due interi ha come risultato un numero intero.
+tipo numerico; la divisione `/` genera un dato `real`, mentre gli operatori
+`div` e `mod` operano su `integer` e generano un dato di tipo `integer`.
 
-.interi.pas
+.numeri.pas
 ------------------------------------------------------------------------------
-program interi; 
+program numeri; 
 var a, b, c, d: integer;
 	r: real;
 begin
@@ -307,8 +317,13 @@ begin
 end.
 ------------------------------------------------------------------------------
 
-Le stringhe
------------
+Caratteri
+~~~~~~~~~
+
+I caratteri ...
+
+Stringhe
+~~~~~~~~
 
 Le stringhe di caratteri in pascal rappresentano un tipo di dato proprio del
 linguaggio: il tipo `string`. Come abbiamo visto una stringa è una qualsiasi
@@ -344,6 +359,65 @@ begin
 	s2 := s3 + ' ' + s1; {s2='carlo rossi'} 
 	writeln(s2);
 end.
+------------------------------------------------------------------------------
+
+Tipi di dato `boolean`
+~~~~~~~~~~~~~~~~~~~~~~
+
+In pascal i valori booleani formano un vero e proprio tipo di dato
+contrassegnato dall'identificatore `boolean`. Gli operatori booleani sono
+`and`, `or` e `not`; sono operatori binari che restituiscono un dato di tipo
+`boolean`.
+
+Operatori logici
+~~~~~~~~~~~~~~~~
+
+Sono operatori che confrontano due espressioni e restituiscono un valore
+booleano (`true` o `false`).
+
+|============================
+|Maggiore		|`>`
+|Maggiore o uguale	|`>=`
+|Minore			|`<`
+|Minore o uguale	|`<=`
+|Uguale			|`=`
+|Diverso		|`<>`
+|============================
+
+E' possibile confrontare tra di loro numeri numeri (anche `integer` con
+`real`), stringhe, caratteri, dati booleani (`false` è minore di `true`) e
+caratteri con stringhe. Per stringhe e caratteri viene rispettato l'ordine
+lessicografico. Non è possibile confrontare stringhe e caratteri con dati
+numerici.
+
+.bool.pas
+------------------------------------------------------------------------------
+program bool;
+var a,b,c: boolean;
+begin
+	a := (12 < 15); 	{T}
+	a := true;		{T}
+	a := false;		{F}
+	b := (12 < 10);		{F}
+	c := a and b;		{T and F = F}
+	c := a or b;		{T or F = T}
+	c := not(a and b);	{a and b = F; not(false) = T}
+	c := ('a' < 'b');	{T}
+	c := ('hello' < 'world'); {T}
+	c := ('h' < 'world');
+end.
+------------------------------------------------------------------------------
+
+Condizione
+~~~~~~~~~~
+
+Una condizione è un espressione booleana: nel caso più semplice è una
+variabile o un letterale di tipo `boolean`, ma può anche essere un espressione
+complessa formata da operatori booleani e logici. In ogni caso una condizione
+o è `true` o è `false`.
+
+------------------------------------------------------------------------------
+(10 < 20) and (a > b);
 ------------------------------------------------------------------------------
 
 Input e output
@@ -453,64 +527,6 @@ begin
 end.
 ------------------------------------------------------------------------------
 
-Tipi di dato `boolean`
-----------------------
-
-In pascal i valori booleani formano un vero e proprio tipo di dato
-contrassegnato dall'identificatore `boolean`. Gli operatori booleani sono
-`and`, `or` e `not`; sono operatori binari che restituiscono un dato di tipo
-`boolean`.
-
-Operatori logici
-~~~~~~~~~~~~~~~~
-
-Sono operatori che confrontano due espressioni e restituiscono un valore
-booleano (`true` o `false`).
-
-|============================
-|Maggiore		|`>`
-|Maggiore o uguale	|`>=`
-|Minore			|`<`
-|Minore o uguale	|`<=`
-|Uguale			|`=`
-|Diverso		|`<>`
-|============================
-
-E' possibile confrontare tra di loro numeri numeri (anche `integer` con
-`real`), stringhe, caratteri, dati booleani (`false` è minore di `true`) e
-caratteri con stringhe. Per stringhe e caratteri viene rispettato l'ordine
-lessicografico. Non è possibile confrontare stringhe e caratteri con dati
-numerici.
-
-.bool.pas
-------------------------------------------------------------------------------
-program bool;
-var a,b,c: boolean;
-begin
-	a := (12 < 15); 	{T}
-	a := true;		{T}
-	a := false;		{F}
-	b := (12 < 10);		{F}
-	c := a and b;		{T and F = F}
-	c := a or b;		{T or F = T}
-	c := not(a and b);	{a and b = F; not(false) = T}
-	c := ('a' < 'b');	{T}
-	c := ('hello' < 'world'); {T}
-	c := ('h' < 'world');
-end.
-------------------------------------------------------------------------------
-
-Condizione
-~~~~~~~~~~
-
-Una condizione è un espressione booleana: nel caso più semplice è una
-variabile o un letterale di tipo `boolean`, ma può anche essere un espressione
-complessa formata da operatori booleani e logici. In ogni caso una condizione
-o è `true` o è `false`.
-
-------------------------------------------------------------------------------
-(10 < 20) and (a > b);
-------------------------------------------------------------------------------
 
 Strutture di controllo
 ----------------------
@@ -918,8 +934,110 @@ Dati strutturati
 Array
 ~~~~~
 
-array
+Un `array` (vettore) può essere visto come come una lista consecutiva di dati
+dello stesso tipo a cui è possible accedere tramite un indice.
 
+------------------------------------------------------------------------------
+(a1, a2, a3, ... ,aN)
+------------------------------------------------------------------------------
+
+Per dichiarare un vettore si usa la seguente notazione.
+
+------------------------------------------------------------------------------
+var <nome>: array [<range_indice>] of <tipo_di_dato>;
+------------------------------------------------------------------------------
+
+Il
+campo `<range indice>` indica valori iniziali e finali dell'indice;
+la dimensione del vettore si calcola quindi: 
+
+------------------------------------------------------------------------------
+<valore finale> - <valore iniziale> + 1 
+------------------------------------------------------------------------------
+
+Il tipo di un vettore può essere uno qualunque dei tipi semplici o anche un
+tipo definito dall'utente (lo vedremo in seguito).
+
+Gli elementi dell'indice devo appartenere ad un tipo ordinale (in cui è
+possibile stabilire una relazione di ordine tra gli elementi): `integer`,
+`char`, sottocampo o `enum`.
+
+.alcuni vettori validi
+------------------------------------------------------------------------------
+var	a: array [1..100] of integer;
+	b: array ['a'..'d'] of integer;
+	giorni: array [1..7] of string;
+------------------------------------------------------------------------------
+
+Per accedere ad un singolo elemento del vettore si usa la forma:
+
+------------------------------------------------------------------------------
+<nome_vettore>[<indice>]
+------------------------------------------------------------------------------
+
+E' possibile assegnare un array ad un altro facendone cosi una copia esatta.
+
+.vettori.pas
+------------------------------------------------------------------------------
+program vettori;
+var a,b: array [1..10] of integer;
+	i: integer;
+begin
+	randomize;
+	for i := 1 to 10 do begin
+		a[i] := random(100);
+		writeln('a[',i,'] = ',a[i]);
+	end;
+	b := a;
+	for i := 1 to 10 do a[i] := 0;
+	writeln;
+	for i := 1 to 10 do
+		writeln('a[', i,'] = ', a[i]);
+	writeln;
+	for i := 1 to 10 do
+		writeln('b[', i,'] = ', b[i]);
+end.
+------------------------------------------------------------------------------
+
+Array multidimensionali
+^^^^^^^^^^^^^^^^^^^^^^^
+
+E' possibile definire array a due o più dimensioni. Un array bidimensionale
+può essere pensato come una tabella o una matrice.
+
+.dichiarazione di `array` multidimensionali
+------------------------------------------------------------------------------
+var <nome>: array [<range1>, ... ,<rangeN>] of <tipo>
+------------------------------------------------------------------------------
+
+Per accedere ad un singolo dato del vettore si usa la notazione:
+
+------------------------------------------------------------------------------
+<nome>[<i1>, <i2>, ... ,<iN>]
+------------------------------------------------------------------------------
+
+Se due vettori hanno le stesse dimensioni è possibile l'operazione di
+assegnazione.
+ 
+------------------------------------------------------------------------------
+program vettori_multi;
+const
+	n = 10;
+	p=10;
+var
+	m : array[1..n, 1..p] of integer;
+	i,j: integer;
+begin
+	randomize;
+	for i := 1 to p do begin
+		for j := 1 to n do begin
+			m[i,j] := random(100)+1;
+			write(m[i,j]:4);
+		end;
+		writeln;
+	end;
+end.
+------------------------------------------------------------------------------
 
 Typedef
 ~~~~~~~
@@ -930,17 +1048,290 @@ typedefs
 Record
 ~~~~~~
 
-record
+Tipi di dato strutturati : Record varianti.
+
+Oltre ai record normali esistono dei record speciali in grado di modificare la
+propria struttura in base al valore di un dato campo.  Vedo di spiegarmi
+meglio : supponiamo di avere un record che contiene i dati anagrafici di una
+persona , questo record tra i suoi campi ha quello della nazionalità , se la
+nazionalità è italiana non abbiamo bisogno di ulteriori campi , ma se la
+nazionalità non è italiana dobbiamo memorizzare il paese di provenienza in un
+certo campo che chiamiamo provenienza.
+
+Una struttura di record che varia a seconda del valore di un suo campo (campo
+discriminatore) viene chiamata record veriante ; la forma generale di questi
+particolari record è la seguente :
+
+RECORD
+  campo1 : tipo ;
+  campo2 : tipo ;
+  
+  CASE (campodiscriminatore) OF
+    val1 : (campi aggiuntivi);
+    val2 : (campi aggiuntivi);
+    ELSE : (campi aggiuntivi);
+  END;
+  ................
+  ................
+  campoN : tipo;
+END;  
+
+Vediamo subito di codificare l'esempio descritto in apertura :
+
+RECORD
+  Nome : string;
+  Data : string[12];
+  .......
+  
+  CASE (Naz : string) OF
+    'italiana' : ();(*nessun altro campo*)
+    ELSE : (prov : string;);
+  END;
+  ......
+END;  
+
+In definitiva un record variante si comporta esattamente come un record
+normale solo che alcuni campi sono presenti a seconda del valore che assume il
+campo discriminatore ; quindi è sempre necessario controllare prima.
 
 Set
-~~~
+~~~~
 
-sets
+Tipi di dato SET.
+
+Il Pascal permette di gestire il modello matematico insieme con un particolare
+tipo di dato , chiamato appunto SET (insieme).  Diciamo innanzitutto che gli
+insiemi possono contenere elementi di un certo tipo ; i tipi possibili nel SET
+del Pascal sono : interi , caratteri e enumerati.  Ma vediamo come si dichiara
+un tipo di dato SET nella sua forma generale :
+
+SET OF TipoElementi;
+
+
+Oppure è possibile definire un nuovo tipo cosi come segue :
+
+TYPE NomeTipo = SET OF TipoElementi;
+
+
+La prima cosa da imparare per operare con i dati di tipo SET è
+l'inizializzazione di un insieme , cioè come fare ad assegnare gli elementi ad
+un insieme ; l'operazione è molto semplice e si esegue nel seguente modo :
+Insieme := [ (lista dei dati) ] ;
+
+Vediamo alcuni esempi per capire meglio :
+
+Type InsiemeInteri = SET OF integer;
+     cifre=0..9;
+     InsiemeCifre = SET OF cifre;
+     InsiemeLettere = SET OF CHAR;
+     InsiemeMinuscole = SET OF 'a'..'z';
+     maiuscole = 'A'..'Z';
+     InsiemeMaiuscole = SET OF maiuscole;
+     colori = (giallo , verde , rosso );
+     InsiemeColori = SET OF colori ;
+     
+Questi sono esempi di dichiarazioni dei tipi SET , vediamo ora
+l'inizializzazione degli insiemi :
+
+VAR A,B : InsiemeInteri;
+    C : InsiemeColori;
+    
+................
+
+A := [1,2,3,5,12,56];
+B := [10..100];
+
+................
+
+C := [giallo , rosso];
+
+Se abbiamo molti elementi consecutivi è possibile usare la Primo .. Ultimo ,
+come si vede dall'esempio.
+
+Unione , intersezione e differenza.
+
+Le operazioni matemetiche tra insiemi sono , naturalmente possibili ,
+naturalmente non spiego come funzionano le operazioni matematiche sugli
+insiemi e le loro propietà , in quanto non è questa la sede adatta.
+
+L'operatore di unione è + , quello di intersezione è l' * invece quello di
+differenza è il - .  Questi operatori funzionano su insiemi dello stesso tipo
+e si usano nel seguente modo :
+
+Insieme1 (operatore) Insieme2
+
+Naturalmente 2 insiemi dello stesso tipo ne restituiscono 1 del tipo medesimo.
+
+Vediamo alcuni esempi per capire meglio :
+
+VAR A,B,C : InsiemeInteri;
+..........
+..........
+
+A := [1,3] + [4,7]; (*A=[1,3,4,7]*)
+
+B := [1,2,3] * [2,5,6]; (*B=[2]*)
+
+A := [1,2,3,4];
+B := [1,3];
+C := A-B; (*A=[2,4]*)
+
+Appartenenza.
+
+Per stabilire se un elemento appartiene o no ad un insieme si usa l'operatore
+di appartenenza IN.  Questo operatore restituisce un valore booleano , true se
+l'elemento appartiene all'insieme , false nel caso contrario.  Il modo di
+usare l'operatore di appartenenza è il seguente : elemento IN insieme
+
+Vediamo alcuni esempi per capire meglio :
+
+VAR A : InsiemeInteri;
+    Ris : Boolean;
+
+
+A := [1,2,3,4];
+
+Ris := 3 IN A;  (*true*)
+Ris := 10 IN A; (*false*)
+
+
+Confronti tra insiemi.
+
+Tra 2 insieme è possibile effettuare un confronto per stabilire se gli insiemi
+sono uguali , diversi oppure se uno dei 2 è sottinsieme dell'altro.
+
+Vediamo come fare :
+
+Operatore 	Descrizione;
+= 	Restituisce true se i 2 insiemi sono uguali
+<> 	Restituisce true se i 2 insieme sono diversi.
+<= 	Restituisce true se i 2 il primo insieme è sottinsieme del secondo.
+>= 	Restituisce true se il secondo insieme è sottinsieme del primo.
+
+
+Vediamo un esempio :
+
+VAR A : InsiemeInteri;
+    Ris : Boolean;
+
+
+A := [1..10];
+Ris := [1,2] <= A;   (*true;*)
+Ris := [11,12] <= A; (*false*)
 
 FILE
 ----
 
-files
+FILE ad accesso diretto
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Innanzi tutto dobbiamo chiarire due aspetti dei file : l'organizzazione e il
+metodo di accesso.  L'organizzazione indica come il file e disposto
+fisicamente sul disco ; ci sono due tipi di organizzazione quella sequenziale
+e quella random ; come si capisce nell'organizzazione sequenziale tutti gli
+elementi sono appunto dipsosti in modo sequenziale uno dietro l'altro ; quelli
+random invece sono disposti in modo non sequenziale.  Diciamo subito che tutti
+i file gestisti dal Pascal sono organizzati in maniera sequenziale.  Il metodo
+di accesso invece è il modo con cui si accede ai file , e come abbiamo visto
+nella lezione precedente sono due accesso sequenziale e diretto. Nel primo
+metodo per accedere all'elemento i bisogna leggete tutti gli i-1 elementi
+precedenti , invece con l'accesso diretto è possibile leggere direttamente
+l'elemento desiderato.  Il Pascal A.N.S.I.  prevede solo l'uso di file
+sequenziali ad accesso sequenziale , quelli visti nella lezione precedente ,
+ma quasi tutte le implementazioni prevedono anche l'uso di file sequenziali ad
+accesso diretto che andiamo ad analizzare adesso.
+
+File sequenziali ad accesso diretto
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I file di questo tipo si comportano esattamente come quelli visti in
+precedenza , quindi tutte le fasi sono uguali e gestite dalle stesse procedure
+e funzioni , l'unica differenza sta in una procedura che è in grado di muovere
+la testina sulla posizione desiderata ; la procedura si chiama seek ed ha la
+seguente forma :
+
+PROCEDURE Seek ( VAR NomeInterno : FILE ; posizione : integer);
+
+
+Ricordiamo che le posizioni cominciano da 0 a N-1 , dove N è la dimensione del
+file.
+
+Vediamo ora due funzioni utili per la gestione dei file in Pascal :
+
+Function FileSize (VAR NomeInterno : FILE) : integer;
+Function Pos(VAR NomeInterno : FILE) : integer;
+
+
+Come si intuisce FileSize restituisce la dimensione del file , invece Pos
+restituisce la posizione corrente della testina.  Con questo concludiamo il
+discorso sui file , in seguito analizzeremo i file di testo , concludiamo con
+un programma completo che analizza meglio il funzionamento dei file :
+
+PROGRAM Prova_file; VAR F : FILE OF integer; num : integer; BEGIN (*Questo programma è un esempio che mostra l'uso dei file in Pascal Il programma legge una serie di numeri inseriti dall'utente e li memorizza su un file in seguito il file viene letto e i dati stampati a video *) writeln ('Inserire una serire di numeri '); writeln ('Per fermarsi inserite 0 '); (*Creazione ed apertura in scrittura del file*) Assign(F,'dati.dat'); Rewrite(F); (*Inserimento dei dati*) writeln; write('Inserisci numero : '); readln(num); WHILE (num<>0) DO BEGIN Write(F,num); write('Inserisci numero : '); readln(num); END; (*Chiusura del File*) Close(F); (*Apertura in lettura e lettura dei dati*) Reset(F); Writeln; Writeln('Hai inserito ',FileSize(F),' numeri'); Writeln; Writeln('Lettura dei dati memorizzati :'); WHILE (NOT EOF(F)) DO BEGIN Read(F,num); Writeln(num); END; Close(F); WriteLn; WriteLn('Questo programma è un esempio che trovate su'); WriteLn; WriteLn('http://www.programmare.vai.li oppure http://digilander.iol.it/carmageddon1'); WriteLn; WriteLn('Ciao da Claudio (carmageddon1@iol.it)'); END.
+
+FILE di testo
+~~~~~~~~~~~~~
+
+In Pascal permette anche di usare i file di testo , che formano un tipo
+indicato con il nome text .  I file di tipo text si comportano come dei file
+di caratteri quindi scrivere : VAR F : Text ;
+
+è equivalente a scrivere :
+VAR F : FILE OF Char ;
+
+Quindi i file di testo si comportano come tutti gli altri file e di
+conseguneza valgono tutte le cose dette in precedenza su di essi.  C'è invece
+da dire che i file di testo hanno in più due funzioni che ne permettono
+l'elaborazione ; vediamole subito :
+
+PROCEDURE Readln ( VAR NomeInterno : FILE);
+PROCEDURE Writeln( VAR NomeInterno : FILE);
+
+
+La procedura writeln inserisce nel file il carattere di EOLN (End Of LiNe) che
+indica la fine di una riga ; di conseguenza la procedura readln salta il
+carattere di EOLN e porta la testina all'inizio della nuova riga.  Per sapere
+se la testina si trova o no su un carattere di eoln ci viene in aiuto la
+funzione eoln che restituisce true se la testina è su un carattere di eoln ,
+false nel caso contrario.
+
+FUNCTION Eoln(VAR T:Text) : Boolean;
+
+
+Ora analiazziamo alcuni esempi :
+
+(1) VAR F : Text;
+    ................
+(2) Assign(F,'prova.txt');
+    ................
+(3) Rewrite(F);
+(4) Write(F,'d');
+(5) Writeln(F);
+(6) Close(F);
+
+In questo esempio si vede come creare (2), aprire in scrittura un file di
+testo (3) , come scrivere un carattere (4) e come mettere un marcatore di eoln
+con la procedura writeln (5) ; infine con l'istruzione (6) chiudiamo il file e
+marchiamo con un eof.
+
+(1) VAR F : Text;
+        c : char;
+    ................
+(2) Assign(F,'prova.txt');
+    ................
+(3) Reset(F);
+(4) Read(F,c);
+(5) Close(F);
+
+Qui invece vediamo come leggere un carattere da un file di testo (4).
+
+Mostriamo ora un programma completo :
+
+PROGRAM Prova_Text; USES crt; VAR T : TEXT; c : char; BEGIN (*Questo è un programma di esempio per mostrare l'uso dei file di testo Il programma legge del testo e lo memorizza in un file che in seguito viene visualizzato *) (*Creazione e apertura in scrittura*) Assign(T,'testo.txt'); Rewrite(T); (*Fase di scrittura testo*) Writeln('Inserire un testo (premere ESC per terminare)'); Writeln; c:= Readkey; (* #27 e #13 corrispondono a ESC ed INVIO*) WHILE (c<>#27) DO BEGIN IF (c=#13) THEN BEGIN Writeln(T); writeln; END ELSE BEGIN Write(T,c); write(c); END; c := ReadKey; END; CLose(T); (*Apertura in lettura*) Reset(T); (*Lettura del testo*) Writeln; Writeln('Il testo inserito è il seguente :'); Writeln; WHILE (NOT EOF(T)) DO BEGIN IF (EOLN(T)) THEN BEGIN Readln(T); Writeln; END ELSE BEGIN Read(T,c); Write(c); END; END; Close(T); WriteLn; WriteLn('Questo programma è un esempio che trovate su'); WriteLn; WriteLn('http://www.programmare.vai.li oppure http://digilander.iol.it/carmageddon1'); WriteLn; WriteLn('Ciao da Claudio (carmageddon1@iol.it)'); END.
+
+
+In questo programma sono molto importanti i due cicli while che mostrano come
+effettuare un ciclo di lettura o di scrittura su un file di testo.
 
 PUNTATORI
 ---------
