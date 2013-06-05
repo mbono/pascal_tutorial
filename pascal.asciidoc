@@ -1339,4 +1339,4 @@ PUNTATORI
 puntatori
 
 
-// vim: cc=78:spell spelllang=it:aw
+// vim: cc=78:spell spelllang=it:aw:tw=78
