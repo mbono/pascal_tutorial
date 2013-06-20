@@ -113,8 +113,8 @@ Idetificatori
 ~~~~~~~~~~~~~~
 
 Un identificatore è il nome che si assegna ad una parte di un programma pascal
-quale può essere una variabile, una costante, una funzione, una proceudura, o
-una label.
+quale può essere una variabile, una costante, una funzione, una procedura, o
+una etichetta.
 
 Un identificare è costituito da una sequenza qualsiasi di lettere e cifre,
 purché il primo carattere sia una lettera. Non sono ammessi spazi o caratteri
@@ -1048,176 +1048,141 @@ typedefs
 Record
 ~~~~~~
 
-Tipi di dato strutturati : Record varianti.
 
-Oltre ai record normali esistono dei record speciali in grado di modificare la
-propria struttura in base al valore di un dato campo.  Vedo di spiegarmi
-meglio : supponiamo di avere un record che contiene i dati anagrafici di una
-persona , questo record tra i suoi campi ha quello della nazionalità , se la
-nazionalità è italiana non abbiamo bisogno di ulteriori campi , ma se la
-nazionalità non è italiana dobbiamo memorizzare il paese di provenienza in un
-certo campo che chiamiamo provenienza.
+Record varianti
+^^^^^^^^^^^^^^^
 
-Una struttura di record che varia a seconda del valore di un suo campo (campo
-discriminatore) viene chiamata record veriante ; la forma generale di questi
-particolari record è la seguente :
+WARNING: PARTE DA RIVEDERE
 
-RECORD
-  campo1 : tipo ;
-  campo2 : tipo ;
-  
-  CASE (campodiscriminatore) OF
-    val1 : (campi aggiuntivi);
-    val2 : (campi aggiuntivi);
-    ELSE : (campi aggiuntivi);
-  END;
-  ................
-  ................
-  campoN : tipo;
-END;  
+Un record che varia la sua struttura a seconda del valore di un suo campo
+(campo discriminatore) viene chiamato record variante; la forma generale è la
+seguente:
 
-Vediamo subito di codificare l'esempio descritto in apertura :
+------------------------------------------------------------------------------
+record
+	<campo>: <tipo>;
+	<campo>: <tipo>;
+	<campo>: <tipo>;
+	...
+	case <campo>: <tipo> of
+	<val1>: (campi aggiuntivi);
+	<val2>: (campi aggiuntivi);
+end;  
+------------------------------------------------------------------------------
 
-RECORD
-  Nome : string;
-  Data : string[12];
-  .......
-  
-  CASE (Naz : string) OF
-    'italiana' : ();(*nessun altro campo*)
-    ELSE : (prov : string;);
-  END;
-  ......
-END;  
+Un record può avere una sola parte variante ed essa deve essere dichiarata
+sempre alla fine dopo la parte fissa.
 
-In definitiva un record variante si comporta esattamente come un record
-normale solo che alcuni campi sono presenti a seconda del valore che assume il
-campo discriminatore ; quindi è sempre necessario controllare prima.
+------------------------------------------------------------------------------
+type utente = record
+	nome: string;
+	cognome: string;
+	case coniugato: boolean of
+	true:(
+		moglie: string;
+		nfigli: integer;
+	);
+end;
+------------------------------------------------------------------------------
 
 Set
 ~~~~
 
-Tipi di dato SET.
+Il pascal permette di gestire il modello matematico degli insiemi con un
+particolare tipo di dato, chiamato appunto `set` (insieme).  Diciamo
+innanzitutto che gli insiemi possono contenere elementi di un certo tipo; i
+tipi possibili nel `set` del pascal sono: interi, caratteri e enumerati.
+La dichiarazione di un insieme ha la seguente struttura.
 
-Il Pascal permette di gestire il modello matematico insieme con un particolare
-tipo di dato , chiamato appunto SET (insieme).  Diciamo innanzitutto che gli
-insiemi possono contenere elementi di un certo tipo ; i tipi possibili nel SET
-del Pascal sono : interi , caratteri e enumerati.  Ma vediamo come si dichiara
-un tipo di dato SET nella sua forma generale :
+------------------------------------------------------------------------------
+set of <tipo>;
+------------------------------------------------------------------------------
 
-SET OF TipoElementi;
+La prima cosa da imparare per operare con i dati di tipo `set` è
+l'inizializzazione di un insieme, cioè come fare ad assegnare gli elementi ad
+un insieme; l'operazione è molto semplice e si esegue nel seguente modo:
 
+------------------------------------------------------------------------------
+<insieme> := [(lista dei dati)] ;
+------------------------------------------------------------------------------
 
-Oppure è possibile definire un nuovo tipo cosi come segue :
-
-TYPE NomeTipo = SET OF TipoElementi;
-
-
-La prima cosa da imparare per operare con i dati di tipo SET è
-l'inizializzazione di un insieme , cioè come fare ad assegnare gli elementi ad
-un insieme ; l'operazione è molto semplice e si esegue nel seguente modo :
-Insieme := [ (lista dei dati) ] ;
-
-Vediamo alcuni esempi per capire meglio :
-
-Type InsiemeInteri = SET OF integer;
+.dichiarazione e inizializzazione di alcuni insiemi
+------------------------------------------------------------------------------
+type insiemeinteri = set of integer;
      cifre=0..9;
-     InsiemeCifre = SET OF cifre;
-     InsiemeLettere = SET OF CHAR;
-     InsiemeMinuscole = SET OF 'a'..'z';
-     maiuscole = 'A'..'Z';
-     InsiemeMaiuscole = SET OF maiuscole;
+     insiemecifre = set of cifre;
+     insiemelettere = set of char;
+     insiememinuscole = set of 'a'..'z';
+     maiuscole = 'a'..'z';
+     insiememaiuscole = set of maiuscole;
      colori = (giallo , verde , rosso );
-     InsiemeColori = SET OF colori ;
+     insiemecolori = set of colori ;
      
-Questi sono esempi di dichiarazioni dei tipi SET , vediamo ora
-l'inizializzazione degli insiemi :
+...
 
-VAR A,B : InsiemeInteri;
-    C : InsiemeColori;
-    
-................
+var a,b : insiemeinteri;
+    c : insiemecolori;
 
-A := [1,2,3,5,12,56];
-B := [10..100];
+a := [1,2,3,5,12,56];
+b := [10..100];
+c := [giallo , rosso];
+------------------------------------------------------------------------------
 
-................
+Se abbiamo molti elementi consecutivi è possibile usare la notazione
+`[<inizio>..<fine>]`, come si vede dall'esempio.
 
-C := [giallo , rosso];
+Le corrispondenti operazioni matematiche sugli insiemi sono effettuate da vari
+operatori binari: l'operatore di unione `+`, quello di intersezione `*` e
+quello di differenza tra insiemi `-`.
 
-Se abbiamo molti elementi consecutivi è possibile usare la Primo .. Ultimo ,
-come si vede dall'esempio.
+.operazioni sugli insiemi
+------------------------------------------------------------------------------
+var a,b,c: insiemeinteri;
 
-Unione , intersezione e differenza.
+...
 
-Le operazioni matemetiche tra insiemi sono , naturalmente possibili ,
-naturalmente non spiego come funzionano le operazioni matematiche sugli
-insiemi e le loro propietà , in quanto non è questa la sede adatta.
-
-L'operatore di unione è + , quello di intersezione è l' * invece quello di
-differenza è il - .  Questi operatori funzionano su insiemi dello stesso tipo
-e si usano nel seguente modo :
-
-Insieme1 (operatore) Insieme2
-
-Naturalmente 2 insiemi dello stesso tipo ne restituiscono 1 del tipo medesimo.
-
-Vediamo alcuni esempi per capire meglio :
-
-VAR A,B,C : InsiemeInteri;
-..........
-..........
-
-A := [1,3] + [4,7]; (*A=[1,3,4,7]*)
-
-B := [1,2,3] * [2,5,6]; (*B=[2]*)
-
-A := [1,2,3,4];
-B := [1,3];
-C := A-B; (*A=[2,4]*)
-
-Appartenenza.
+a := [1,3] + [4,7]; (* a = [1,3,4,7] *)
+b := [1,2,3] * [2,5,6]; (* b = [2] *)
+a := [1,2,3,4];
+b := [1,3];
+c := a-b; (* a = [2,4] *)
+------------------------------------------------------------------------------
 
 Per stabilire se un elemento appartiene o no ad un insieme si usa l'operatore
-di appartenenza IN.  Questo operatore restituisce un valore booleano , true se
-l'elemento appartiene all'insieme , false nel caso contrario.  Il modo di
-usare l'operatore di appartenenza è il seguente : elemento IN insieme
+di appartenenza `in`.  Questo operatore restituisce un valore booleano, `true` se
+l'elemento appartiene all'insieme, `false` nel caso contrario.
 
-Vediamo alcuni esempi per capire meglio :
-
-VAR A : InsiemeInteri;
-    Ris : Boolean;
-
-
-A := [1,2,3,4];
-
-Ris := 3 IN A;  (*true*)
-Ris := 10 IN A; (*false*)
+.appartenenza ad un insieme
+------------------------------------------------------------------------------
+var a: insiemeinteri;
+    ris: boolean;
 
 
-Confronti tra insiemi.
+a := [1,2,3,4];
 
-Tra 2 insieme è possibile effettuare un confronto per stabilire se gli insiemi
-sono uguali , diversi oppure se uno dei 2 è sottinsieme dell'altro.
+ris := 3 in a;  (*true*)
+ris := 10 in a; (*false*)
+------------------------------------------------------------------------------
 
-Vediamo come fare :
+Tra due insiemi è possibile effettuare un confronto per stabilire se gli insiemi
+sono uguali, diversi oppure se uno dei 2 è sottoinsieme dell'altro. La seguente
+tabella riassume gli operatori corrispondenti.
 
-Operatore 	Descrizione;
-= 	Restituisce true se i 2 insiemi sono uguali
-<> 	Restituisce true se i 2 insieme sono diversi.
-<= 	Restituisce true se i 2 il primo insieme è sottinsieme del secondo.
->= 	Restituisce true se il secondo insieme è sottinsieme del primo.
+|=============================================================================
+|`=`	|Restituisce `true` se i due insiemi sono uguali
+|`<>`	|Restituisce `true` se i due insiemi sono diversi.
+|`<=`	|Restituisce `true` se il primo insieme è sottoinsieme del secondo.
+|`>=`	|Restituisce `true` se il secondo insieme è sottoinsieme del primo.
+|=============================================================================
 
-
-Vediamo un esempio :
-
-VAR A : InsiemeInteri;
-    Ris : Boolean;
-
-
-A := [1..10];
-Ris := [1,2] <= A;   (*true;*)
-Ris := [11,12] <= A; (*false*)
+------------------------------------------------------------------------------
+var a: insiemeinteri;
+    ris: boolean;
+...
+a := [1..10];
+ris := [1,2] <= a;   (*true;*)
+ris := [11,12] <= a; (*false*)
+------------------------------------------------------------------------------
 
 FILE
 ----
@@ -1225,19 +1190,19 @@ FILE
 FILE ad accesso diretto
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Innanzi tutto dobbiamo chiarire due aspetti dei file : l'organizzazione e il
-metodo di accesso.  L'organizzazione indica come il file e disposto
-fisicamente sul disco ; ci sono due tipi di organizzazione quella sequenziale
-e quella random ; come si capisce nell'organizzazione sequenziale tutti gli
-elementi sono appunto dipsosti in modo sequenziale uno dietro l'altro ; quelli
+Innanzi tutto dobbiamo chiarire due aspetti dei file: l'organizzazione e il
+metodo di accesso.  L'organizzazione indica come il file è disposto
+fisicamente sul disco; ci sono due tipi di organizzazione quella sequenziale
+e quella random; come si capisce nell'organizzazione sequenziale tutti gli
+elementi sono appunto disposti in modo sequenziale uno dietro l'altro; quelli
 random invece sono disposti in modo non sequenziale.  Diciamo subito che tutti
-i file gestisti dal Pascal sono organizzati in maniera sequenziale.  Il metodo
-di accesso invece è il modo con cui si accede ai file , e come abbiamo visto
+i file gestisti dal pascal sono organizzati in maniera sequenziale.  Il metodo
+di accesso invece è il modo con cui si accede ai file, e come abbiamo visto
 nella lezione precedente sono due accesso sequenziale e diretto. Nel primo
 metodo per accedere all'elemento i bisogna leggete tutti gli i-1 elementi
-precedenti , invece con l'accesso diretto è possibile leggere direttamente
-l'elemento desiderato.  Il Pascal A.N.S.I.  prevede solo l'uso di file
-sequenziali ad accesso sequenziale , quelli visti nella lezione precedente ,
+precedenti, invece con l'accesso diretto è possibile leggere direttamente
+l'elemento desiderato.  Il pascal ANSI  prevede solo l'uso di file
+sequenziali ad accesso sequenziale, quelli visti nella lezione precedente,
 ma quasi tutte le implementazioni prevedono anche l'uso di file sequenziali ad
 accesso diretto che andiamo ad analizzare adesso.
 
@@ -1245,92 +1210,174 @@ File sequenziali ad accesso diretto
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 I file di questo tipo si comportano esattamente come quelli visti in
-precedenza , quindi tutte le fasi sono uguali e gestite dalle stesse procedure
-e funzioni , l'unica differenza sta in una procedura che è in grado di muovere
-la testina sulla posizione desiderata ; la procedura si chiama seek ed ha la
-seguente forma :
+precedenza, quindi tutte le fasi sono uguali e gestite dalle stesse procedure
+e funzioni, l'unica differenza sta in una procedura che è in grado di muovere
+la testina sulla posizione desiderata; la procedura si chiama seek ed ha la
+seguente forma:
 
-PROCEDURE Seek ( VAR NomeInterno : FILE ; posizione : integer);
+------------------------------------------------------------------------------
+procedure seek (var nomeinterno: file; posizione: integer);
+------------------------------------------------------------------------------
 
-
-Ricordiamo che le posizioni cominciano da 0 a N-1 , dove N è la dimensione del
+Ricordiamo che le posizioni cominciano da 0 a N-1, dove N è la dimensione del
 file.
 
-Vediamo ora due funzioni utili per la gestione dei file in Pascal :
+Vediamo ora due funzioni utili per la gestione dei file in pascal:
 
-Function FileSize (VAR NomeInterno : FILE) : integer;
-Function Pos(VAR NomeInterno : FILE) : integer;
+------------------------------------------------------------------------------
+function filesize (var nomeinterno: file): integer;
+function pos(var nomeinterno: file): integer;
+------------------------------------------------------------------------------
 
-
-Come si intuisce FileSize restituisce la dimensione del file , invece Pos
+Come si intuisce `filesize` restituisce la dimensione del file, invece `pos`
 restituisce la posizione corrente della testina.  Con questo concludiamo il
-discorso sui file , in seguito analizzeremo i file di testo , concludiamo con
-un programma completo che analizza meglio il funzionamento dei file :
+discorso sui file, in seguito analizzeremo i file di testo, concludiamo con
+un programma completo che analizza meglio il funzionamento dei file:
 
-PROGRAM Prova_file; VAR F : FILE OF integer; num : integer; BEGIN (*Questo programma è un esempio che mostra l'uso dei file in Pascal Il programma legge una serie di numeri inseriti dall'utente e li memorizza su un file in seguito il file viene letto e i dati stampati a video *) writeln ('Inserire una serire di numeri '); writeln ('Per fermarsi inserite 0 '); (*Creazione ed apertura in scrittura del file*) Assign(F,'dati.dat'); Rewrite(F); (*Inserimento dei dati*) writeln; write('Inserisci numero : '); readln(num); WHILE (num<>0) DO BEGIN Write(F,num); write('Inserisci numero : '); readln(num); END; (*Chiusura del File*) Close(F); (*Apertura in lettura e lettura dei dati*) Reset(F); Writeln; Writeln('Hai inserito ',FileSize(F),' numeri'); Writeln; Writeln('Lettura dei dati memorizzati :'); WHILE (NOT EOF(F)) DO BEGIN Read(F,num); Writeln(num); END; Close(F); WriteLn; WriteLn('Questo programma è un esempio che trovate su'); WriteLn; WriteLn('http://www.programmare.vai.li oppure http://digilander.iol.it/carmageddon1'); WriteLn; WriteLn('Ciao da Claudio (carmageddon1@iol.it)'); END.
+------------------------------------------------------------------------------
+program files;
+var
+	f: file of integer;
+	num: integer;
+begin
+	writeln('inserire una serire di numeri ');
+	writeln('per fermarsi inserite 0 ');
+	(*creazione ed apertura in scrittura del file*)
+	assign(f, 'dati.dat');
+	rewrite(f);
+	(*inserimento dei dati*)
+	writeln;
+	write('inserisci numero : ');
+	readln(num);
+	while (num <> 0) do begin
+		write(f, num);
+		write('inserisci numero : ');
+		readln(num);
+	end;
+	(*chiusura del file*)
+	close(f);
+	(*apertura in lettura e lettura dei dati*)
+	reset(f);
+	writeln;
+	writeln('hai inserito ', filesize(f), ' numeri');
+	writeln;
+	writeln('lettura dei dati memorizzati :');
+	while (not eof(f)) do begin
+		read(f, num);
+		writeln(num);
+	end;
+	close(f);
+end.
+------------------------------------------------------------------------------
 
 FILE di testo
 ~~~~~~~~~~~~~
 
-In Pascal permette anche di usare i file di testo , che formano un tipo
-indicato con il nome text .  I file di tipo text si comportano come dei file
-di caratteri quindi scrivere : VAR F : Text ;
+Il pascal permette anche di usare i file di testo, che formano un tipo
+indicato con il nome `text`.  I file di tipo `text` si comportano come dei
+file di caratteri quindi scrivere `var f : text` è equivalente a scrivere `var
+f: file of char`.
 
-è equivalente a scrivere :
-VAR F : FILE OF Char ;
+I file di testo si comportano come tutti gli altri file e di conseguenza
+valgono tutte le cose dette in precedenza su di essi.  C'è invece da dire che
+i file di testo hanno in più due funzioni che ne permettono l'elaborazione;
+vediamole subito:
 
-Quindi i file di testo si comportano come tutti gli altri file e di
-conseguneza valgono tutte le cose dette in precedenza su di essi.  C'è invece
-da dire che i file di testo hanno in più due funzioni che ne permettono
-l'elaborazione ; vediamole subito :
+------------------------------------------------------------------------------
+procedure readln ( var nomeinterno: file);
+procedure writeln( var nomeinterno: file);
+------------------------------------------------------------------------------
 
-PROCEDURE Readln ( VAR NomeInterno : FILE);
-PROCEDURE Writeln( VAR NomeInterno : FILE);
+La procedura `writeln` inserisce nel file il carattere di `eoln` (End Of LiNe)
+che indica la fine di una riga; di conseguenza la procedura `readln` salta il
+carattere di `eoln` e porta la testina all'inizio della nuova riga.  Per
+sapere se la testina si trova o no su un carattere di `eoln` ci viene in aiuto
+la funzione `eoln(f)` che restituisce `true` se la testina è su un carattere
+di `eoln` o `false` nel caso contrario.
 
+------------------------------------------------------------------------------
+function eoln(var t:text) : boolean;
+------------------------------------------------------------------------------
 
-La procedura writeln inserisce nel file il carattere di EOLN (End Of LiNe) che
-indica la fine di una riga ; di conseguenza la procedura readln salta il
-carattere di EOLN e porta la testina all'inizio della nuova riga.  Per sapere
-se la testina si trova o no su un carattere di eoln ci viene in aiuto la
-funzione eoln che restituisce true se la testina è su un carattere di eoln ,
-false nel caso contrario.
-
-FUNCTION Eoln(VAR T:Text) : Boolean;
-
-
-Ora analiazziamo alcuni esempi :
-
-(1) VAR F : Text;
-    ................
-(2) Assign(F,'prova.txt');
-    ................
-(3) Rewrite(F);
-(4) Write(F,'d');
-(5) Writeln(F);
-(6) Close(F);
+.esempi
+------------------------------------------------------------------------------
+(1) var f: text;
+...
+(2) assign(f,'prova.txt');
+(3) rewrite(f);
+(4) write(f,'d');
+(5) writeln(f);
+(6) close(f);
+------------------------------------------------------------------------------
 
 In questo esempio si vede come creare (2), aprire in scrittura un file di
-testo (3) , come scrivere un carattere (4) e come mettere un marcatore di eoln
-con la procedura writeln (5) ; infine con l'istruzione (6) chiudiamo il file e
-marchiamo con un eof.
+testo (3), come scrivere un carattere (4) e come mettere un marcatore di
+`eoln` con la procedura `writeln` (5) ; infine con l'istruzione (6) chiudiamo
+il file e marchiamo con un `eof`.
 
-(1) VAR F : Text;
-        c : char;
-    ................
-(2) Assign(F,'prova.txt');
-    ................
-(3) Reset(F);
-(4) Read(F,c);
-(5) Close(F);
+.esempi
+------------------------------------------------------------------------------
+(1) var f: text;
+        c: char;
+...
+(2) assign(f,'prova.txt');
+(3) reset(f);
+(4) read(f,c);
+(5) close(f);
+------------------------------------------------------------------------------
 
 Qui invece vediamo come leggere un carattere da un file di testo (4).
 
 Mostriamo ora un programma completo :
 
-PROGRAM Prova_Text; USES crt; VAR T : TEXT; c : char; BEGIN (*Questo è un programma di esempio per mostrare l'uso dei file di testo Il programma legge del testo e lo memorizza in un file che in seguito viene visualizzato *) (*Creazione e apertura in scrittura*) Assign(T,'testo.txt'); Rewrite(T); (*Fase di scrittura testo*) Writeln('Inserire un testo (premere ESC per terminare)'); Writeln; c:= Readkey; (* #27 e #13 corrispondono a ESC ed INVIO*) WHILE (c<>#27) DO BEGIN IF (c=#13) THEN BEGIN Writeln(T); writeln; END ELSE BEGIN Write(T,c); write(c); END; c := ReadKey; END; CLose(T); (*Apertura in lettura*) Reset(T); (*Lettura del testo*) Writeln; Writeln('Il testo inserito è il seguente :'); Writeln; WHILE (NOT EOF(T)) DO BEGIN IF (EOLN(T)) THEN BEGIN Readln(T); Writeln; END ELSE BEGIN Read(T,c); Write(c); END; END; Close(T); WriteLn; WriteLn('Questo programma è un esempio che trovate su'); WriteLn; WriteLn('http://www.programmare.vai.li oppure http://digilander.iol.it/carmageddon1'); WriteLn; WriteLn('Ciao da Claudio (carmageddon1@iol.it)'); END.
+------------------------------------------------------------------------------
+program prova_text;
+uses crt;
+var
+	t: text;
+	c: char;
+begin
+	(*creazione e apertura in scrittura*)
+	assign(t,'testo.txt');
+	rewrite(t);
+	(*fase di scrittura testo*)
+	writeln('inserire un testo (premere esc per terminare)');
+	writeln;
+	c:= readkey;
+	(* #27 e #13 corrispondono a esc ed invio*)
+	while (c <> #27) do begin
+		if ( c = #13) then begin
+			writeln(t);
+			writeln;
+		end
+		else begin
+			write(t,c);
+			write(c);
+		end;
+		c := readkey;
+	end;
+	close(t);
+	(*apertura in lettura*)
+	reset(t);
+	(*lettura del testo*)
+	writeln;
+	writeln('il testo inserito è il seguente :');
+	writeln;
+	while (not eof(t)) do begin
+		if (eoln(t)) then begin
+			readln(t);
+			writeln;
+		end
+		else begin
+			read(t,c);
+			write(c);
+		end;
+	end;
+	close(t);
+end.
+------------------------------------------------------------------------------
 
-
-In questo programma sono molto importanti i due cicli while che mostrano come
+In questo programma sono molto importanti i due cicli `while` che mostrano come
 effettuare un ciclo di lettura o di scrittura su un file di testo.
 
 PUNTATORI

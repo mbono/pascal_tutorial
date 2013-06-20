@@ -19,4 +19,4 @@ pascal.html: pascal.asciidoc
 	asciidoc -b html pascal.asciidoc
 
 clean:
-	rm -f *~ *.text *.html *.pdf *.css
+	rm -f *~ *.text *.html *.pdf *.css *.xml
