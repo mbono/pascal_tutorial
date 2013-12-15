@@ -1,28 +1,28 @@
 all: html
 
-html: pascal.html
+html: pascal_tutorial.html
 
-txt: pascal.txt
+txt: pascal_tutorial.txt
 
-pdf: pascal.pdf
+pdf: pascal_tutorial.pdf
 
-epub: pascal.epub
+epub: pascal_tutorial.epub
 
-pascal.pdf: pascal.asciidoc
-	a2x -f pdf pascal.asciidoc
+pascal_tutorial.pdf: pascal_tutorial.asciidoc
+	a2x -f pdf pascal_tutorial.asciidoc
 
 #fop pdf generation
-#a2x --fop -f pdf pascal.asciidoc
+#a2x --fop -f pdf pascal_tutorial.asciidoc
 
-pascal.txt: pascal.asciidoc
-	a2x -f text pascal.asciidoc
-	mv pascal.text pascal.txt
+pascal_tutorial.txt: pascal_tutorial.asciidoc
+	a2x -f text pascal_tutorial.asciidoc
+	mv pascal_tutorial.text pascal_tutorial.txt
 
-pascal.html: pascal.asciidoc
-	asciidoc -b html5 -a max-width=55em pascal.asciidoc
+pascal_tutorial.html: pascal_tutorial.asciidoc
+	asciidoc -b html5 -a max-width=55em pascal_tutorial.asciidoc
 
-pascal.epub: pascal.asciidoc
-	a2x -f epub pascal.asciidoc
+pascal_tutorial.epub: pascal_tutorial.asciidoc
+	a2x -f epub pascal_tutorial.asciidoc
 
 clean:
 	rm -f *~ *.txt *.html *.pdf *.css *.xml *.epub
