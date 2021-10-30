@@ -27,6 +27,7 @@ Partiamo il classico programma `hello world` scritto in pascal. Questo codice
 non fa altro che stampare a video la stringa di testo `hello, world`.
 
 .hello.pas
+[source, pascal]
 ------------------------------------------------------------------------------
 {hello.pas: write the string "hello, world"}
 program hello;
@@ -1620,10 +1621,124 @@ end.
 in questo programma sono molto importanti i due cicli `while` che mostrano come
 effettuare un ciclo di lettura o di scrittura su un file di testo.
 
-puntatori
+Puntatori
 ---------
 
-todo: puntatori
+Semplificando possiamo pensare alla memoria di un computer come ad una lista
+contigua di celle di memoria; ognuna di queste celle è identificata da un
+indirizzo univoco.
+
+Il pascal consente attraverso l'uso degli operatori `^` e `@` di utilizzare
+gli indirizzi delle variabili. In particolare l'operatore di indirizzo `@`
+restituisce l'indirizzo associato ad una variabile, mentre l'operatore `^`
+consente di accedere alla locazione di memoria indicata da un indirizzo.
+
+Per utilizzare un puntatore bisogna prima definirne il tipo attraverso la
+seguente notazione.
+
+----
+^<tipo>
+----
+
+Questo definisce un puntatore ad una variabile di tipo `<tipo>`. Ovviamente si
+può anche definire il tipo del puntatore attraverso `type`.
+
+----
+type <nome_tipo_puntatore> = ^<tipo>
+----
+
+Vediamo un esempio per capire il funzionamento.
+
+[source, pascal]
+----
+program pointer_demo2;
+
+type
+	pint = ^integer;	{definisce un puntatore ad integer}
+
+var
+	num: integer;
+	p1, p2: pint;		{dichiarazione dei puntatori}
+	p3: ^integer;		{dichiarazione diretta senza ricorrere a type}
+
+begin
+	num := 20;
+	writeln('num = ', num);
+	p1 := @num;		{p1 contiene l'indirizzo di num}
+	writeln('p1^ = ', p1^);	{p1^ ci consente di accedere all'indirizzo
+				contenuto nel puntatore}
+	p2 := p1;		{sia p1 che p2 puntano a num}
+	writeln('p2^ = ', p2^);
+
+	p1^ := 30;		{modifichiamo num attraverso il suo puntatore}
+	writeln('num = ', num);
+end.
+----
+
+L'output prodotto è il seguente.
+
+----
+num = 20
+p1^ = 20
+p2^ = 20
+num = 30
+----
+
+Memoria dinamica
+~~~~~~~~~~~~~~~~
+
+La memoria può essere allocata/deallocata dinamicamente a runtime (durante
+l'esecuzione del programma) grazie alle funzioni di sistema `new` e `dispose`.
+
+La funzione `new(<puntatore>)` alloca lo spazio e lo rende accessibile
+attraverso il puntatore (la quantità di memoria allocata dipende dal tipo del
+puntatore), mentre `dispose(<puntatore>)` si occupa di liberare lo spazio,
+rendendolo nuovamente disponibile per successive allocazioni. E' importante
+liberare la memoria quando non serve più in quanto la memoria utilizzata per
+l'allocazione dinamica (conosciuta con il nome di *heap*) è limitata ed il
+pascal non la pulisce automaticamente.
+
+Vediamo un esempio che sfrutta i puntatori e la memoria dinamica per creare
+una lista concatenata; da notare l'utilizzo del valore `NIL` che rappresenta
+il valore nullo per i puntatori; se un puntatore è `NIL` non punta a nulla.
+
+[source, pascal]
+----
+program pointer_demo;
+
+type
+	list = ^cell;
+	cell = record
+		value: integer;
+		next: list;
+	end;
+
+var
+	l1, l2: list;
+begin
+	new(l1);
+	l1^.value := 10;
+	l1^.next := NIL;
+	writeln('l1^.value = ', l1^.value);
+
+	new(l2);
+	l2^.value := 20;
+	l2^.next := NIL;
+
+	l1^.next := l2;
+	writeln('l1^.next^.value = ', l1^.next^.value);
+
+	dispose(l1);
+	dispose(l2);
+end.
+----
+
+L'output è il seguente.
+
+----
+l1^.value = 10
+l1^.next^.value = 20
+----
 
 
 // vim: cc=78:spell spelllang=it:aw:tw=78
