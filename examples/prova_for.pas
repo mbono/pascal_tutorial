@@ -1,0 +1,9 @@
+program provafor;
+var i: integer;
+begin
+	for i := 1 to 10 do
+		writeln(i);
+	writeln;
+	for i := 10 downto 1 do
+		writeln(i);
+end.
