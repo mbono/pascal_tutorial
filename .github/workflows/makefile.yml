@@ -19,9 +19,6 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install -y asciidoc asciidoc-dblatex
 
-    - name: Build PDF
-      run: make pdf
-
     - name: Build HTML
       run: make html
 
@@ -29,4 +26,4 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: Pascal Tutorial
-        path: pascal_tutorial.pdf pascal_tutorial.html
+        path: pascal_tutorial.html
