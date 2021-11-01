@@ -1,3 +1,9 @@
+---
+title: Pascal tutorial
+author: Mariano Bono
+date: 2021/11/01
+...
+
 # Pascal tutorial #
 
 Mariano Bono <mbono1980@gmail.com> v0.1, 
