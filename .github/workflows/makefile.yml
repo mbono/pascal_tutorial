@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Install dependencies
-      run: sudo apt-get install -y asciidoc asciidoc-dblatex
+      run: sudo apt-get install -y asciidoc asciidoc-dblatex pandoc
 
     - name: Build HTML
       run: make html
