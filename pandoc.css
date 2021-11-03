@@ -16,13 +16,14 @@ body {
 table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
-	margin: 1em auto;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding: 0.3em;
 	align: hcenter;
 }
 
 div.sourceCode {
 	background-color: #f6f8fa;
-	_background-color: rgba(175, 184, 193, 0.2);
 	padding: 1em;
 }
 
