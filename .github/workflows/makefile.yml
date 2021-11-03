@@ -26,4 +26,8 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: Pascal Tutorial
-        path: pascal_tutorial2.html
+        path: |
+                pascal_tutorial2.html
+                pascal_tutorial.html
+                pandoc.css
+

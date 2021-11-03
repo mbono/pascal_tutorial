@@ -22,10 +22,15 @@ table, th, td {
 
 div.sourceCode {
 	background-color: #f6f8fa;
+	_background-color: rgba(175, 184, 193, 0.2);
 	padding: 1em;
 }
 
 code {
-	background-color: #f6f8fa;
+	background-color: rgba(175, 184, 193, 0.2);
 	padding: 0.2em;
+}
+
+code.sourceCode, code.sourceCode.pascal {
+	background-color: #f6f8fa;
 }
