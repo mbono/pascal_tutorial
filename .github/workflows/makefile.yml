@@ -20,7 +20,7 @@ jobs:
       run: sudo apt-get install -y asciidoc asciidoc-dblatex pandoc
 
     - name: Build HTML
-      run: make html
+      run: make all
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
