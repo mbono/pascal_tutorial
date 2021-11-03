@@ -1,0 +1,31 @@
+/*
+ * I add this to html files generated with pandoc.
+ */
+
+body {
+  color: #444;
+  font-family: sans-serif;
+  font-size: 12pt;
+  line-height: 1.7;
+  padding: 1em;
+  margin: auto;
+  max-width: 44em;
+  background: #fefefe;
+}
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin: 1em auto;
+	align: hcenter;
+}
+
+div.sourceCode {
+	background-color: #f6f8fa;
+	padding: 1em;
+}
+
+code {
+	background-color: #f6f8fa;
+	padding: 0.2em;
+}

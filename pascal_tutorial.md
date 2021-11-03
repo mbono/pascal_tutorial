@@ -4,17 +4,15 @@ author: Mariano Bono
 date: 2021/11/01
 ...
 
-# Pascal tutorial #
-
-Mariano Bono <mbono1980@gmail.com> v0.1, 
+# Pascal tutorial
 
 Questo documento contiene una breve panoramica sul linguaggio di programmazione
 pascal, illustrando la struttura, i costrutti, le strutture di controllo e i
 tipi di dati tipici del linguaggio.
 
-## Basi del linguaggio ##
+# Basi del linguaggio
 
-### Hello world ###
+## Hello world
 
 Partiamo il classico programma `hello world` scritto in pascal. Questo codice
 non fa altro che stampare a video la stringa di testo `hello, world`.
@@ -38,7 +36,7 @@ eseguite; La riga 4 è quella che stampa a video la stringa `hello, world`, il
 comando `writeln('testo da stampare')` scrive a video tutto quello che si trova
 tra gli apici.
 
-### Struttura del programma ###
+## Struttura del programma
 
 Un programma pascal si divide generalmente in tre parti: intestazione, blocco
 delle dichiarazioni e blocco delle istruzioni.
@@ -83,32 +81,36 @@ Cosa Tre Volte Più Facile': le iniziali di ogni parola coincidono con un
 elemento del programma (`label`, `const`, `type`, `var`, `procedure` e
 `function`).
 
-### Parole riservate ###
+## Parole riservate
 
 Il pascal ha una serie di parole riservate che non possono essere utilizzate
 come identificatori.
 
 Le parole riservate del pascal ANSI sono mostrate nella tabella seguente.
 
-|            |          |         |            |          |           |           |
-|------------|----------|---------|------------|----------|-----------|-----------|
-|`and`       |`array`   |`begin`  |`case`      |`const`   |`div`      |`do`       |
-|`downto`    |`else`    |`end`    |`file`      |`for`     |`forward`  |`function` |
-|`goto`      |`if`      |`in`     |`label`     |`mod`     |`nil`      |`not`      |
-|`of`        |`or`      |`packed` |`procedure` |`program` |`record`   |`repeat`   |
-|`set`       |`then`    |`to`     |`type`      |`until`   |`var`      |`while`    |
-|`with`      |
+|            |           |         |            |
+|------------|-----------|---------|------------|
+|`and`       |`array`    |`begin`  |`case`      |
+|`const`     |`div`      |`do`     |`downto`    |
+|`else`      |`end`      |`file`   |`for`       |
+|`forward`   |`function` |`goto`   |`if`        |
+| `in`       |`label`    |`mod`    |`nil`       |
+|`not`       |`of`       |`or`     |`packed`    |
+|`procedure` |`program`  |`record` |`repeat`    |
+|`set`       |`then`     |`to`     |`type`      |
+|`until`     |`var`      |`while`  |`with`      |
 
-### Idetificatori ###
+## Idetificatori
 
 Un identificatore è il nome che si assegna ad una parte di un programma pascal
-quale può essere una variabile, una costante, una funzione, una procedura, o una
-etichetta.
+quale può essere una variabile, una costante, una funzione, una procedura, o
+una etichetta.
 
 Un identificare è costituito da una sequenza qualsiasi di lettere e cifre,
 purché il primo carattere sia una lettera. Non sono ammessi spazi o caratteri
-diversi da numeri e lettere con l'unica eccezione del carattere underscore `_`.
-Il pascal è case-insensitive quindi non distingue tra maiuscole e minuscole.
+diversi da numeri e lettere con l'unica eccezione del carattere underscore
+`_`.  Il pascal è case-insensitive quindi non distingue tra maiuscole e
+minuscole.
 
 .alcuni esempi sugli identificatori
 ```pascal
@@ -117,7 +119,7 @@ PIPPO pippo Pippo {rappresentano tutti lo stesso identificatore}
 12Pippo {non valido in quanto inizia con un numero}
 ```
 
-### Tipi di dato ###
+## Tipi di dato
 
 In pascal distinguiamo tra tipi di dati semplici e strutturati; vediamo quali
 sono:
@@ -139,9 +141,9 @@ sono:
   * File
 * Dati di tipo puntatore
 
-### Letterali
+## Letterali
 
-#### Numeri
+### Numeri
 
 Distinguiamo tra numeri interi e reali.
 
@@ -169,7 +171,7 @@ utilizza il simbolo `E`.
 8.5E-2 {8.5x10\^-2}
 ```
 
-#### Caratteri
+### Caratteri
 
 Un carattere è rappresentato da un qualsiasi carattere alfanumerico tra apici:
 
@@ -177,7 +179,7 @@ Un carattere è rappresentato da un qualsiasi carattere alfanumerico tra apici:
 'a' 'b' 'c' '1' '0'
 ```
 
-#### Stringhe
+### Stringhe
 
 Una stringa è una sequenza di caratteri alfanumerici racchiusa tra apici.
 
@@ -185,11 +187,11 @@ Una stringa è una sequenza di caratteri alfanumerici racchiusa tra apici.
 'Io sono una stringa di testo'
 ```
 
-#### Letterali booleani
+### Letterali booleani
 
 Esistono due letterali booleani e sono `true` e `false`.
 
-#### Costanti
+### Costanti
 
 Una costante è un oggetto che rimane sempre con lo stesso valore per tutta la
 durata del programma.
@@ -206,7 +208,7 @@ const settimana = 7;
 const ore = 24;
 ```
 
-#### Variabili
+### Variabili
 
 Le variabili sono degli oggetti che possono assumere valori di un certo tipo;
 durante l'esecuzione del programma il loro valore può essere modificato ma il
@@ -224,7 +226,7 @@ var <var1>,<var2>, ... : <tipo di dato>;
 var nome: string; var numero: integer;
 ```
 
-#### Operatore di assegnazione
+### Operatore di assegnazione
 
 Dopo avere dichiarato una variabile ad essa possiamo assegnare un
 valore; per farlo ricorriamo all'operatore di assegnazione.
@@ -245,9 +247,9 @@ n := 10; {assegnazione semplice}
 n := (10 + 2) \* 5; {assegnazione complessa}
 ```
 
-### Tipi di dati semplici
+# Tipi di dati semplici
 
-#### Numeri
+## Numeri
 
 I numeri interi in pascal sono rappresentati dal tipo `integer`, mentre i numeri
 in virgola mobile sono del tipo `real`.
@@ -290,7 +292,7 @@ begin
 end.
 ```
 
-#### Caratteri
+## Caratteri
 
 Il tipo di dato carattere in pascal è indicato dalla parola chiave `char`. Una
 variabile di tipo `char` può assumere il valore di uno dei 255 caratteri
@@ -311,7 +313,7 @@ c := chr(65);
 In questo esempio entrambe le operazioni di assegnazione producono lo stesso
 risultato.
 
-#### Stringhe
+## Stringhe
 
 Le stringhe di caratteri in pascal rappresentano un tipo di dato proprio del
 linguaggio: il tipo `string`. Come abbiamo visto una stringa è una qualsiasi
@@ -345,305 +347,386 @@ begin
 end.
 ```
 
-#### Tipi di dato `boolean` e operatori logici
+## Tipi di dato `boolean` e operatori logici
 
 In pascal i valori booleani formano un vero e proprio tipo di dato
-contrassegnato dall'identificatore `boolean`. Gli operatori booleani
-sono `and`, `or` e `not`; sono operatori che restituiscono un dato di
-tipo `boolean` secondo le seguenti tabelle di verità.
+contrassegnato dall'identificatore `boolean`. Gli operatori booleani sono
+`and`, `or` e `not`; sono operatori che restituiscono un dato di tipo
+`boolean` secondo le seguenti tabelle di verità.
 
-\[options="header"\]
-\|============================================================================
-\| Primo operando \| Secondo Operando \|Operatore `and`\| Operatore `or`
-\| `false` \| `false` \| `false` \|`false` \| `false` \| `true` \|
-`false` \| `true` \| `true` \| `false` \| `false` \| `true` \| `true` \|
-`true` \| `true` \| `true`
-\|============================================================================
+| Primo operando | Secondo Operando |Operatore `and`| Operatore `or` |
+|----------------|------------------|---------------|----------------|
+| `false`        | `false`          | `false`       |`false`         |
+| `false`        | `true`           | `false`       | `true`         | 
+| `true`         | `false`          | `false`       | `true`         |
+| `true`         | `true`           | `true`        | `true`         |
 
-\[options="header"\]
-\|============================================================================
-\| Operando \| Operatore `not` \| `false` \| `true` \| `true` \| `false`
-\|============================================================================
+| Operando | Operatore `not`|
+|----------|----------------|
+| `false`  | `true`         |
+| `true`   | `false`        |
 
 Osserviamo che l'operazione di `and` restituisce un valore vero solo se
-entrambi gli operandi sono veri; l'operatore `or` restituisce un valore
-vero se almeno uno dei due operandi è vero; l'operatore `not` inverte il
-predicato.
+entrambi gli operandi sono veri; l'operatore `or` restituisce un valore vero
+se almeno uno dei due operandi è vero; l'operatore `not` inverte il predicato.
 
-Operatori logici \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+## Operatori logici
 
 Sono operatori che confrontano due espressioni e restituiscono un valore
 booleano (`true` o `false`).
 
-\|============================ \|Maggiore \|`>` \|Maggiore o uguale
-\|`>=` \|Minore \|`<` \|Minore o uguale \|`<=` \|Uguale \|`=` \|Diverso
-\|`<>` \|============================
+* Maggiore: `>`
+* Maggiore uguale: `>=`
+* Minore: `<`
+* Minore uguale: `<=`
+* Uguale: `=`
+* Diverso: `<>`
 
 E' possibile confrontare tra di loro numeri numeri (anche `integer` con
-`real`), stringhe, caratteri, dati booleani (`false` è minore di `true`)
-e caratteri con stringhe. Per stringhe e caratteri viene rispettato
-l'ordine lessicografico. Non è possibile confrontare stringhe e
-caratteri con dati numerici.
+`real`), stringhe, caratteri, dati booleani (`false` è minore di `true`) e
+caratteri con stringhe. Per stringhe e caratteri viene rispettato l'ordine
+lessicografico. Non è possibile confrontare stringhe e caratteri con dati
+numerici.
 
-.bool.pas
----------
+```pascal
+program bool; 
+var a,b,c: boolean; 
+begin 
+  a := (12 < 15); {T} 
+  a := true; {T} 
+  a := false; {F} 
+  b := (12 < 10); {F} 
+  c := a and b; {T and F = F} 
+  c := a or b; {T or F = T} 
+  c := not(a and b); {a and b = F; not(false) = T}
+  c := ('a' < 'b'); {T} 
+  c := ('hello' < 'world'); {T} 
+  c := ('h' \<'world'); 
+end.
+```
 
-program bool; var a,b,c: boolean; begin a := (12 \< 15); {T} a := true;
-{T} a := false; {F} b := (12 \< 10); {F} c := a and b; {T and F = F} c
-:= a or b; {T or F = T} c := not(a and b); {a and b = F; not(false) = T}
-c := ('a' \< 'b'); {T} c := ('hello' \< 'world'); {T} c := ('h' \<
-'world'); end.
-------------------------------------------------------------------------------
-
-Condizione \~\~\~\~\~\~\~\~\~\~
+## Condizione
 
 Una condizione è un espressione booleana: nel caso più semplice è una
-variabile o un letterale di tipo `boolean`, ma può anche essere un
-espressione complessa formata da operatori booleani e logici. In ogni
-caso una condizione o è `true` o è `false`.
+variabile o un letterale di tipo `boolean`, ma può anche essere un espressione
+complessa formata da operatori booleani e logici. In ogni caso una condizione
+o è `true` o è `false`.
 
-  --------------------------
-  (10 \< 20) and (a \> b);
-  --------------------------
+```pascal
+(10 \< 20) and (a \> b);
+```
 
-Input e output
---------------
+# Input e output
 
-I comandi principali per le operazioni di input/output sono due: `read`
-e `write`; il primo legge i dati dal file `input` mentre il secondo
-scrive sul file `output`. I file `input` e `output` sono associati di
-default alla tastiera e allo schermo, ma si può cambiare l'associazione
-di default legandoli a file reali o ad altri dispositivi.
+I comandi principali per le operazioni di input/output sono due: `read` e
+`write`; il primo legge i dati dal file `input` mentre il secondo scrive sul
+file `output`. I file `input` e `output` sono associati di default alla
+tastiera e allo schermo, ma si può cambiare l'associazione di default
+legandoli a file reali o ad altri dispositivi.
 
-  -------------------------
-  read(var1, var2, ...);
-  write(exp1, exp2, ...);
-  -------------------------
+```pascal
+read(var1, var2, ...);
+write(exp1, exp2, ...);
+```
 
 Il comando `read` legge i dati dallo standard input e li memorizza nelle
-variabili indicate; i tipi ammessi sono `char`, `string`, `integer` e
-`real`. Nello standard input i dati sono separati da uno o più spazi o
-da un carattere di fine riga (che si ottiene digitanto `invio` quando lo
-standard input è la tastiera).
+variabili indicate; i tipi ammessi sono `char`, `string`, `integer` e `real`.
+Nello standard input i dati sono separati da uno o più spazi o da un carattere
+di fine riga (che si ottiene digitanto `invio` quando lo standard input è la
+tastiera).
 
-Il comando `write` stampa sullo standard output la lista di dati
-indicata; possono essere passate variabili, costanti o espressioni di
-tipo `string`, `char`, `integer` o `real`.
+Il comando `write` stampa sullo standard output la lista di dati indicata;
+possono essere passate variabili, costanti o espressioni di tipo `string`,
+`char`, `integer` o `real`.
 
-Esistono due varianti di `read` e `write` che sono rispettivamente
-`writeln` e `readln`; il primo stampa il carattere `EOL` (end of line)
-dopo i dati, mentre il secondo dopo avere letto i dati si sposta alla
-riga successiva (dopo il carattere `EOL`).
+Esistono due varianti di `read` e `write` che sono rispettivamente `writeln` e
+`readln`; il primo stampa il carattere `EOL` (end of line) dopo i dati, mentre
+il secondo dopo avere letto i dati si sposta alla riga successiva (dopo il
+carattere `EOL`).
 
-.io.pas
--------
+```pascal
+program io;
+var i: integer;
+	r: real; c: char;
+	s: string;
+begin
+	writeln; {stampa una riga vuota}
+	write('inserisci un numero intero :');
+	readln(i);
+	writeln('hai inserito : ', i);
+	writeln;
+	write('inserisci un numero reale :');
+	readln(r);
+	writeln('hai inserito ', r);
+	writeln('hai inserito : ', r:3:4);
+	writeln;
+	write('inserisci un carattere :');
+	readln(c);
+	writeln('hai inserito : ',c);
+	writeln;
+	write('inserisci una stringa :');
+	readln(s);
+	writeln('hai inserito : ',s);
+	writeln;
+	write('inserimento multiplo di intero e reale :');
+	readln(i,r);
+	writeln('hai inserito : ',i,' ',r);
+end.
+```
 
-program io; var i: integer; r: real; c: char; s: string; begin writeln;
-{stampa una riga vuota} write('inserisci un numero intero :');
-readln(i); writeln('hai inserito :', i); writeln; write('inserisci un
-numero reale :'); readln(r); writeln('hai inserito', r); writeln('hai
-inserito :', r:3:4); writeln; write('inserisci un carattere :');
-readln(c); writeln('hai inserito :',c); writeln; write('inserisci una
-stringa :'); readln(s); writeln('hai inserito :',s); writeln;
-write('inserimento multiplo di intero e reale :'); readln(i,r);
-writeln('hai inserito :',i,' ',r); end.
-------------------------------------------------------------------------------
+## Formattazione dell'output
 
-Formattazione dell'output
-\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+E' possibile formattare l'output inserendo lo spazio che un certo dato deve
+occupare sullo schermo utilizzando la seguente forma.
 
-E' possibile formattare l'output inserendo lo spazio che un certo dato
-deve occupare sullo schermo utilizzando la seguente forma.
+```pascal
+write(exp:spazio);
+```
 
-  --------------------
-  write(exp:spazio);
-  --------------------
+Se il dato necessita di più spazio la formattazione viene ignorata, mentre nel
+caso in cui il dato richiede meno spazio, questo viene preservato e il dato
+viene allineato a destra.
 
-Se il dato necessita di più spazio la formattazione viene ignorata,
-mentre nel caso in cui il dato richiede meno spazio, questo viene
-preservato e il dato viene allineato a destra.
+Per i dati `real` è possibile specificare un ulteriore campo per indicare
+quante cifre dopo la virgola stampare.
 
-Per i dati `real` è possibile specificare un ulteriore campo per
-indicare quante cifre dopo la virgola stampare.
-
-  -----------------------------------
-  write(exp:spazio:cifre decimali);
-  -----------------------------------
+```pascal
+write(exp:spazio:cifre decimali);
+```
 
 Il codice seguente chiarisce il concetto.
 
-.formatted\_io.pas
-------------------
+```pascal
+program formatted_io;
+var a1,a2,a3,a4,a5,a6: integer;
+begin
+	a1 := 10;
+	a2 := 334;
+	a3 := 2103;
+	a4 := 0;
+	a5 := 46;
+	a6 := 555;
+	{testo non formattato}
+	writeln('tabella:');
+	writeln(a1, ' ', a2, ' ', a3);
+	writeln(a4, ' ', a5, ' ', a6);
+	writeln;
+	{testo formattato}
+	writeln('tabella:');
+	writeln(a1:6, a2:6, a3:6); {6 colonne per dato}
+	writeln(a4:6, a5:6, a6:6);
+end.
+```
 
-program formatted\_io; var a1,a2,a3,a4,a5,a6: integer; begin a1 := 10;
-a2 := 334; a3 := 2103; a4 := 0; a5 := 46; a6 := 555; {testo non
-formattato} writeln('tabella:'); writeln(a1, ' ', a2,' ', a3);
-writeln(a4,' ', a5,' ', a6); writeln; {testo formattato}
-writeln('tabella:'); writeln(a1:6, a2:6, a3:6); {6 colonne per dato}
-writeln(a4:6, a5:6, a6:6); end.
-------------------------------------------------------------------------------
+# Strutture di controllo
 
-Strutture di controllo
-----------------------
-
-Costrutto di scelta: `if`
-\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+## Costrutto di scelta: `if`
 
 Il costrutto `if` consente di eseguire un blocco di codice solo se una
 condizione risulta vera.
 
-  ------------------------
-  if (<condizione>) then
+```pascal
+if (<condizione>) then
   <blocco>
-  ------------------------
+```
 
-Esiste la variante `if .. else` in cui se la condizione risulta `false`
-allora viene eseguito il blocco alternativo.
+Esiste la variante `if .. else` in cui se la condizione risulta `false` allora
+viene eseguito il blocco alternativo.
 
-  ------------------------
-  if (<condizione>) then
+```pascal
+if (<condizione>) then
   <blocco>
-  else
+else
   <blocco alternativo>
-  ------------------------
+```
 
-Diversi `if .. else` si possono annidare dando luogo al costrutto
-`if .. else if` che consente di effettuare scelte multiple.
+Diversi `if .. else` si possono annidare dando luogo al costrutto `if .. else
+if` che consente di effettuare scelte multiple.
 
-  -----------------------------
-  if (<condizione>) then
+```pascal
+if (<condizione>) then
   <blocco>
-  else if (<condizione>) then
-  \<blocco 2\>
-  else if (<condizione>) then
-  \<blocco 3\>
-  ...
-  else
+else if (<condizione>) then
+  <blocco 2>
+else if (<condizione>) then
+  <blocco 3>
+...
+else
   <blocco alternativo>
-  -----------------------------
+```
 
 L'ultimo `else` si riferisce sempre all'ultima occorrenza di `if`.
 
-WARNING: L'ultima istruzione prima della parola chiave `else` non deve
-essere terminata dal punto e virgola.
+WARNING: L'ultima istruzione prima della parola chiave `else` non deve essere
+terminata dal punto e virgola.
 
-  -----------------------------------
-  program if\_else;
-  var a,b: integer;
-  begin
-  writeln('inserisci due numeri:');
-  readln(a, b);
-  if (a \< b) then
-  writeln(a, ' \< ', b)
-  else if (a = b) then
-  writeln(a, ' = ', b)
-  else
-  writeln(a, ' \> ', b);
-  end.
-  -----------------------------------
+```pascal
+program if_else;
+var a,b: integer;
+begin
+	writeln('inserisci due numeri: ');
+	readln(a, b);
+	if (a < b) then
+		writeln(a, ' < ', b)
+	else if (a = b) then
+		writeln(a, ' = ', b)
+	else
+		writeln(a, ' > ', b);
+end.
+```
 
-Scelta multipla: `case` \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+## Scelta multipla: `case`
 
-La struttura `case` permette di effettuare una scelta multipla in base
-al risultato di una espressione oppure al contenuto di una variabile. La
-forma della struttura di controllo `case` è la seguente :
+La struttura `case` permette di effettuare una scelta multipla in base al
+risultato di una espressione oppure al contenuto di una variabile. La forma
+della struttura di controllo `case` è la seguente :
 
-  -----------------------------------
-  case (espressione o variabile) of
+```pascal
+case (espressione o variabile) of
   listavalori1: (blocco1)
   listavalori2: (blocco2)
   ...
   listavalorin: (bloccon)
   else (bloccoelse)
-  end;
-  -----------------------------------
+end;
+```
 
-Viene valutato il valore dell'espressione o della variabile e viene
-cercato il corrispondente valore tra quelli indicati nelle varie liste;
-se il valore viene trovato allora viene eseguito il blocco di codice
-corrispondente altrimenti viene eseguito il blocco `else`. Il blocco
-`else` è opzionale; in questo caso se il valore non viene trovato allora
-non viene eseguito nessun blocco di codice e l'esecuzione prosegue senza
-problemi.
+Viene valutato il valore dell'espressione o della variabile e viene cercato il
+corrispondente valore tra quelli indicati nelle varie liste; se il valore
+viene trovato allora viene eseguito il blocco di codice corrispondente
+altrimenti viene eseguito il blocco `else`. Il blocco `else` è opzionale; in
+questo caso se il valore non viene trovato allora non viene eseguito nessun
+blocco di codice e l'esecuzione prosegue senza problemi.
 
-.scelta multipla usando una variabile
--------------------------------------
+Scelta multipla usando una variabile:
 
-case (i) of 1,2,3,4,5: writeln('i \<= 5'); 6: writeln('i = 6'); 7,8:
-writeln('i = 7 or i = 8'); else writeln('i out of range 1..8'); end;
-------------------------------------------------------------------------------
+```pascal
+case (i) of
+	1,2,3,4,5:
+		writeln('i <= 5');
+	6:
+		writeln('i = 6');
+	7,8:
+		writeln('i = 7 or i = 8');
+	else
+		writeln('i out of range 1..8');
+end;
+```
 
-.scelta multipla usando il risultato di una espressione
--------------------------------------------------------
+Scelta multipla usando il risultato di una espressione:
 
-case (i mod 9) of 1,2,3,7,8: writeln('blocco1'); 4,5,6:
-writeln('blocco2'); end;
-------------------------------------------------------------------------------
+```pascal
+case (i mod 9) of
+	1,2,3,7,8:
+		writeln('blocco1');
+	4,5,6:
+		writeln('blocco2');
+end;
+```
 
-.simple\_menu.pas: un semplice menu
------------------------------------
+Un semplice menu:
 
-program simple\_menu; var scelta: integer; begin writeln(' menu
-pricipale : '); writeln; writeln('1. opzione a'); writeln('2. opzione
-b'); writeln('3. opzione c'); writeln; write('Cosa scegli? (1..3):');
-readln(scelta); case (scelta) of 1: writeln('hai scelto l''opzione a
-!!'); 2: writeln('hai scelto l''opzione b !!'); 3: writeln('hai scelto
-l''opzione c !!') else writeln ('errore : la scelta effettuata non è
-corretta !!!!'); end; end.
-------------------------------------------------------------------------------
+```pascal
+(* file: examples/simple_menu.pas *)
 
-Ciclo `while` \~\~\~\~\~\~\~\~\~\~\~\~\~
+program simple_menu;
+var scelta: integer;
+begin
+	writeln(' menu pricipale : ');
+	writeln;
+	writeln('1. opzione a');
+	writeln('2. opzione b');
+	writeln('3. opzione c');
+	writeln;
+	write('Cosa scegli? (1..3): ');
+	readln(scelta);
+	case (scelta) of
+	1:
+		writeln('hai scelto l''opzione a !!');
+	2:
+		writeln('hai scelto l''opzione b !!');
+	3:
+		writeln('hai scelto l''opzione c !!')
+	else
+		writeln ('errore : la scelta effettuata non è corretta !!!!');
+	end;
+end.
+```
 
-La struttura `while` esegue un blocco di codice in maniera ciclica fino
-a quando la variabile o l'espressione di controllo rimane `true`.
+## Ciclo `while`
 
-  -----------------------------------
-  while (<espressione booleana>) do
-  <blocco>
-  -----------------------------------
+La struttura `while` esegue un blocco di codice in maniera ciclica fino a
+quando la variabile o l'espressione di controllo rimane `true`.
 
-.conteggio da 1 a 10
---------------------
+```pascal
+while (<espressione booleana>) do
+	<blocco>
+```
 
+Conteggio da 1 a 10:
+
+```pascal
 i := 1;
 
-while (i \<= 10) do begin writeln(i); inc(i); end;
-------------------------------------------------------------------------------
+while (i <= 10) do
+begin
+	writeln(i);
+	inc(i);
+end;
+```
 
-NOTE: le procedure `inc(var n: interger)` e `dec(var n: integer)`
-incrementano e decrementano di uno la variabile fornita come argomento.
+NOTE: le procedure `inc(var n: interger)` e `dec(var n: integer)` incrementano
+e decrementano di uno la variabile fornita come argomento.
 
-.tabellina.pas: stampa la tabellina del 3
------------------------------------------
+Stampa la tabellina del 3:
 
-program tabellina; var i: integer; begin writeln('tabellina 3'); i := 1;
-while (i \<= 10) do begin writeln(3 \* i); inc(i); end; end.
-------------------------------------------------------------------------------
+```pascal
+(* file: examples/tabellina.pas *)
 
-Ciclo `repeat` \~\~\~\~\~\~\~\~\~\~\~\~\~\~
+program tabellina;
+var i: integer;
+begin
+	writeln('tabellina 3');
+	i := 1;
+	while (i <= 10) do
+	begin
+		writeln(3 * i);
+		inc(i);
+	end;
+end.
+```
+
+## Ciclo `repeat`
 
 Il ciclo `repeat` è simile al ciclo `while` con la grossa differenza che
 la condizione di uscita dal ciclo viene valutata alla fine dello stesso
 per cui il ciclo viene eseguito almeno una volta.
 
-  ---------------------
-  repeat
-  <blocco>
-  until <condizione>;
-  ---------------------
+```pascal
+repeat
+	<blocco>
+until <condizione>;
+```
 
-Il blocco di codice viene eseguito finché la condizione non è vera.
-Vediamo il conteggio da uno a dieci con il ciclo `repeat`.
+Il blocco di codice viene eseguito finché la condizione non è vera.  Vediamo
+il conteggio da uno a dieci con il ciclo `repeat`.
 
-.conteggio da 1 a 10
---------------------
+Conteggio da 1 a 10:
 
+```pascal
 i := 1;
 
-repeat begin writeln(i); inc(i); end; until (i \> 10);
-------------------------------------------------------------------------------
+repeat
+begin
+	writeln(i);
+	inc(i);
+end;
+until (i > 10);
+```
 
-Ciclo `for` \~\~\~\~\~\~\~\~\~\~\~
+# TODO MB da qui
+
+## Ciclo `for`
 
 La struttura `for` esegue un loop un numero prestabilito di volte.
 

@@ -21,8 +21,8 @@ pascal_tutorial.txt: pascal_tutorial.asciidoc
 pascal_tutorial.html: pascal_tutorial.asciidoc
 	asciidoc -b html5 -a max-width=55em pascal_tutorial.asciidoc
 
-pascal_tutorial2.html: pascal_tutorial.md
-	pandoc --standalone --from markdown --to html5 -o pascal_tutorial2.html pascal_tutorial.md
+pascal_tutorial2.html: pascal_tutorial.md pandoc.css
+	pandoc --standalone --number-section --toc --from markdown --to html5 -o pascal_tutorial2.html --css pandoc.css pascal_tutorial.md
 
 pascal_tutorial.epub: pascal_tutorial.asciidoc
 	a2x -f epub pascal_tutorial.asciidoc
