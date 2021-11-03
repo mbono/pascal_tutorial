@@ -15,7 +15,7 @@ pascal_tutorial.txt: pascal_tutorial.md
 	pandoc -t plain -o pascal_tutorial.txt pascal_tutorial.md
 
 pascal_tutorial.html: pascal_tutorial.md
-	pandoc --standalone --number-section --toc --from markdown --to html5 -o pascal_tutorial2.html --css pandoc.css pascal_tutorial.md
+	pandoc --standalone --number-section --toc --from markdown --to html5 -o pascal_tutorial.html --css pandoc.css pascal_tutorial.md
 
 pascal_tutorial.epub: pascal_tutorial.md
 	pandoc -o pascal_tutorial.epub pascal_tutorial.md
