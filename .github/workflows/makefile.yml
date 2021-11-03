@@ -27,7 +27,9 @@ jobs:
       with:
         name: Pascal Tutorial
         path: |
-                pascal_tutorial2.html
                 pascal_tutorial.html
+                pascal_tutorial.txt
+                pascal_tutorial.pdf
+                pascal_tutorial.epub
                 pandoc.css
 
