@@ -724,16 +724,15 @@ end;
 until (i > 10);
 ```
 
-# TODO MB da qui
-
 ## Ciclo `for`
 
 La struttura `for` esegue un loop un numero prestabilito di volte.
 
-  ------------------------------------------------
-  for <variabile> := <viniziale> to <vfinale> do
-  <blocco>
-  ------------------------------------------------
+
+```pascal
+for <variabile> := <viniziale> to <vfinale> do
+	<blocco>
+```
 
 La variabile indicata assume tutti i valori tra <viniziale> e <vfinale>
 incrementando ogni volta di 1; il numero di loop eseguito è <vfinale> -
@@ -741,25 +740,26 @@ incrementando ogni volta di 1; il numero di loop eseguito è <vfinale> -
 
 La seguente variante decrementa di 1 la variabile di controllo.
 
-  ----------------------------------------
-  for <variabile> := <v1> downto <v2> do
-  <blocco>
-  ----------------------------------------
+```pascal
+for <variabile> := <v1> downto <v2> do
+	<blocco>
+```
 
-.conteggio da 1 a 10
---------------------
+Conteggio da 1 a 10:
 
-for i := 1 to 10 do writeln(i);
-------------------------------------------------------------------------------
+```pascal
+for i := 1 to 10 do
+	writeln(i);
+```
 
-.conteggio da 10 a 1
---------------------
+Conteggio da 1 a 10:
 
-for i := 10 downto 1 do writeln(i);
-------------------------------------------------------------------------------
+```pascal
+for i := 10 downto 1 do
+	writeln(i);
+```
 
-Procedure e funzioni
---------------------
+# Procedure e funzioni
 
 Il pascal offre due tipi di subroutine: `procedure` e `function`.
 
@@ -767,79 +767,107 @@ Dal punto di vista concettuale le `procedure` sono utilizzate quando il
 sottoprogramma deve eseguire delle azioni, le `function` invece sono
 usate per fornire il risultato di un elaborazione.
 
-.dichiarazione di `procedure` e `function`
-------------------------------------------
+Dichiarazione di `procedure` e `function`:
 
-procedure <nome>(<lista parametri>); <corpo della procedura>
+```pascal
+procedure <nome>(<lista parametri>);
+	<corpo della procedura>
 
 function <nome>(<lista parametri>):<tipo restituito>;
-<corpo della funzione>
-------------------------------------------------------------------------------
+    <corpo della funzione>
+```
 
-Struttura dei sottoprogrammi
-\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+## Struttura dei sottoprogrammi
 
-Un sottoprogramma pascal ha la stessa struttura di un programma
-generico.
+Un sottoprogramma pascal ha la stessa struttura di un programma generico.
 
-.struttura di una `procedure`
------------------------------
+Struttura di una `procedure`:
 
-procedure <nome>(<parametri>); {dichiarazioni} label const type var
-procedure function begin {istruzioni} end.
-------------------------------------------------------------------------------
+```pascal
+procedure <nome>(<parametri>);
+	{dichiarazioni}
+	label
+	const
+	type
+	var
+	procedure
+	function
+begin
+	{istruzioni}
+end.
+```
 
-.struttura di una `function`
-----------------------------
+Struttura di una `function`:
 
-function <nome>(<parametri>): <tipo restituito>; {dichiarazioni} label
-const type var procedure function begin {istruzioni} end.
-------------------------------------------------------------------------------
+```pascal
+function <nome>(<parametri>): <tipo restituito>;
+	{dichiarazioni}
+	label
+	const 
+	type
+	var
+	procedure
+	function
+begin
+	{istruzioni}
+end.
+```
 
-La cosa che si nota immediatamente è che all'interno dei sottoprogrammi
-è possibile definirne altri.
+La cosa che si nota immediatamente è che all'interno dei sottoprogrammi è
+possibile definirne altri.
 
-Per invocare un sottoprogramma si utilizza la seguente forma.
+Per invocare un sottoprogramma si utilizza la seguente forma:
 
-  -----------------------------------
-  <procedura>(<parametri>);
-  <var> := <funzione>(<parametri>);
-  -----------------------------------
+```pascal
+<procedura>(<parametri>);
+<var> := <funzione>(<parametri>);
+```
 
-.due semplici subroutine
-------------------------
+Due semplici subroutine:
 
-function somma(a, b: integer): integer; begin somma := a + b; end;
+```pascal
+function somma(a, b: integer): integer;
+begin
+	somma := a + b;
+end;
 
-procedure stampa\_somma(a, b: integer); begin writeln(a, ' + ', b,' = ',
-a + b); end; ... begin n := somma(10, 20); stampa\_somma(10, 20); end.
-------------------------------------------------------------------------------
+procedure stampa_somma(a, b: integer);
+begin
+	writeln(a, ' + ', b, ' = ', a + b);
+end;
+...
+begin
+	n := somma(10, 20);
+	stampa_somma(10, 20);
+end.
+```
 
-Valore restituito da una `function`
-\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+## Valore restituito da una `function`
 
-Abbiamo visto che una funzione restituisce un valore di uscita; il
-metodo per assegnare il valore di uscita dall'interno della funzione è
-il seguente:
+Abbiamo visto che una funzione restituisce un valore di uscita; il metodo per
+assegnare il valore di uscita dall'interno della funzione è il seguente:
 
-  -------------------------------------
-  <nome_funzione> := <valore_uscita>;
-  -------------------------------------
+```pascal
+<nome_funzione> := <valore_uscita>;
+```
 
-.`function` che restituisce il quadrato di un numero
-----------------------------------------------------
+`function` che restituisce il quadrato di un numero:
 
-function sqr(a: integer): integer; begin sqr := a \* a; end;
-------------------------------------------------------------------------------
+```pascal
+function sqr(a: integer): integer;
+begin
+	sqr := a * a;
+end;
+```
 
-Parametri \~\~\~\~\~\~\~\~\~
+## Parametri
 
 La lista dei parametri è una lista di identificatori raggruppata per
 tipo.
 
-  ------------------------------------------------
-  (p1, p2, ...: tipo1; pJ, pK, ...: tipo2; ...);
-  ------------------------------------------------
+```pascal
+(p1, p2, ...: tipo1; pJ, pK, ...: tipo2; ...);
+```
 
 All'interno del sottoprogramma i parametri possono essere utilizzati
 all'interno di espressioni come se fossero delle variabili.
@@ -847,78 +875,101 @@ all'interno di espressioni come se fossero delle variabili.
 Esistono due tipi di parametri: parametri valore e parametri variabile.
 
 Per i parametri valore viene fatta una copia locale (all'interno del
-sottoprogramma) e quindi eventuali modifiche al parametro non hanno
-effetto al di fuori del sottoprogramma.
+sottoprogramma) e quindi eventuali modifiche al parametro non hanno effetto al
+di fuori del sottoprogramma.
 
-I parametri variabile invece sono passati direttamente al sottoprogramma
-e quindi ogni modifica ad esso si riflette anche all'esterno del
-sottoprogramma.
+I parametri variabile invece sono passati direttamente al sottoprogramma e
+quindi ogni modifica ad esso si riflette anche all'esterno del sottoprogramma.
 
-Per dichiarare un parametro variabile si utilizza la parola chiave
-`var`.
+Per dichiarare un parametro variabile si utilizza la parola chiave `var`.
 
-.parametri.pas
---------------
+Pparametri.pas:
 
-program parametri; procedure foo(a,b: integer; var c: integer); {a e b
-sono parametri valore mentre c è variabile} begin a := a \* a; {modifica
-locale} writeln('local a =', a); b := b \* b; {modifica locale}
-writeln('local b =', b); c := a + b; {modifica globale} writeln('local c
-=', c); end; var a, b, c: integer; begin a := 10; b := 5; c := 0; foo(a,
-b, c); writeln('global a =', a); writeln('global b =', b);
-writeln('global c =', c); end.
-------------------------------------------------------------------------------
+```pascal
+program parametri;
+procedure foo(a,b: integer; var c: integer);
+{a e b sono parametri valore mentre c è variabile}
+begin
+	a := a * a;	{modifica locale}
+	writeln('local a = ', a);
+	b := b * b;	{modifica locale}
+	writeln('local b = ', b);
+	c := a + b;	{modifica globale}
+	writeln('local c = ', c);
+end;
+var a, b, c: integer;
+begin
+	a := 10;
+	b := 5;
+	c := 0;
+	foo(a, b, c);
+	writeln('global a = ', a);
+	writeln('global b = ', b);
+	writeln('global c = ', c);
+end.
+```
 
-.output di parametri.pas
-------------------------
+Ooutput di parametri.pas:
 
-local a = 100 local b = 25 local c = 125 global a = 10 global b = 5
+```
+local a = 100
+local b = 25
+local c = 125
+global a = 10
+global b = 5
 global c = 125
-------------------------------------------------------------------------------
+```
 
 I valori di `a` e `b` vengono modificati all'interno di `foo`, ma questa
-modifica rimane locale alla `procedure`; al contrario le modifiche a `c`
-sono globali.
+modifica rimane locale alla `procedure`; al contrario le modifiche a `c` sono
+globali.
 
-Facciamo un altra distinzione tra parametri formali e parametri attuali:
-i parametri formali sono quelli dichiarati nell'intestazione, quelli
-attuali invece sono i parametri forniti al momento dell'invocazione. I
-parametri attuali devo rispettare i tipi dei parametri formali, inoltre
-i parametri attuali possono esseri passati anche come costanti e non
-devono rispettare i nome dei parametri formali.
+Facciamo un altra distinzione tra parametri formali e parametri attuali: i
+parametri formali sono quelli dichiarati nell'intestazione, quelli attuali
+invece sono i parametri forniti al momento dell'invocazione. I parametri
+attuali devo rispettare i tipi dei parametri formali, inoltre i parametri
+attuali possono esseri passati anche come costanti e non devono rispettare i
+nome dei parametri formali.
 
-.esempi validi di invocazione di `foo`
---------------------------------------
+Esempi validi di invocazione di `foo`:
 
-var a, b, c, d, e: integer; begin a := 10; b := 20; foo(a, b, c);
-foo(10, 20, c); {stesso risultato di prima} d := 40; e := 30; foo(e, d,
-a); foo(10 + 2, b, e); end.
-------------------------------------------------------------------------------
+```pascal
+var a, b, c, d, e: integer;
+begin
+	a := 10;
+	b := 20;
+	foo(a, b, c);
+	foo(10, 20, c); {stesso risultato di prima}
+	d := 40;
+	e := 30;
+	foo(e, d, a);
+	foo(10 + 2, b, e);
+end.
+```
 
-Dati strutturati
-----------------
+# Dati strutturati
 
-Array \~\~\~\~\~
+## Array
 
 Un `array` (vettore) può essere visto come come una lista consecutiva di
 dati dello stesso tipo a cui è possible accedere tramite un indice.
 
-  -----------------------
-  (a1, a2, a3, ... ,aN)
-  -----------------------
+```pascal
+(a1, a2, a3, ... ,aN)
+```
 
 Per dichiarare un vettore si usa la seguente notazione.
 
-  ---------------------------------------------------------
-  var <nome>: array \[<range_indice>\] of <tipo_di_dato>;
-  ---------------------------------------------------------
+```pascal
+var <nome>: array [<range_indice>] of <tipo_di_dato>;
+```
 
 Il campo `<range indice>` indica valori iniziali e finali dell'indice;
 la dimensione del vettore si calcola quindi:
 
-  -----------------------------------------
-  <valore finale> - <valore iniziale> + 1
-  -----------------------------------------
+```pascal
+<valore finale> - <valore iniziale> + 1
+```
 
 Il tipo di un vettore può essere uno qualunque dei tipi semplici o anche
 un tipo definito dall'utente (lo vedremo in seguito).
@@ -927,141 +978,153 @@ Gli elementi dell'indice devo appartenere ad un tipo ordinale (in cui è
 possibile stabilire una relazione di ordine tra gli elementi):
 `integer`, `char`, sottocampo o `enum`.
 
-.alcuni vettori validi
-----------------------
+Alcuni vettori validi:
 
-var a: array \[1..100\] of integer; b: array \['a'..'d'\] of integer;
-giorni: array \[1..7\] of string;
-------------------------------------------------------------------------------
+```pascal
+var	a: array [1..100] of integer;
+	b: array ['a'..'d'] of integer;
+	giorni: array [1..7] of string;
+```
 
 Per accedere ad un singolo elemento del vettore si usa la forma:
 
-  ----------------------------
-  <nome_vettore>\[<indice>\]
-  ----------------------------
+```pascal
+<nome_vettore>[<indice>]
+```
 
 E' possibile assegnare un array ad un altro facendone cosi una copia
 esatta.
 
 .vettori.pas
-------------
+```pascal
+program vettori;
+var a,b: array [1..10] of integer;
+	i: integer;
+begin
+	randomize;
+	for i := 1 to 10 do begin
+		a[i] := random(100);
+		writeln('a[',i,'] = ',a[i]);
+	end;
+	b := a;
+	for i := 1 to 10 do a[i] := 0;
+	writeln;
+	for i := 1 to 10 do
+		writeln('a[', i,'] = ', a[i]);
+	writeln;
+	for i := 1 to 10 do
+		writeln('b[', i,'] = ', b[i]);
+end.
+```
 
-program vettori; var a,b: array \[1..10\] of integer; i: integer; begin
-randomize; for i := 1 to 10 do begin a\[i\] := random(100);
-writeln('a\[',i,'\] =',a\[i\]); end; b := a; for i := 1 to 10 do a\[i\]
-:= 0; writeln; for i := 1 to 10 do writeln('a\[', i,'\] =', a\[i\]);
-writeln; for i := 1 to 10 do writeln('b\[', i,'\] =', b\[i\]); end.
-------------------------------------------------------------------------------
+### Array multidimensionali
 
-Array multidimensionali \^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^
+E' possibile definire array a due o più dimensioni. Un array bidimensionale
+può essere pensato come una tabella o una matrice.
 
-E' possibile definire array a due o più dimensioni. Un array
-bidimensionale può essere pensato come una tabella o una matrice.
+Dichiarazione di `array` multidimensionali:
 
-.dichiarazione di `array` multidimensionali
--------------------------------------------
-
-var <nome>: array \[<range1>, ... ,<rangeN>\] of <tipo>
--------------------------------------------------------
+```pascal
+var <nome>: array [<range1>, ... ,<rangeN>] of <tipo>
+```
 
 Per accedere ad un singolo dato del vettore si usa la notazione:
 
-  ---------------------------------
-  <nome>\[<i1>, <i2>, ... ,<iN>\]
-  ---------------------------------
+```pascal
+<nome>[<i1>, <i2>, ... ,<iN>]
+```
 
 Se due vettori hanno le stesse dimensioni è possibile l'operazione di
 assegnazione.
 
-  -------------------------------------
-  program vettori\_multi;
-  const
-  n = 10;
-  p=10;
-  var
-  m : array\[1..n, 1..p\] of integer;
-  i,j: integer;
-  begin
-  randomize;
-  for i := 1 to p do begin
-  for j := 1 to n do begin
-  m\[i,j\] := random(100)+1;
-  write(m\[i,j\]:4);
-  end;
-  writeln;
-  end;
-  end.
-  -------------------------------------
+```pascal
+program vettori_multi;
+const
+	n = 10;
+	p=10;
+var
+	m : array[1..n, 1..p] of integer;
+	i,j: integer;
+begin
+	randomize;
+	for i := 1 to p do begin
+		for j := 1 to n do begin
+			m[i,j] := random(100)+1;
+			write(m[i,j]:4);
+		end;
+		writeln;
+	end;
+end.
+```
 
-`type` \~\~\~\~\~\~
+## `type`
 
-La parola chiave `type` consente di dare un nome ad un tipo di dato
-definito dall'utente (ovvero rinominare un tipo già esistente) ed
-utilizzare questo nome all'interno del programma.
+La parola chiave `type` consente di dare un nome ad un tipo di dato definito
+dall'utente (ovvero rinominare un tipo già esistente) ed utilizzare questo
+nome all'interno del programma.
 
-  ------------------------------------------------
-  type int\_array = array \[1..100\] of integer;
-  ...
-  var a: int\_array;
-  begin
-  a\[1\] := 10;
-  end.
-  ------------------------------------------------
+```pascal
+type int_array = array [1..100] of integer;
+...
+var a: int_array;
+begin
+	a[1] := 10;
+end.
+```
 
-Record \~\~\~\~\~\~
+## Record
 
-Attraverso il meccanismo dei `record` il pascal ci consente di costruire
-dei tipi di dati complessi che sono formati da più campi.
+Attraverso il meccanismo dei `record` il pascal ci consente di costruire dei
+tipi di dati complessi che sono formati da più campi.
 
 La struttura generale di un record è la seguente.
 
-  ------------------
-  record
-  <campo>: <tipo>;
-  <campo>: <tipo>;
-  ...
-  end;
-  ------------------
+```pascal
+record
+	<campo>: <tipo>;
+	<campo>: <tipo>;
+	...
+end;
+```
 
-Per accedere ad un certo campo si utilizza la notazione
-`<nome>.<campo>`.
+Per accedere ad un certo campo si utilizza la notazione `<nome>.<campo>`.
 
-Possiamo ad esempio pensare di volere manipolare i dati di un utente; i
-dati di questo utente sono: nome, cognome e userid. La struttura dati
+Possiamo ad esempio pensare di volere manipolare i dati di un utente; i dati
+di questo utente sono: nome, cognome e userid. La struttura dati
 corrispondente può essere creata nel seguente modo.
 
-  ---------------
-  type utente =
-  record nome:
-  string;
-  cognome:
-  string; uid:
-  integer; end;
+```pascal
+type utente =
+	record
+		nome: string;
+		cognome: string;
+		uid: integer;
+	end;
 
-  ... var mario:
-  utente; ...
-  mario.nome :=
-  'Mario';
-  mario.cognome
-  := 'Rossi';
-  mario.uid :=
-  001;
-  ---------------
+...
+var mario: utente;
+...
+mario.nome := 'Mario';
+mario.cognome := 'Rossi';
+mario.uid := 001;
+```
 
-Se si devono manipolare molti campi di un `record` può essere utile la
-parola chiave `with` che ci consente di non specificare ogni volta il
-nome del record.
+Se si devono manipolare molti campi di un `record` può essere utile la parola
+chiave `with` che ci consente di non specificare ogni volta il nome del
+record.
 
-  ---------------------
-  with mario do
-  begin
-  nome := 'Mario';
-  cognome := 'Rossi';
-  uid := 001;
-  end;
-  ---------------------
+```pascal
+with mario do
+begin
+	nome := 'Mario';
+	cognome := 'Rossi';
+	uid := 001;
+end;
+```
 
-record varianti \^\^\^\^\^\^\^\^\^\^\^\^\^\^\^
+## TODO MB: HERE
+
+### Record varianti
 
 Un `record` che varia la sua struttura a seconda del valore di un suo
 campo (campo discriminatore) viene chiamato `record` variante; la forma
