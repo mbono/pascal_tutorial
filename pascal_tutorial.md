@@ -6,9 +6,9 @@ date: 2021/11/01
 
 # Pascal tutorial
 
-Questo documento contiene una breve panoramica sul linguaggio di programmazione
-pascal, illustrando la struttura, i costrutti, le strutture di controllo e i
-tipi di dati tipici del linguaggio.
+Questo documento contiene una breve panoramica sul linguaggio di
+programmazione pascal, illustrando la struttura, i costrutti, le strutture di
+controllo e i tipi di dati tipici del linguaggio.
 
 # Basi del linguaggio
 
@@ -33,8 +33,8 @@ compilatore; la riga 2 indica l'inizio del programma con la parola chiave
 definiscono l'inizio e la fine del blocco principale del programma; tra le
 parole chiave `begin` e `end` vanno inserite le istruzioni che verranno
 eseguite; La riga 4 è quella che stampa a video la stringa `hello, world`, il
-comando `writeln('testo da stampare')` scrive a video tutto quello che si trova
-tra gli apici.
+comando `writeln('testo da stampare')` scrive a video tutto quello che si
+trova tra gli apici.
 
 ## Struttura del programma
 
@@ -48,8 +48,8 @@ programma e terminata da un punto e virgola.
 program <nome_programma>;
 ```
 
-Il blocco delle dichiarazioni definisce i vari dati che si usano nel programma è
-contiene: etichette (`label`), costanti (`const`), tipi definiti dall'utente
+Il blocco delle dichiarazioni definisce i vari dati che si usano nel programma
+è contiene: etichette (`label`), costanti (`const`), tipi definiti dall'utente
 (`type`), variabili (`var`), procedure (`procedure`) e funzioni (`function`).
 
 Il blocco delle istruzioni contiene le istruzioni che il programma deve
@@ -1122,433 +1122,458 @@ begin
 end;
 ```
 
-## TODO MB: HERE
-
 ### Record varianti
 
-Un `record` che varia la sua struttura a seconda del valore di un suo
-campo (campo discriminatore) viene chiamato `record` variante; la forma
-generale è la seguente:
+Un `record` che varia la sua struttura a seconda del valore di un suo campo
+(campo discriminatore) viene chiamato `record` variante; la forma generale è
+la seguente:
 
-  -----------------------------
-  record
-  <campo>: <tipo>;
-  <campo>: <tipo>;
-  <campo>: <tipo>;
-  ...
-  case <campo>: <tipo> of
-  <val1>: (campi aggiuntivi);
-  <val2>: (campi aggiuntivi);
-  end;
-  -----------------------------
+```pascal
+record
+	<campo>: <tipo>;
+	<campo>: <tipo>;
+	<campo>: <tipo>;
+	...
+	case <campo>: <tipo> of
+	<val1>: (campi aggiuntivi);
+	<val2>: (campi aggiuntivi);
+end;
+```
 
-Un `record` può avere una sola parte variante ed essa deve essere
-dichiarata sempre alla fine dopo la parte fissa.
+Un `record` può avere una sola parte variante ed essa deve essere dichiarata
+sempre alla fine dopo la parte fissa.
 
-  ----------------------------
-  type utente = record
-  nome: string;
-  cognome: string;
-  case coniugato: boolean of
-  true:(
-  moglie: string;
-  nfigli: integer;
-  );
-  end;
-  ----------------------------
+```pascal
+type utente = record
+	nome: string;
+	cognome: string;
+	case coniugato: boolean of
+	true:(
+		moglie: string;
+		nfigli: integer;
+	);
+end;
+```
 
 Concludiamo con un piccolo esempio.
 
-.record\_demo.pas
------------------
+```pascal
+{record_demo.pas}
 
-program record\_demo;
+program record_demo;
 
-type utente = record nome: string; cognome: string; uid: integer; end;
+type utente = record
+	nome: string;
+	cognome: string;
+	uid: integer;
+end;
 
-var mario, luca: utente; {un record si può anche specificare
-direttamente senza bisogno di definire il tipo con type} gianni: record
-nome: string; cognome: string; uid: integer; case coniugato: boolean of
-true:( moglie: string; nfigli: integer; ); end;
+var mario, luca: utente;
+	{un record si può anche specificare direttamente senza bisogno di
+	definire il tipo con type}
+	gianni: record
+		nome: string;
+		cognome: string;
+		uid: integer;
+		case coniugato: boolean of
+		true:(
+			moglie: string;
+			nfigli: integer;
+			);
+	end;
 
-begin mario.nome := 'Mario'; mario.cognome := 'Rossi'; mario.uid := 001;
+begin
+	mario.nome := 'Mario';
+	mario.cognome := 'Rossi';
+	mario.uid := 001;
 
-    {utilizzo di with}
-    with luca do begin
-        nome := 'Luca';
-        cognome := 'Verdi';
-        uid := 002;
-    end;
+	{utilizzo di with}
+	with luca do begin
+		nome := 'Luca';
+		cognome := 'Verdi';
+		uid := 002;
+	end;
 
-    writeln('nome: ' + mario.nome);
-    writeln('nome: ' + luca.nome);
+	writeln('nome: ' + mario.nome);
+	writeln('nome: ' + luca.nome);
 
-    gianni.nome := 'Gianni';
-    gianni.coniugato := true;
-    gianni.moglie := 'Maria';
-    gianni.nfigli := 3;
+	gianni.nome := 'Gianni';
+	gianni.coniugato := true;
+	gianni.moglie := 'Maria';
+	gianni.nfigli := 3;
 
-    writeln('nome: ' + gianni.nome);
-    writeln(gianni.nome + ' e'' sposato con ' + gianni.moglie);
+	writeln('nome: ' + gianni.nome);
+	writeln(gianni.nome + ' e'' sposato con ' + gianni.moglie);
 
-    luca := mario;  {assegnazione}
-    writeln('nome: ' + luca.nome);
-    writeln('cognome: ' + luca.cognome);
-
+	luca := mario;	{assegnazione}
+	writeln('nome: ' + luca.nome);
+	writeln('cognome: ' + luca.cognome);
 end.
-----
+```
 
-Insiemi \~\~\~\~\~\~\~
+## Insiemi
 
 il pascal permette di gestire il modello matematico degli insiemi con un
 particolare tipo di dato, chiamato appunto `set` (insieme). diciamo
-innanzitutto che gli insiemi possono contenere elementi di un certo
-tipo; i tipi possibili nel `set` del pascal sono: interi, caratteri e
-enumerati. la dichiarazione di un insieme ha la seguente struttura.
+innanzitutto che gli insiemi possono contenere elementi di un certo tipo; i
+tipi possibili nel `set` del pascal sono: interi, caratteri e enumerati. la
+dichiarazione di un insieme ha la seguente struttura.
 
-  ----------------
-  set of <tipo>;
-  ----------------
+```pascal
+set of <tipo>;
+```
 
 la prima cosa da imparare per operare con i dati di tipo `set` è
-l'inizializzazione di un insieme, cioè come fare ad assegnare gli
-elementi ad un insieme; l'operazione è molto semplice e si esegue nel
-seguente modo:
+l'inizializzazione di un insieme, cioè come fare ad assegnare gli elementi ad
+un insieme; l'operazione è molto semplice e si esegue nel seguente modo:
 
-  -------------------------------------
-  <insieme> := \[(lista dei dati)\] ;
-  -------------------------------------
+```pascal
+<insieme> := [(lista dei dati)] ;
+```
 
-.dichiarazione e inizializzazione di alcuni insiemi
----------------------------------------------------
+Dichiarazione e inizializzazione di alcuni insiemi:
 
-type insiemeinteri = set of integer; cifre=0..9; insiemecifre = set of
-cifre; insiemelettere = set of char; insiememinuscole = set of 'a'..'z';
-maiuscole = 'a'..'z'; insiememaiuscole = set of maiuscole; colori =
-(giallo , verde , rosso ); insiemecolori = set of colori ;
+```pascal
+type insiemeinteri = set of integer;
+     cifre=0..9;
+     insiemecifre = set of cifre;
+     insiemelettere = set of char;
+     insiememinuscole = set of 'a'..'z';
+     maiuscole = 'a'..'z';
+     insiememaiuscole = set of maiuscole;
+     colori = (giallo , verde , rosso );
+     insiemecolori = set of colori ;
 
 ...
 
-var a,b : insiemeinteri; c : insiemecolori;
+var a,b : insiemeinteri;
+    c : insiemecolori;
 
-a := \[1,2,3,5,12,56\]; b := \[10..100\]; c := \[giallo , rosso\];
-------------------------------------------------------------------------------
+a := [1,2,3,5,12,56];
+b := [10..100];
+c := [giallo , rosso];
+```
 
-se abbiamo molti elementi consecutivi è possibile usare la notazione
+Se abbiamo molti elementi consecutivi è possibile usare la notazione
 `[<inizio>..<fine>]`, come si vede dall'esempio.
 
-le corrispondenti operazioni matematiche sugli insiemi sono effettuate
-da vari operatori binari: l'operatore di unione `+`, quello di
-intersezione `*` e quello di differenza tra insiemi `-`.
+le corrispondenti operazioni matematiche sugli insiemi sono effettuate da vari
+operatori binari: l'operatore di unione `+`, quello di intersezione `*` e
+quello di differenza tra insiemi `-`.
 
-.operazioni sugli insiemi
--------------------------
+Operazioni sugli insiemi:
 
+```pascal
 var a,b,c: insiemeinteri;
 
 ...
 
-a := \[1,3\] + \[4,7\]; (\* a = \[1,3,4,7\] *) b := \[1,2,3\] *
-\[2,5,6\]; (\* b = \[2\] *) a := \[1,2,3,4\]; b := \[1,3\]; c := a-b; (*
-a = \[2,4\] \*)
-------------------------------------------------------------------------------
+a := [1,3] + [4,7]; (* a = [1,3,4,7] *)
+b := [1,2,3] * [2,5,6]; (* b = [2] *)
+a := [1,2,3,4];
+b := [1,3];
+c := a-b; (* a = [2,4] *)
+```
 
-per stabilire se un elemento appartiene o no ad un insieme si usa
-l'operatore di appartenenza `in`. questo operatore restituisce un valore
-booleano, `true` se l'elemento appartiene all'insieme, `false` nel caso
-contrario.
+Per stabilire se un elemento appartiene o no ad un insieme si usa l'operatore
+di appartenenza `in`. questo operatore restituisce un valore booleano, `true`
+se l'elemento appartiene all'insieme, `false` nel caso contrario.
 
-.appartenenza ad un insieme
----------------------------
+Appartenenza ad un insieme:
 
-var a: insiemeinteri; ris: boolean;
+```pascal
+var a: insiemeinteri;
+    ris: boolean;
 
-a := \[1,2,3,4\];
 
-ris := 3 in a; (*true*) ris := 10 in a; (*false*)
-------------------------------------------------------------------------------
+a := [1,2,3,4];
 
-tra due insiemi è possibile effettuare un confronto per stabilire se gli
-insiemi sono uguali, diversi oppure se uno dei 2 è sottoinsieme
-dell'altro. la seguente tabella riassume gli operatori corrispondenti.
+ris := 3 in a;  (*true*)
+ris := 10 in a; (*false*)
+```
 
-\|=============================================================================
-\|`=` \|restituisce `true` se i due insiemi sono uguali \|`<>`
-\|restituisce `true` se i due insiemi sono diversi. \|`<=` \|restituisce
-`true` se il primo insieme è sottoinsieme del secondo. \|`>=`
-\|restituisce `true` se il secondo insieme è sottoinsieme del primo.
-\|=============================================================================
+Tra due insiemi è possibile effettuare un confronto per stabilire se gli
+insiemi sono uguali, diversi oppure se uno dei 2 è sottoinsieme dell'altro. la
+seguente tabella riassume gli operatori corrispondenti.
 
-  -----------------------------------
-  var a: insiemeinteri;
-  ris: boolean;
-  ...
-  a := \[1..10\];
-  ris := \[1,2\] \<= a; (*true;*)
-  ris := \[11,12\] \<= a; (*false*)
-  -----------------------------------
+|       |                                                                    |
+|-------|--------------------------------------------------------------------|
+|`=`	|restituisce `true` se i due insiemi sono uguali                     |
+|`<>`	|restituisce `true` se i due insiemi sono diversi.                   |
+|`<=`	|restituisce `true` se il primo insieme è sottoinsieme del secondo.  |
+|`>=`	|restituisce `true` se il secondo insieme è sottoinsieme del primo.  |
 
-Tipi enumerati \~\~\~\~\~\~\~\~\~\~\~\~\~\~
+```pascal
+var a: insiemeinteri;
+    ris: boolean;
+...
+a := [1..10];
+ris := [1,2] <= a;   (*true;*)
+ris := [11,12] <= a; (*false*)
+```
 
-Un tipo enumerato consiste in una sequenza ordinata di identificatori.
-Il tipo cosi definito è un tipo ordinale ed è possibile effettuare il
-confronto tra questi valori ed utilizzarli come indici per gli `array`.
+## Tipi enumerati
+
+Un tipo enumerato consiste in una sequenza ordinata di identificatori.  Il
+tipo cosi definito è un tipo ordinale ed è possibile effettuare il confronto
+tra questi valori ed utilizzarli come indici per gli `array`.
 
 Il tipo enumerato viene definito in questo modo.
 
-  ------------------------------------------------
-  type <nome_tipo> = (<valore1>, <valore2> ...);
-  ------------------------------------------------
+```pascal
+type <nome_tipo> = (<valore1>, <valore2> ...);
+```
 
 Vediamo un esempio.
 
-enum\_demo.pas
---------------
+```pascal
+{enum_demo.pas}
 
-program enum\_demo;
+program enum_demo;
 
-type giorni = (lunedi, martedi, mercoledi, giovedi, venerdi, sabato,
-domenica);
+type giorni = (lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica);
 
-var g1, g2: giorni; a: array \[lunedi .. domenica\] of integer;
+var g1, g2: giorni;
+	a: array [lunedi .. domenica] of integer;
 
-begin g1 := lunedi; g2 := sabato;
+begin
+	g1 := lunedi;
+	g2 := sabato;
 
-    if (g1 < g2) then
-        writeln('g1 < g2')
-    else
-        writeln('g1 >= g2');
+	if (g1 < g2) then
+		writeln('g1 < g2')
+	else
+		writeln('g1 >= g2');
 
-    a[lunedi] := 10;
-    a[martedi] := 20;
-
+	a[lunedi] := 10;
+	a[martedi] := 20;
 end.
-----
+```
 
-Sottocampi \~\~\~\~\~\~\~\~\~\~
+## Sottocampi
 
-Per sottocampo si intende un tipo di dato che include solo una porzione
-dei possibili valori di un dato semplice ordinato.
+Per sottocampo si intende un tipo di dato che include solo una porzione dei
+possibili valori di un dato semplice ordinato.
 
 Il dato si definisce nel seguente modo.
 
-  -------------------------------------------
-  type <nome> = <v_iniziale> .. <v_finale>;
-  -------------------------------------------
+```pascal
+type <nome> = <v_iniziale> .. <v_finale>;
+```
 
 Ad esempio.
 
-  -------------
-  program
-  subrange;
+```pascal
+program subrange;
 
-  type lettere
-  = 'a' .. 'z';
-  cifre = 0 ..
-  9;
+type
+	lettere = 'a' .. 'z';
+	cifre = 0 .. 9;
 
-  var l:
-  lettere; n:
-  cifre; begin
-  l := 'a'; n
-  := 2;
+var
+	l: lettere;
+	n: cifre;
+begin
+	l := 'a';
+	n := 2;
 
-  writeln(l);
-  writeln(n);
-  end.
-  -------------
+	writeln(l);
+	writeln(n);
+end.
+```
 
-file
-----
+# file
 
-file ad accesso diretto \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+## file ad accesso diretto
 
-innanzi tutto dobbiamo chiarire due aspetti dei file: l'organizzazione e
-il metodo di accesso. l'organizzazione indica come il file è disposto
-fisicamente sul disco; ci sono due tipi di organizzazione quella
-sequenziale e quella random; come si capisce nell'organizzazione
-sequenziale tutti gli elementi sono appunto disposti in modo sequenziale
-uno dietro l'altro; quelli random invece sono disposti in modo non
-sequenziale. diciamo subito che tutti i file gestisti dal pascal sono
-organizzati in maniera sequenziale. il metodo di accesso invece è il
-modo con cui si accede ai file, e come abbiamo visto nella lezione
-precedente sono due accesso sequenziale e diretto. nel primo metodo per
-accedere all'elemento i bisogna leggete tutti gli i-1 elementi
-precedenti, invece con l'accesso diretto è possibile leggere
-direttamente l'elemento desiderato. il pascal ansi prevede solo l'uso di
-file sequenziali ad accesso sequenziale, quelli visti nella lezione
-precedente, ma quasi tutte le implementazioni prevedono anche l'uso di
-file sequenziali ad accesso diretto che andiamo ad analizzare adesso.
+Innanzi tutto dobbiamo chiarire due aspetti dei file: l'organizzazione e il
+metodo di accesso.
 
-file sequenziali ad accesso diretto
-\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+L'organizzazione indica come il file è disposto fisicamente sul disco. Ci sono
+due tipi di organizzazione quella sequenziale e quella random; come si capisce
+nell'organizzazione sequenziale tutti gli elementi sono appunto disposti in
+modo sequenziale uno dietro l'altro; quelli random invece sono disposti in
+modo non sequenziale.Diciamo subito che tutti i file gestisti dal pascal sono
+organizzati in maniera sequenziale. 
 
-i file di questo tipo si comportano esattamente come quelli visti in
-precedenza, quindi tutte le fasi sono uguali e gestite dalle stesse
-procedure e funzioni, l'unica differenza sta in una procedura che è in
-grado di muovere la testina sulla posizione desiderata; la procedura si
-chiama seek ed ha la seguente forma:
+Il metodo di accesso invece è il modo con cui si accede ai file, e come
+abbiamo visto nella lezione precedente sono due accesso sequenziale e diretto.
+nel primo metodo per accedere all'elemento i bisogna leggete tutti gli i-1
+elementi precedenti, invece con l'accesso diretto è possibile leggere
+direttamente l'elemento desiderato. il pascal ansi prevede solo l'uso di file
+sequenziali ad accesso sequenziale, quelli visti nella lezione precedente, ma
+quasi tutte le implementazioni prevedono anche l'uso di file sequenziali ad
+accesso diretto che andiamo ad analizzare adesso.
 
-  -------------------------------------------------------------
-  procedure seek (var nomeinterno: file; posizione: integer);
-  -------------------------------------------------------------
+## file sequenziali ad accesso diretto
+
+I file di questo tipo si comportano esattamente come quelli visti in
+precedenza, quindi tutte le fasi sono uguali e gestite dalle stesse procedure
+e funzioni, l'unica differenza sta in una procedura che è in grado di muovere
+la testina sulla posizione desiderata; la procedura si chiama seek ed ha la
+seguente forma:
+
+```pascal
+procedure seek (var nomeinterno: file; posizione: integer);
+```
 
 ricordiamo che le posizioni cominciano da 0 a n-1, dove n è la
 dimensione del file.
 
 vediamo ora due funzioni utili per la gestione dei file in pascal:
 
-  -----------------------------------------------------
-  function filesize (var nomeinterno: file): integer;
-  function pos(var nomeinterno: file): integer;
-  -----------------------------------------------------
+```pascal
+function filesize (var nomeinterno: file): integer;
+function pos(var nomeinterno: file): integer;
+```
 
-come si intuisce `filesize` restituisce la dimensione del file, invece
-`pos` restituisce la posizione corrente della testina. con questo
-concludiamo il discorso sui file, in seguito analizzeremo i file di
-testo, concludiamo con un programma completo che analizza meglio il
-funzionamento dei file:
+come si intuisce `filesize` restituisce la dimensione del file, invece `pos`
+restituisce la posizione corrente della testina. con questo concludiamo il
+discorso sui file, in seguito analizzeremo i file di testo, concludiamo con un
+programma completo che analizza meglio il funzionamento dei file:
 
-  --------------------------------------------------
-  program files;
-  var
-  f: file of integer;
-  num: integer;
-  begin
-  writeln('inserire una serire di numeri');
-  writeln('per fermarsi inserite 0');
-  (*creazione ed apertura in scrittura del file*)
-  assign(f, 'dati.dat');
-  rewrite(f);
-  (*inserimento dei dati*)
-  writeln;
-  write('inserisci numero :');
-  readln(num);
-  while (num \<\> 0) do begin
-  write(f, num);
-  write('inserisci numero :');
-  readln(num);
-  end;
-  (*chiusura del file*)
-  close(f);
-  (*apertura in lettura e lettura dei dati*)
-  reset(f);
-  writeln;
-  writeln('hai inserito', filesize(f), ' numeri');
-  writeln;
-  writeln('lettura dei dati memorizzati :');
-  while (not eof(f)) do begin
-  read(f, num);
-  writeln(num);
-  end;
-  close(f);
-  end.
-  --------------------------------------------------
+```pascal
+program files;
+var
+	f: file of integer;
+	num: integer;
+begin
+	writeln('inserire una serire di numeri ');
+	writeln('per fermarsi inserite 0 ');
+	(*creazione ed apertura in scrittura del file*)
+	assign(f, 'dati.dat');
+	rewrite(f);
+	(*inserimento dei dati*)
+	writeln;
+	write('inserisci numero : ');
+	readln(num);
+	while (num <> 0) do begin
+		write(f, num);
+		write('inserisci numero : ');
+		readln(num);
+	end;
+	(*chiusura del file*)
+	close(f);
+	(*apertura in lettura e lettura dei dati*)
+	reset(f);
+	writeln;
+	writeln('hai inserito ', filesize(f), ' numeri');
+	writeln;
+	writeln('lettura dei dati memorizzati :');
+	while (not eof(f)) do begin
+		read(f, num);
+		writeln(num);
+	end;
+	close(f);
+end.
+```
 
-file di testo \~\~\~\~\~\~\~\~\~\~\~\~\~
+## file di testo
 
 il pascal permette anche di usare i file di testo, che formano un tipo
-indicato con il nome `text`. i file di tipo `text` si comportano come
-dei file di caratteri quindi scrivere `var f : text` è equivalente a
-scrivere `var f: file of char`.
+indicato con il nome `text`. i file di tipo `text` si comportano come dei file
+di caratteri quindi scrivere `var f : text` è equivalente a scrivere `var f:
+file of char`.
 
 i file di testo si comportano come tutti gli altri file e di conseguenza
-valgono tutte le cose dette in precedenza su di essi. c'è invece da dire
-che i file di testo hanno in più due funzioni che ne permettono
-l'elaborazione; vediamole subito:
+valgono tutte le cose dette in precedenza su di essi. c'è invece da dire che i
+file di testo hanno in più due funzioni che ne permettono l'elaborazione;
+vediamole subito:
 
-  --------------------------------------------
-  procedure readln ( var nomeinterno: file);
-  procedure writeln( var nomeinterno: file);
-  --------------------------------------------
+```pascal
+procedure readln ( var nomeinterno: file);
+procedure writeln( var nomeinterno: file);
+```
 
-la procedura `writeln` inserisce nel file il carattere di `eoln` (end of
-line) che indica la fine di una riga; di conseguenza la procedura
-`readln` salta il carattere di `eoln` e porta la testina all'inizio
-della nuova riga. per sapere se la testina si trova o no su un carattere
-di `eoln` ci viene in aiuto la funzione `eoln(f)` che restituisce `true`
-se la testina è su un carattere di `eoln` o `false` nel caso contrario.
+la procedura `writeln` inserisce nel file il carattere di `eoln` (end of line)
+che indica la fine di una riga; di conseguenza la procedura `readln` salta il
+carattere di `eoln` e porta la testina all'inizio della nuova riga. per sapere
+se la testina si trova o no su un carattere di `eoln` ci viene in aiuto la
+funzione `eoln(f)` che restituisce `true` se la testina è su un carattere di
+`eoln` o `false` nel caso contrario.
 
-  --------------------------------------
-  function eoln(var t:text) : boolean;
-  --------------------------------------
+```pascal
+function eoln(var t:text) : boolean;
+```
 
-.esempi
--------
+Esempi:
 
+```pascal
 (1) var f: text; ...
 (2) assign(f,'prova.txt');
 (3) rewrite(f);
 (4) write(f,'d');
 (5) writeln(f);
 (6) close(f);
-    ---------
+```
 
-in questo esempio si vede come creare (2), aprire in scrittura un file
-di testo (3), come scrivere un carattere (4) e come mettere un marcatore
-di `eoln` con la procedura `writeln` (5) ; infine con l'istruzione (6)
-chiudiamo il file e marchiamo con un `eof`.
+in questo esempio si vede come creare (2), aprire in scrittura un file di
+testo (3), come scrivere un carattere (4) e come mettere un marcatore di
+`eoln` con la procedura `writeln` (5) ; infine con l'istruzione (6) chiudiamo
+il file e marchiamo con un `eof`.
 
-.esempi
--------
+Esempi:
 
-(1) var f: text; c: char; ...
+```pascal
+(1) var f: text;
+        c: char;
+...
 (2) assign(f,'prova.txt');
 (3) reset(f);
 (4) read(f,c);
 (5) close(f);
-    ---------
+```
 
 qui invece vediamo come leggere un carattere da un file di testo (4).
 
 mostriamo ora un programma completo :
 
-  -----------------------------------------------------------
-  program prova\_text;
-  uses crt;
-  var
-  t: text;
-  c: char;
-  begin
-  (*creazione e apertura in scrittura*)
-  assign(t,'testo.txt');
-  rewrite(t);
-  (*fase di scrittura testo*)
-  writeln('inserire un testo (premere esc per terminare)');
-  writeln;
-  c:= readkey;
-  (\* \#27 e \#13 corrispondono a esc ed invio\*)
-  while (c \<\> \#27) do begin
-  if ( c = \#13) then begin
-  writeln(t);
-  writeln;
-  end
-  else begin
-  write(t,c);
-  write(c);
-  end;
-  c := readkey;
-  end;
-  close(t);
-  (*apertura in lettura*)
-  reset(t);
-  (*lettura del testo*)
-  writeln;
-  writeln('il testo inserito è il seguente :');
-  writeln;
-  while (not eof(t)) do begin
-  if (eoln(t)) then begin
-  readln(t);
-  writeln;
-  end
-  else begin
-  read(t,c);
-  write(c);
-  end;
-  end;
-  close(t);
-  end.
-  -----------------------------------------------------------
+```pascal
+program prova_text;
+uses crt;
+var
+	t: text;
+	c: char;
+begin
+	(*creazione e apertura in scrittura*)
+	assign(t,'testo.txt');
+	rewrite(t);
+	(*fase di scrittura testo*)
+	writeln('inserire un testo (premere esc per terminare)');
+	writeln;
+	c:= readkey;
+	(* #27 e #13 corrispondono a esc ed invio*)
+	while (c <> #27) do begin
+		if ( c = #13) then begin
+			writeln(t);
+			writeln;
+		end
+		else begin
+			write(t,c);
+			write(c);
+		end;
+		c := readkey;
+	end;
+	close(t);
+	(*apertura in lettura*)
+	reset(t);
+	(*lettura del testo*)
+	writeln;
+	writeln('il testo inserito è il seguente :');
+	writeln;
+	while (not eof(t)) do begin
+		if (eoln(t)) then begin
+			readln(t);
+			writeln;
+		end
+		else begin
+			read(t,c);
+			write(c);
+		end;
+	end;
+	close(t);
+end.
+```
 
 in questo programma sono molto importanti i due cicli `while` che
 mostrano come effettuare un ciclo di lettura o di scrittura su un file
@@ -1570,97 +1595,104 @@ da un indirizzo.
 Per utilizzare un puntatore bisogna prima definirne il tipo attraverso
 la seguente notazione.
 
-  ----------
-  \^<tipo>
-  ----------
+```pascal
+^<tipo>
+```
 
 Questo definisce un puntatore ad una variabile di tipo `<tipo>`.
 Ovviamente si può anche definire il tipo del puntatore attraverso
 `type`.
 
-  ---------------------------------------
-  type <nome_tipo_puntatore> = \^<tipo>
-  ---------------------------------------
+```pascal
+type <nome_tipo_puntatore> = ^<tipo>
+```
 
 Vediamo un esempio per capire il funzionamento.
 
-\[source, pascal\]
-------------------
+```pascal
+program pointer_demo2;
 
-program pointer\_demo2;
+type
+	pint = ^integer;	{definisce un puntatore ad integer}
 
-type pint = \^integer; {definisce un puntatore ad integer}
+var
+	num: integer;
+	p1, p2: pint;		{dichiarazione dei puntatori}
+	p3: ^integer;		{dichiarazione diretta senza ricorrere a type}
 
-var num: integer; p1, p2: pint; {dichiarazione dei puntatori} p3:
-\^integer; {dichiarazione diretta senza ricorrere a type}
+begin
+	num := 20;
+	writeln('num = ', num);
+	p1 := @num;		{p1 contiene l'indirizzo di num}
+	writeln('p1^ = ', p1^);	{p1^ ci consente di accedere all'indirizzo
+				contenuto nel puntatore}
+	p2 := p1;		{sia p1 che p2 puntano a num}
+	writeln('p2^ = ', p2^);
 
-begin num := 20; writeln('num =', num); p1 := @num; {p1 contiene
-l'indirizzo di num} writeln('p1\^ =', p1\^); {p1\^ ci consente di
-accedere all'indirizzo contenuto nel puntatore} p2 := p1; {sia p1 che p2
-puntano a num} writeln('p2\^ =', p2\^);
-
-    p1^ := 30;      {modifichiamo num attraverso il suo puntatore}
-    writeln('num = ', num);
-
+	p1^ := 30;		{modifichiamo num attraverso il suo puntatore}
+	writeln('num = ', num);
 end.
-----
+```
 
 L'output prodotto è il seguente.
 
-  -----------
-  num = 20
-  p1\^ = 20
-  p2\^ = 20
-  num = 30
-  -----------
+```
+num = 20
+p1^ = 20
+p2^ = 20
+num = 30
+```
 
-Memoria dinamica \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+# Memoria dinamica
 
-La memoria può essere allocata/deallocata dinamicamente a runtime
-(durante l'esecuzione del programma) grazie alle funzioni di sistema
-`new` e `dispose`.
+La memoria può essere allocata/deallocata dinamicamente a runtime (durante
+l'esecuzione del programma) grazie alle funzioni di sistema `new` e `dispose`.
 
 La funzione `new(<puntatore>)` alloca lo spazio e lo rende accessibile
-attraverso il puntatore (la quantità di memoria allocata dipende dal
-tipo del puntatore), mentre `dispose(<puntatore>)` si occupa di liberare
-lo spazio, rendendolo nuovamente disponibile per successive allocazioni.
-E' importante liberare la memoria quando non serve più in quanto la
-memoria utilizzata per l'allocazione dinamica (conosciuta con il nome di
-*heap*) è limitata ed il pascal non la pulisce automaticamente.
+attraverso il puntatore (la quantità di memoria allocata dipende dal tipo del
+puntatore), mentre `dispose(<puntatore>)` si occupa di liberare lo spazio,
+rendendolo nuovamente disponibile per successive allocazioni.  E' importante
+liberare la memoria quando non serve più in quanto la memoria utilizzata per
+l'allocazione dinamica (conosciuta con il nome di *heap*) è limitata ed il
+pascal non la pulisce automaticamente.
 
-Vediamo un esempio che sfrutta i puntatori e la memoria dinamica per
-creare una lista concatenata; da notare l'utilizzo del valore `NIL` che
-rappresenta il valore nullo per i puntatori; se un puntatore è `NIL` non
-punta a nulla.
+Vediamo un esempio che sfrutta i puntatori e la memoria dinamica per creare
+una lista concatenata; da notare l'utilizzo del valore `NIL` che rappresenta
+il valore nullo per i puntatori; se un puntatore è `NIL` non punta a nulla.
 
-\[source, pascal\]
-------------------
+```pascal
+program pointer_demo;
 
-program pointer\_demo;
+type
+	list = ^cell;
+	cell = record
+		value: integer;
+		next: list;
+	end;
 
-type list = \^cell; cell = record value: integer; next: list; end;
+var
+	l1, l2: list;
+begin
+	new(l1);
+	l1^.value := 10;
+	l1^.next := NIL;
+	writeln('l1^.value = ', l1^.value);
 
-var l1, l2: list; begin new(l1); l1\^.value := 10; l1\^.next := NIL;
-writeln('l1\^.value =', l1\^.value);
+	new(l2);
+	l2^.value := 20;
+	l2^.next := NIL;
 
-    new(l2);
-    l2^.value := 20;
-    l2^.next := NIL;
+	l1^.next := l2;
+	writeln('l1^.next^.value = ', l1^.next^.value);
 
-    l1^.next := l2;
-    writeln('l1^.next^.value = ', l1^.next^.value);
-
-    dispose(l1);
-    dispose(l2);
-
+	dispose(l1);
+	dispose(l2);
 end.
-----
+```
 
 L'output è il seguente.
 
-  ----------------------
-  l1\^.value = 10
-  l1^.next^.value = 20
-  ----------------------
-
-// vim: cc=78:spell spelllang=it:aw:tw=78
+```
+l1^.value = 10
+l1^.next^.value = 20
+```
