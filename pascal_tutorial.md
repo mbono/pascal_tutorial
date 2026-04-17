@@ -1,35 +1,35 @@
 ---
-title: Pascal tutorial
+title: Tutorial sul Pascal
 author: Mariano Bono
 date: 2021/11/01
 ...
 
-# Pascal tutorial
+# Tutorial sul Pascal
 
 Questo documento contiene una breve panoramica sul linguaggio di
-programmazione pascal, illustrando la struttura, i costrutti, le strutture di
+programmazione Pascal, illustrando la struttura, i costrutti, le strutture di
 controllo e i tipi di dati tipici del linguaggio.
 
 # Basi del linguaggio
 
 ## Hello world
 
-Partiamo il classico programma `hello world` scritto in pascal. Questo codice
+Partiamo il classico programma `hello world` scritto in Pascal. Questo codice
 non fa altro che stampare a video la stringa di testo `hello, world`.
 
-.hello.pas
+`hello.pas`
 ```pascal
 {hello.pas: write the string "hello, world"}
 program hello;
 begin
   writeln('hello, world');
-end.
+end;
 ```
 
 Analizziamo il programma riga per riga: alla prima troviamo un commento, il
 testo scritto tra `(* *)` oppure tra `{ }` viene completamente ignorato dal
 compilatore; la riga 2 indica l'inizio del programma con la parola chiave
-`program` seguita dal nome del programma (`hello_world`); le righe 3 e 5
+`program` seguita dal nome del programma (`hello`); le righe 3 e 5
 definiscono l'inizio e la fine del blocco principale del programma; tra le
 parole chiave `begin` e `end` vanno inserite le istruzioni che verranno
 eseguite; La riga 4 è quella che stampa a video la stringa `hello, world`, il
@@ -38,7 +38,7 @@ trova tra gli apici.
 
 ## Struttura del programma
 
-Un programma pascal si divide generalmente in tre parti: intestazione, blocco
+Un programma Pascal si divide generalmente in tre parti: intestazione, blocco
 delle dichiarazioni e blocco delle istruzioni.
 
 L'intestazione comincia con la parola chiave `program` seguita dal nome del
@@ -49,7 +49,7 @@ program <nome_programma>;
 ```
 
 Il blocco delle dichiarazioni definisce i vari dati che si usano nel programma
-è contiene: etichette (`label`), costanti (`const`), tipi definiti dall'utente
+e contiene: etichette (`label`), costanti (`const`), tipi definiti dall'utente
 (`type`), variabili (`var`), procedure (`procedure`) e funzioni (`function`).
 
 Il blocco delle istruzioni contiene le istruzioni che il programma deve
@@ -69,7 +69,7 @@ procedure
 function
 begin
 {istruzioni}
-end.
+end;
 {fine del programma}
 ```
 
@@ -83,10 +83,10 @@ elemento del programma (`label`, `const`, `type`, `var`, `procedure` e
 
 ## Parole riservate
 
-Il pascal ha una serie di parole riservate che non possono essere utilizzate
+Il Pascal ha una serie di parole riservate che non possono essere utilizzate
 come identificatori.
 
-Le parole riservate del pascal ANSI sono mostrate nella tabella seguente.
+Le parole riservate del Pascal ANSI sono mostrate nella tabella seguente.
 
 |            |           |         |            |
 |------------|-----------|---------|------------|
@@ -100,16 +100,16 @@ Le parole riservate del pascal ANSI sono mostrate nella tabella seguente.
 |`set`       |`then`     |`to`     |`type`      |
 |`until`     |`var`      |`while`  |`with`      |
 
-## Idetificatori
+## Identificatori
 
-Un identificatore è il nome che si assegna ad una parte di un programma pascal
+Un identificatore è il nome che si assegna ad una parte di un programma Pascal
 quale può essere una variabile, una costante, una funzione, una procedura, o
 una etichetta.
 
-Un identificare è costituito da una sequenza qualsiasi di lettere e cifre,
+Un identificatore è costituito da una sequenza qualsiasi di lettere e cifre,
 purché il primo carattere sia una lettera. Non sono ammessi spazi o caratteri
 diversi da numeri e lettere con l'unica eccezione del carattere underscore
-`_`.  Il pascal è case-insensitive quindi non distingue tra maiuscole e
+`_`.  Il Pascal è case-insensitive quindi non distingue tra maiuscole e
 minuscole.
 
 .alcuni esempi sugli identificatori
@@ -121,7 +121,7 @@ PIPPO pippo Pippo {rappresentano tutti lo stesso identificatore}
 
 ## Tipi di dato
 
-In pascal distinguiamo tra tipi di dati semplici e strutturati; vediamo quali
+In Pascal distinguiamo tra tipi di dati semplici e strutturati; vediamo quali
 sono:
 
 * Dati di tipo semplice:
@@ -215,7 +215,7 @@ durante l'esecuzione del programma il loro valore può essere modificato ma il
 tipo di dato deve rimanere lo stesso (una variabile `integer` può memorizzare
 solo dati di tipo intero).
 
-Le varibili vanno dichiarate nel seguente modo:
+Le variabili vanno dichiarate nel seguente modo:
 
 ```pascal
 var <var1>,<var2>, ... : <tipo di dato>;
@@ -236,7 +236,7 @@ valore; per farlo ricorriamo all'operatore di assegnazione.
 <nome_variabile> := <espressione>;
 ```
 
-Un espressione può essere una costante dello stesso tipo della variabile o una
+Un'espressione può essere una costante dello stesso tipo della variabile o una
 espressione complessa il cui risultato è dello stesso tipo della variabile.
 
 .esempi
@@ -251,7 +251,7 @@ n := (10 + 2) \* 5; {assegnazione complessa}
 
 ## Numeri
 
-I numeri interi in pascal sono rappresentati dal tipo `integer`, mentre i numeri
+I numeri interi in Pascal sono rappresentati dal tipo `integer`, mentre i numeri
 in virgola mobile sono del tipo `real`.
 
 I seguenti operatori sono supportati:
@@ -267,7 +267,7 @@ Questi sono operatori binari (richiedono due operandi) che operano su dati di
 tipo numerico; la divisione `/` genera un dato `real`, mentre gli operatori
 `div` e `mod` operano su `integer` e generano un dato di tipo `integer`.
 
-.numeri.pas
+`numeri.pas`
 ```pascal
 program numeri;
 var a, b, c, d: integer; 
@@ -294,7 +294,7 @@ end.
 
 ## Caratteri
 
-Il tipo di dato carattere in pascal è indicato dalla parola chiave `char`. Una
+Il tipo di dato carattere in Pascal è indicato dalla parola chiave `char`. Una
 variabile di tipo `char` può assumere il valore di uno dei 255 caratteri
 definiti dal codice ASCII.
 
@@ -315,7 +315,7 @@ risultato.
 
 ## Stringhe
 
-Le stringhe di caratteri in pascal rappresentano un tipo di dato proprio del
+Le stringhe di caratteri in Pascal rappresentano un tipo di dato proprio del
 linguaggio: il tipo `string`. Come abbiamo visto una stringa è una qualsiasi
 sequenza di caratteri racchiusa tra apici `''`.
 
@@ -334,7 +334,7 @@ var str: string\[10\]; {contiene stringhe di max 10 caratteri}
 
 L'operatore di concatenazione `+` permette di fondere più stringhe in una sola.
 
-.stringhe.pas
+`stringhe.pas`
 ```pascal
 program stringhe; 
 var s1,s2,s3: string; 
@@ -349,7 +349,7 @@ end.
 
 ## Tipi di dato `boolean` e operatori logici
 
-In pascal i valori booleani formano un vero e proprio tipo di dato
+In Pascal i valori booleani formano un vero e proprio tipo di dato
 contrassegnato dall'identificatore `boolean`. Gli operatori booleani sono
 `and`, `or` e `not`; sono operatori che restituiscono un dato di tipo
 `boolean` secondo le seguenti tabelle di verità.
@@ -382,7 +382,7 @@ booleano (`true` o `false`).
 * Uguale: `=`
 * Diverso: `<>`
 
-E' possibile confrontare tra di loro numeri numeri (anche `integer` con
+È possibile confrontare tra di loro numeri numeri (anche `integer` con
 `real`), stringhe, caratteri, dati booleani (`false` è minore di `true`) e
 caratteri con stringhe. Per stringhe e caratteri viene rispettato l'ordine
 lessicografico. Non è possibile confrontare stringhe e caratteri con dati
@@ -476,7 +476,7 @@ end.
 
 ## Formattazione dell'output
 
-E' possibile formattare l'output inserendo lo spazio che un certo dato deve
+È possibile formattare l'output inserendo lo spazio che un certo dato deve
 occupare sullo schermo utilizzando la seguente forma.
 
 ```pascal
@@ -626,13 +626,14 @@ end;
 
 Un semplice menu:
 
+`simple_menu.pas`
+
 ```pascal
-(* file: examples/simple_menu.pas *)
 
 program simple_menu;
 var scelta: integer;
 begin
-	writeln(' menu pricipale : ');
+	writeln(' menu principale : ');
 	writeln;
 	writeln('1. opzione a');
 	writeln('2. opzione b');
@@ -675,13 +676,14 @@ begin
 end;
 ```
 
-NOTE: le procedure `inc(var n: interger)` e `dec(var n: integer)` incrementano
+NOTE: le procedure `inc(var n: integer)` e `dec(var n: integer)` incrementano
 e decrementano di uno la variabile fornita come argomento.
 
 Stampa la tabellina del 3:
 
+`tabellina.pas`
+
 ```pascal
-(* file: examples/tabellina.pas *)
 
 program tabellina;
 var i: integer;
@@ -761,7 +763,7 @@ for i := 10 downto 1 do
 
 # Procedure e funzioni
 
-Il pascal offre due tipi di subroutine: `procedure` e `function`.
+Il Pascal offre due tipi di subroutine: `procedure` e `function`.
 
 Dal punto di vista concettuale le `procedure` sono utilizzate quando il
 sottoprogramma deve eseguire delle azioni, le `function` invece sono
@@ -779,7 +781,7 @@ function <nome>(<lista parametri>):<tipo restituito>;
 
 ## Struttura dei sottoprogrammi
 
-Un sottoprogramma pascal ha la stessa struttura di un programma generico.
+Un sottoprogramma Pascal ha la stessa struttura di un programma generico.
 
 Struttura di una `procedure`:
 
@@ -883,7 +885,7 @@ quindi ogni modifica ad esso si riflette anche all'esterno del sottoprogramma.
 
 Per dichiarare un parametro variabile si utilizza la parola chiave `var`.
 
-Pparametri.pas:
+`parametri.pas`
 
 ```pascal
 program parametri;
@@ -909,7 +911,7 @@ begin
 end.
 ```
 
-Ooutput di parametri.pas:
+Output di `parametri.pas`:
 
 ```
 local a = 100
@@ -927,9 +929,9 @@ globali.
 Facciamo un altra distinzione tra parametri formali e parametri attuali: i
 parametri formali sono quelli dichiarati nell'intestazione, quelli attuali
 invece sono i parametri forniti al momento dell'invocazione. I parametri
-attuali devo rispettare i tipi dei parametri formali, inoltre i parametri
-attuali possono esseri passati anche come costanti e non devono rispettare i
-nome dei parametri formali.
+attuali devono rispettare i tipi dei parametri formali, inoltre i parametri
+attuali possono essere passati anche come costanti e non devono rispettare i
+nomi dei parametri formali.
 
 Esempi validi di invocazione di `foo`:
 
@@ -952,7 +954,7 @@ end.
 ## Array
 
 Un `array` (vettore) può essere visto come come una lista consecutiva di
-dati dello stesso tipo a cui è possible accedere tramite un indice.
+dati dello stesso tipo a cui è possibile accedere tramite un indice.
 
 ```pascal
 (a1, a2, a3, ... ,aN)
@@ -992,10 +994,10 @@ Per accedere ad un singolo elemento del vettore si usa la forma:
 <nome_vettore>[<indice>]
 ```
 
-E' possibile assegnare un array ad un altro facendone cosi una copia
+È possibile assegnare un array ad un altro facendone cosi una copia
 esatta.
 
-.vettori.pas
+`vettori.pas`
 ```pascal
 program vettori;
 var a,b: array [1..10] of integer;
@@ -1019,7 +1021,7 @@ end.
 
 ### Array multidimensionali
 
-E' possibile definire array a due o più dimensioni. Un array bidimensionale
+È possibile definire array a due o più dimensioni. Un array bidimensionale
 può essere pensato come una tabella o una matrice.
 
 Dichiarazione di `array` multidimensionali:
@@ -1074,7 +1076,7 @@ end.
 
 ## Record
 
-Attraverso il meccanismo dei `record` il pascal ci consente di costruire dei
+Attraverso il meccanismo dei `record` il Pascal ci consente di costruire dei
 tipi di dati complessi che sono formati da più campi.
 
 La struttura generale di un record è la seguente.
@@ -1157,8 +1159,9 @@ end;
 
 Concludiamo con un piccolo esempio.
 
+`record_demo.pas`
+
 ```pascal
-{record_demo.pas}
 
 program record_demo;
 
@@ -1213,17 +1216,17 @@ end.
 
 ## Insiemi
 
-il pascal permette di gestire il modello matematico degli insiemi con un
-particolare tipo di dato, chiamato appunto `set` (insieme). diciamo
+Il Pascal permette di gestire il modello matematico degli insiemi con un
+particolare tipo di dato, chiamato appunto `set` (insieme). Diciamo
 innanzitutto che gli insiemi possono contenere elementi di un certo tipo; i
-tipi possibili nel `set` del pascal sono: interi, caratteri e enumerati. la
+tipi possibili nel `set` del Pascal sono: interi, caratteri e enumerati. La
 dichiarazione di un insieme ha la seguente struttura.
 
 ```pascal
 set of <tipo>;
 ```
 
-la prima cosa da imparare per operare con i dati di tipo `set` è
+La prima cosa da imparare per operare con i dati di tipo `set` è
 l'inizializzazione di un insieme, cioè come fare ad assegnare gli elementi ad
 un insieme; l'operazione è molto semplice e si esegue nel seguente modo:
 
@@ -1239,7 +1242,7 @@ type insiemeinteri = set of integer;
      insiemecifre = set of cifre;
      insiemelettere = set of char;
      insiememinuscole = set of 'a'..'z';
-     maiuscole = 'a'..'z';
+     maiuscole = 'A'..'Z';
      insiememaiuscole = set of maiuscole;
      colori = (giallo , verde , rosso );
      insiemecolori = set of colori ;
@@ -1257,7 +1260,7 @@ c := [giallo , rosso];
 Se abbiamo molti elementi consecutivi è possibile usare la notazione
 `[<inizio>..<fine>]`, come si vede dall'esempio.
 
-le corrispondenti operazioni matematiche sugli insiemi sono effettuate da vari
+Le corrispondenti operazioni matematiche sugli insiemi sono effettuate da vari
 operatori binari: l'operatore di unione `+`, quello di intersezione `*` e
 quello di differenza tra insiemi `-`.
 
@@ -1276,7 +1279,7 @@ c := a-b; (* a = [2,4] *)
 ```
 
 Per stabilire se un elemento appartiene o no ad un insieme si usa l'operatore
-di appartenenza `in`. questo operatore restituisce un valore booleano, `true`
+di appartenenza `in`. Questo operatore restituisce un valore booleano, `true`
 se l'elemento appartiene all'insieme, `false` nel caso contrario.
 
 Appartenenza ad un insieme:
@@ -1293,7 +1296,7 @@ ris := 10 in a; (*false*)
 ```
 
 Tra due insiemi è possibile effettuare un confronto per stabilire se gli
-insiemi sono uguali, diversi oppure se uno dei 2 è sottoinsieme dell'altro. la
+insiemi sono uguali, diversi oppure se uno dei 2 è sottoinsieme dell'altro. La
 seguente tabella riassume gli operatori corrispondenti.
 
 |       |                                                                    |
@@ -1326,8 +1329,9 @@ type <nome_tipo> = (<valore1>, <valore2> ...);
 
 Vediamo un esempio.
 
+`enum_demo.pas`
+
 ```pascal
-{enum_demo.pas}
 
 program enum_demo;
 
@@ -1382,30 +1386,30 @@ begin
 end.
 ```
 
-# file
+# File
 
-## file ad accesso diretto
+## File ad accesso diretto
 
 Innanzi tutto dobbiamo chiarire due aspetti dei file: l'organizzazione e il
 metodo di accesso.
 
 L'organizzazione indica come il file è disposto fisicamente sul disco. Ci sono
-due tipi di organizzazione quella sequenziale e quella random; come si capisce
+due tipi di organizzazione: quella sequenziale e quella random; come si capisce
 nell'organizzazione sequenziale tutti gli elementi sono appunto disposti in
-modo sequenziale uno dietro l'altro; quelli random invece sono disposti in
-modo non sequenziale.Diciamo subito che tutti i file gestisti dal pascal sono
+modo sequenziale uno dietro l'altro; quelli ad accesso random invece sono disposti in
+modo non sequenziale. Diciamo subito che tutti i file gestiti dal Pascal sono
 organizzati in maniera sequenziale. 
 
 Il metodo di accesso invece è il modo con cui si accede ai file, e come
-abbiamo visto nella lezione precedente sono due accesso sequenziale e diretto.
-nel primo metodo per accedere all'elemento i bisogna leggete tutti gli i-1
+abbiamo visto nella lezione precedente sono due: accesso sequenziale e diretto.
+Nel primo metodo per accedere all'elemento i bisogna leggere tutti gli i-1
 elementi precedenti, invece con l'accesso diretto è possibile leggere
-direttamente l'elemento desiderato. il pascal ansi prevede solo l'uso di file
+direttamente l'elemento desiderato. Il Pascal ANSI prevede solo l'uso di file
 sequenziali ad accesso sequenziale, quelli visti nella lezione precedente, ma
 quasi tutte le implementazioni prevedono anche l'uso di file sequenziali ad
 accesso diretto che andiamo ad analizzare adesso.
 
-## file sequenziali ad accesso diretto
+## File sequenziali ad accesso diretto
 
 I file di questo tipo si comportano esattamente come quelli visti in
 precedenza, quindi tutte le fasi sono uguali e gestite dalle stesse procedure
@@ -1417,19 +1421,19 @@ seguente forma:
 procedure seek (var nomeinterno: file; posizione: integer);
 ```
 
-ricordiamo che le posizioni cominciano da 0 a n-1, dove n è la
+Ricordiamo che le posizioni cominciano da 0 a n-1, dove n è la
 dimensione del file.
 
-vediamo ora due funzioni utili per la gestione dei file in pascal:
+Vediamo ora due funzioni utili per la gestione dei file in Pascal:
 
 ```pascal
 function filesize (var nomeinterno: file): integer;
 function pos(var nomeinterno: file): integer;
 ```
 
-come si intuisce `filesize` restituisce la dimensione del file, invece `pos`
-restituisce la posizione corrente della testina. con questo concludiamo il
-discorso sui file, in seguito analizzeremo i file di testo, concludiamo con un
+Come si intuisce `filesize` restituisce la dimensione del file, invece `pos`
+restituisce la posizione corrente della testina. Con questo concludiamo il
+discorso sui file; in seguito analizzeremo i file di testo. Concludiamo con un
 programma completo che analizza meglio il funzionamento dei file:
 
 ```pascal
@@ -1438,7 +1442,7 @@ var
 	f: file of integer;
 	num: integer;
 begin
-	writeln('inserire una serire di numeri ');
+	writeln('inserire una serie di numeri ');
 	writeln('per fermarsi inserite 0 ');
 	(*creazione ed apertura in scrittura del file*)
 	assign(f, 'dati.dat');
@@ -1468,26 +1472,26 @@ begin
 end.
 ```
 
-## file di testo
+## File di testo
 
-il pascal permette anche di usare i file di testo, che formano un tipo
-indicato con il nome `text`. i file di tipo `text` si comportano come dei file
+Il Pascal permette anche di usare i file di testo, che formano un tipo
+indicato con il nome `text`. I file di tipo `text` si comportano come dei file
 di caratteri quindi scrivere `var f : text` è equivalente a scrivere `var f:
 file of char`.
 
 i file di testo si comportano come tutti gli altri file e di conseguenza
-valgono tutte le cose dette in precedenza su di essi. c'è invece da dire che i
+valgono tutte le cose dette in precedenza su di essi. C'è invece da dire che i
 file di testo hanno in più due funzioni che ne permettono l'elaborazione;
 vediamole subito:
 
 ```pascal
-procedure readln ( var nomeinterno: file);
-procedure writeln( var nomeinterno: file);
+procedure readln ( var nomeinterno: text);
+procedure writeln( var nomeinterno: text);
 ```
 
-la procedura `writeln` inserisce nel file il carattere di `eoln` (end of line)
+La procedura `writeln` inserisce nel file il carattere di `eoln` (end of line)
 che indica la fine di una riga; di conseguenza la procedura `readln` salta il
-carattere di `eoln` e porta la testina all'inizio della nuova riga. per sapere
+carattere di `eoln` e porta la testina all'inizio della nuova riga. Per sapere
 se la testina si trova o no su un carattere di `eoln` ci viene in aiuto la
 funzione `eoln(f)` che restituisce `true` se la testina è su un carattere di
 `eoln` o `false` nel caso contrario.
@@ -1579,14 +1583,13 @@ in questo programma sono molto importanti i due cicli `while` che
 mostrano come effettuare un ciclo di lettura o di scrittura su un file
 di testo.
 
-Puntatori
----------
+# Puntatori
 
 Semplificando possiamo pensare alla memoria di un computer come ad una
 lista contigua di celle di memoria; ognuna di queste celle è
 identificata da un indirizzo univoco.
 
-Il pascal consente attraverso l'uso degli operatori `^` e `@` di
+Il Pascal consente attraverso l'uso degli operatori `^` e `@` di
 utilizzare gli indirizzi delle variabili. In particolare l'operatore di
 indirizzo `@` restituisce l'indirizzo associato ad una variabile, mentre
 l'operatore `^` consente di accedere alla locazione di memoria indicata
@@ -1651,10 +1654,10 @@ l'esecuzione del programma) grazie alle funzioni di sistema `new` e `dispose`.
 La funzione `new(<puntatore>)` alloca lo spazio e lo rende accessibile
 attraverso il puntatore (la quantità di memoria allocata dipende dal tipo del
 puntatore), mentre `dispose(<puntatore>)` si occupa di liberare lo spazio,
-rendendolo nuovamente disponibile per successive allocazioni.  E' importante
+rendendolo nuovamente disponibile per successive allocazioni.  È importante
 liberare la memoria quando non serve più in quanto la memoria utilizzata per
 l'allocazione dinamica (conosciuta con il nome di *heap*) è limitata ed il
-pascal non la pulisce automaticamente.
+Pascal non la pulisce automaticamente.
 
 Vediamo un esempio che sfrutta i puntatori e la memoria dinamica per creare
 una lista concatenata; da notare l'utilizzo del valore `NIL` che rappresenta
