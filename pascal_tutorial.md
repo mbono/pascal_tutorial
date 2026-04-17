@@ -752,7 +752,7 @@ for i := 1 to 10 do
 	writeln(i);
 ```
 
-Conteggio da 1 a 10:
+Conteggio da 10 a 1:
 
 ```pascal
 for i := 10 downto 1 do
