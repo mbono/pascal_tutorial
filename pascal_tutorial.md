@@ -142,15 +142,15 @@ what they are:
   * File
 * Pointer type data
 
-## Letterali
+## Literals
 
-### Numeri
+### Numbers
 
-Distinguiamo tra numeri interi e reali.
+We distinguish between integer and real numbers.
 
-I numeri interi sono una sequenza di cifre eventualmente preceduta dal segno.
+Integer numbers are a sequence of digits, optionally preceded by a sign.
 
-.numeri interi validi
+.valid integer numbers
 ```pascal
 124
 2345
@@ -184,7 +184,7 @@ A character is represented by any alphanumeric character between quotes:
 A string is a sequence of alphanumeric characters enclosed in quotes.
 
 ```pascal
-'Io sono una stringa di testo'
+'I am a text string'
 ```
 
 ### Boolean Literals
@@ -199,7 +199,7 @@ duration of the program.
 The structure for declaring a constant is as follows:
 
 ```pascal
-const <identificatore> = <valore>;
+const <identifier> = <value>;
 ```
 
 .example
@@ -217,12 +217,12 @@ execution their value can be modified but the data type must remain the same (an
 Variables must be declared in the following way:
 
 ```pascal
-var <var1>,<var2>, ... : <tipo di dato>;
+var <var1>,<var2>, ... : <data type>;
 ```
 
 .example
 ```pascal
-var nome: string; var numero: integer;
+var name: string; var number: integer;
 ```
 
 ### Assignment Operator
@@ -232,7 +232,7 @@ assignment operator.
 
 .assignment
 ```pascal
-<nome_variabile> := <espressione>;
+<variable_name> := <expression>;
 ```
 
 An expression can be a constant of the same type as the variable or a complex
@@ -240,10 +240,10 @@ expression whose result is of the same type as the variable.
 
 .examples
 ```pascal
-var n: integer; {dichiarazione}
+var n: integer; {declaration}
  ...
-n := 10; {assegnazione semplice}
-n := (10 + 2) * 5; {assegnazione complessa}
+n := 10; {simple assignment}
+n := (10 + 2) * 5; {complex assignment}
 ```
 
 # Simple Data Types
@@ -575,12 +575,12 @@ of an expression or the content of a variable. The form of the `case` control
 structure is as follows:
 
 ```pascal
-case (espressione o variabile) of
-  listavalori1: (blocco1)
-  listavalori2: (blocco2)
+case (expression or variable) of
+  value_list1: (block1)
+  value_list2: (block2)
   ...
-  listavalorin: (bloccon)
-  else (bloccoelse)
+  value_listn: (blockn)
+  else (else_block)
 end;
 ```
 
@@ -653,8 +653,8 @@ The `while` structure executes a code block cyclically as long as the control
 variable or expression remains `true`.
 
 ```pascal
-while (<espressione booleana>) do
-	<blocco>
+while (<boolean expression>) do
+	<block>
 ```
 
 Count from 1 to 10:
@@ -952,14 +952,14 @@ that can be accessed via an index.
 To declare an array, the following notation is used.
 
 ```pascal
-var <nome>: array [<range_indice>] of <tipo_di_dato>;
+var <name>: array [<index_range>] of <data_type>;
 ```
 
 The `<range indice>` field indicates the initial and final values of the index;
 the size of the array is therefore calculated as:
 
 ```pascal
-<valore finale> - <valore iniziale> + 1
+<final value> - <initial value> + 1
 ```
 
 The type of an array can be any of the simple types or even a user-defined type
