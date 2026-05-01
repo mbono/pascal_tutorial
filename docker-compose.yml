@@ -1,5 +1,6 @@
 services:
   tutorial-build:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
     build:
       context: .
     working_dir: /workdir

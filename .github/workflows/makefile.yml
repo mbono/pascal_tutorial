@@ -1,4 +1,4 @@
-name: Makefile CI
+name: Build tutorial artifacts
 
 on:
   push:
@@ -10,26 +10,32 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Install dependencies
-      run: sudo apt-get install -y asciidoc asciidoc-dblatex pandoc
+      - uses: actions/checkout@v4
 
-    - name: Build HTML
-      run: make all
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            make \
+            pandoc \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-fonts-recommended \
+            lmodern
 
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.4
-      with:
-        name: Pascal Tutorial
-        path: |
-                pascal_tutorial.html
-                pascal_tutorial.txt
-                pascal_tutorial.pdf
-                pascal_tutorial.epub
-                pandoc.css
+      - name: Build tutorial artifacts
+        run: make all
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Pascal Tutorial
+          path: |
+            pascal_tutorial.html
+            pascal_tutorial.txt
+            pascal_tutorial.pdf
+            pascal_tutorial.epub
+            pandoc.css

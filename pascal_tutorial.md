@@ -10,6 +10,9 @@ Questo documento contiene una breve panoramica sul linguaggio di
 programmazione Pascal, illustrando la struttura, i costrutti, le strutture di
 controllo e i tipi di dati tipici del linguaggio.
 
+Formati disponibili: [PDF](pascal_tutorial.pdf), [EPUB](pascal_tutorial.epub),
+[Testo](pascal_tutorial.txt).
+
 # Basi del linguaggio
 
 ## Hello world
