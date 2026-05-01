@@ -58,3 +58,7 @@ https://<owner>.github.io/pascal_tutorial/
 ```
 
 The English homepage is published as `index.html`; the Italian homepage is published under `it/index.html`. TXT, PDF, and EPUB downloads are available for both languages.
+
+## License
+
+This repository is licensed under the **MIT License**. See [`LICENSE`](LICENSE).
