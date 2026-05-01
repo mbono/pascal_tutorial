@@ -1,16 +1,26 @@
-HTML_OUTPUT := pascal_tutorial.html
-TEXT_OUTPUT := pascal_tutorial.txt
-PDF_OUTPUT := pascal_tutorial.pdf
-EPUB_OUTPUT := pascal_tutorial.epub
+EN_SOURCE := pascal_tutorial.md
+IT_SOURCE := pascal_tutorial.it.md
+
+EN_HTML_OUTPUT := pascal_tutorial.html
+EN_TEXT_OUTPUT := pascal_tutorial.txt
+EN_PDF_OUTPUT := pascal_tutorial.pdf
+EN_EPUB_OUTPUT := pascal_tutorial.epub
+
+IT_HTML_OUTPUT := pascal_tutorial.it.html
+IT_TEXT_OUTPUT := pascal_tutorial.it.txt
+IT_PDF_OUTPUT := pascal_tutorial.it.pdf
+IT_EPUB_OUTPUT := pascal_tutorial.it.epub
+
 PAGES_DIR := _site
+IT_PAGES_DIR := $(PAGES_DIR)/it
 
 all: html txt pdf epub
 
-html: $(HTML_OUTPUT)
+html: $(EN_HTML_OUTPUT) $(IT_HTML_OUTPUT)
 
-txt: $(TEXT_OUTPUT)
+txt: $(EN_TEXT_OUTPUT) $(IT_TEXT_OUTPUT)
 
-pdf: $(PDF_OUTPUT)
+pdf: $(EN_PDF_OUTPUT) $(IT_PDF_OUTPUT)
 
 # Optional Docker-based build for all tutorial artifacts.
 docker-build:
@@ -19,41 +29,84 @@ docker-build:
 docker-pages:
 	LOCAL_UID=$$(id -u) LOCAL_GID=$$(id -g) docker compose run --rm tutorial-build pages
 
-epub: $(EPUB_OUTPUT)
+epub: $(EN_EPUB_OUTPUT) $(IT_EPUB_OUTPUT)
 
-pages: $(PAGES_DIR)/index.html $(PAGES_DIR)/$(TEXT_OUTPUT) $(PAGES_DIR)/$(PDF_OUTPUT) $(PAGES_DIR)/$(EPUB_OUTPUT) $(PAGES_DIR)/pandoc.css
+pages: \
+	$(PAGES_DIR)/index.html \
+	$(PAGES_DIR)/$(EN_TEXT_OUTPUT) \
+	$(PAGES_DIR)/$(EN_PDF_OUTPUT) \
+	$(PAGES_DIR)/$(EN_EPUB_OUTPUT) \
+	$(PAGES_DIR)/pandoc.css \
+	$(IT_PAGES_DIR)/index.html \
+	$(IT_PAGES_DIR)/$(IT_TEXT_OUTPUT) \
+	$(IT_PAGES_DIR)/$(IT_PDF_OUTPUT) \
+	$(IT_PAGES_DIR)/$(IT_EPUB_OUTPUT) \
+	$(IT_PAGES_DIR)/pandoc.css
 
-$(PDF_OUTPUT): pascal_tutorial.md
-	pandoc -o $(PDF_OUTPUT) pascal_tutorial.md
+$(EN_PDF_OUTPUT): $(EN_SOURCE)
+	pandoc -o $(EN_PDF_OUTPUT) $(EN_SOURCE)
 
-$(TEXT_OUTPUT): pascal_tutorial.md
-	pandoc -t plain -o $(TEXT_OUTPUT) pascal_tutorial.md
+$(IT_PDF_OUTPUT): $(IT_SOURCE)
+	pandoc -o $(IT_PDF_OUTPUT) $(IT_SOURCE)
 
-$(HTML_OUTPUT): pascal_tutorial.md pandoc.css
-	pandoc --standalone --number-section --toc --from markdown --to html5 -o $(HTML_OUTPUT) --css pandoc.css pascal_tutorial.md
+$(EN_TEXT_OUTPUT): $(EN_SOURCE)
+	pandoc -t plain -o $(EN_TEXT_OUTPUT) $(EN_SOURCE)
 
-$(EPUB_OUTPUT): pascal_tutorial.md
-	pandoc -o $(EPUB_OUTPUT) pascal_tutorial.md
+$(IT_TEXT_OUTPUT): $(IT_SOURCE)
+	pandoc -t plain -o $(IT_TEXT_OUTPUT) $(IT_SOURCE)
+
+$(EN_HTML_OUTPUT): $(EN_SOURCE) pandoc.css
+	pandoc --standalone --number-section --toc --from markdown --to html5 -o $(EN_HTML_OUTPUT) --css pandoc.css $(EN_SOURCE)
+
+$(IT_HTML_OUTPUT): $(IT_SOURCE) pandoc.css
+	pandoc --standalone --number-section --toc --from markdown --to html5 -o $(IT_HTML_OUTPUT) --css pandoc.css $(IT_SOURCE)
+
+$(EN_EPUB_OUTPUT): $(EN_SOURCE)
+	pandoc -o $(EN_EPUB_OUTPUT) $(EN_SOURCE)
+
+$(IT_EPUB_OUTPUT): $(IT_SOURCE)
+	pandoc -o $(IT_EPUB_OUTPUT) $(IT_SOURCE)
 
 $(PAGES_DIR):
 	mkdir -p $(PAGES_DIR)
 
-$(PAGES_DIR)/index.html: $(HTML_OUTPUT) | $(PAGES_DIR)
-	cp $(HTML_OUTPUT) $(PAGES_DIR)/index.html
+$(IT_PAGES_DIR):
+	mkdir -p $(IT_PAGES_DIR)
 
-$(PAGES_DIR)/$(TEXT_OUTPUT): $(TEXT_OUTPUT) | $(PAGES_DIR)
-	cp $(TEXT_OUTPUT) $(PAGES_DIR)/$(TEXT_OUTPUT)
+$(PAGES_DIR)/index.html: $(EN_HTML_OUTPUT) | $(PAGES_DIR)
+	cp $(EN_HTML_OUTPUT) $(PAGES_DIR)/index.html
 
-$(PAGES_DIR)/$(PDF_OUTPUT): $(PDF_OUTPUT) | $(PAGES_DIR)
-	cp $(PDF_OUTPUT) $(PAGES_DIR)/$(PDF_OUTPUT)
+$(PAGES_DIR)/$(EN_TEXT_OUTPUT): $(EN_TEXT_OUTPUT) | $(PAGES_DIR)
+	cp $(EN_TEXT_OUTPUT) $(PAGES_DIR)/$(EN_TEXT_OUTPUT)
 
-$(PAGES_DIR)/$(EPUB_OUTPUT): $(EPUB_OUTPUT) | $(PAGES_DIR)
-	cp $(EPUB_OUTPUT) $(PAGES_DIR)/$(EPUB_OUTPUT)
+$(PAGES_DIR)/$(EN_PDF_OUTPUT): $(EN_PDF_OUTPUT) | $(PAGES_DIR)
+	cp $(EN_PDF_OUTPUT) $(PAGES_DIR)/$(EN_PDF_OUTPUT)
+
+$(PAGES_DIR)/$(EN_EPUB_OUTPUT): $(EN_EPUB_OUTPUT) | $(PAGES_DIR)
+	cp $(EN_EPUB_OUTPUT) $(PAGES_DIR)/$(EN_EPUB_OUTPUT)
 
 $(PAGES_DIR)/pandoc.css: pandoc.css | $(PAGES_DIR)
 	cp pandoc.css $(PAGES_DIR)/pandoc.css
 
+$(IT_PAGES_DIR)/index.html: $(IT_HTML_OUTPUT) | $(IT_PAGES_DIR)
+	cp $(IT_HTML_OUTPUT) $(IT_PAGES_DIR)/index.html
+
+$(IT_PAGES_DIR)/$(IT_TEXT_OUTPUT): $(IT_TEXT_OUTPUT) | $(IT_PAGES_DIR)
+	cp $(IT_TEXT_OUTPUT) $(IT_PAGES_DIR)/$(IT_TEXT_OUTPUT)
+
+$(IT_PAGES_DIR)/$(IT_PDF_OUTPUT): $(IT_PDF_OUTPUT) | $(IT_PAGES_DIR)
+	cp $(IT_PDF_OUTPUT) $(IT_PAGES_DIR)/$(IT_PDF_OUTPUT)
+
+$(IT_PAGES_DIR)/$(IT_EPUB_OUTPUT): $(IT_EPUB_OUTPUT) | $(IT_PAGES_DIR)
+	cp $(IT_EPUB_OUTPUT) $(IT_PAGES_DIR)/$(IT_EPUB_OUTPUT)
+
+$(IT_PAGES_DIR)/pandoc.css: pandoc.css | $(IT_PAGES_DIR)
+	cp pandoc.css $(IT_PAGES_DIR)/pandoc.css
+
 clean:
-	rm -rf *~ $(TEXT_OUTPUT) $(HTML_OUTPUT) $(PDF_OUTPUT) *.xml $(EPUB_OUTPUT) $(PAGES_DIR)
+	rm -rf *~ \
+		$(EN_TEXT_OUTPUT) $(EN_HTML_OUTPUT) $(EN_PDF_OUTPUT) $(EN_EPUB_OUTPUT) \
+		$(IT_TEXT_OUTPUT) $(IT_HTML_OUTPUT) $(IT_PDF_OUTPUT) $(IT_EPUB_OUTPUT) \
+		*.xml $(PAGES_DIR)
 
 .PHONY: all html clean pdf epub txt docker-build docker-pages pages

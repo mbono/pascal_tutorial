@@ -1,24 +1,26 @@
 ---
-title: Tutorial sul Pascal
+title: Pascal Tutorial
 author: Mariano Bono
 date: 2021/11/01
 ...
 
-# Tutorial sul Pascal
+# Pascal Tutorial
 
-Questo documento contiene una breve panoramica sul linguaggio di
-programmazione Pascal, illustrando la struttura, i costrutti, le strutture di
-controllo e i tipi di dati tipici del linguaggio.
+This document contains a brief overview of the Pascal programming language,
+illustrating the structure, constructs, control structures, and typical data
+types of the language.
 
-Formati disponibili: [PDF](pascal_tutorial.pdf), [EPUB](pascal_tutorial.epub),
-[Testo](pascal_tutorial.txt).
+Language: **English** | [Italian version](it/)
 
-# Basi del linguaggio
+Available formats: [PDF](pascal_tutorial.pdf), [EPUB](pascal_tutorial.epub),
+[Text](pascal_tutorial.txt).
+
+# Language Basics
 
 ## Hello world
 
-Partiamo il classico programma `hello world` scritto in Pascal. Questo codice
-non fa altro che stampare a video la stringa di testo `hello, world`.
+Let's start with the classic `hello world` program written in Pascal. This code
+simply prints the text string `hello, world` to the screen.
 
 `hello.pas`
 ```pascal
@@ -29,36 +31,35 @@ begin
 end;
 ```
 
-Analizziamo il programma riga per riga: alla prima troviamo un commento, il
-testo scritto tra `(* *)` oppure tra `{ }` viene completamente ignorato dal
-compilatore; la riga 2 indica l'inizio del programma con la parola chiave
-`program` seguita dal nome del programma (`hello`); le righe 3 e 5
-definiscono l'inizio e la fine del blocco principale del programma; tra le
-parole chiave `begin` e `end` vanno inserite le istruzioni che verranno
-eseguite; La riga 4 è quella che stampa a video la stringa `hello, world`, il
-comando `writeln('testo da stampare')` scrive a video tutto quello che si
-trova tra gli apici.
+Let's analyze the program line by line: on the first line we find a comment,
+text written between `(* *)` or between `{ }` is completely ignored by the
+compiler; line 2 indicates the start of the program with the keyword `program`
+followed by the program name (`hello`); lines 3 and 5 define the beginning and
+end of the main block of the program; between the keywords `begin` and `end`
+you insert the instructions that will be executed; Line 4 is the one that
+prints the string `hello, world` to the screen, the command `writeln('text to
+print')` writes to the screen everything found between the quotes.
 
-## Struttura del programma
+## Program Structure
 
-Un programma Pascal si divide generalmente in tre parti: intestazione, blocco
-delle dichiarazioni e blocco delle istruzioni.
+A Pascal program is generally divided into three parts: header, declaration
+block, and instruction block.
 
-L'intestazione comincia con la parola chiave `program` seguita dal nome del
-programma e terminata da un punto e virgola.
+The header begins with the keyword `program` followed by the program name and
+terminated by a semicolon.
 
 ```pascal
 program <nome_programma>;
 ```
 
-Il blocco delle dichiarazioni definisce i vari dati che si usano nel programma
-e contiene: etichette (`label`), costanti (`const`), tipi definiti dall'utente
-(`type`), variabili (`var`), procedure (`procedure`) e funzioni (`function`).
+The declaration block defines the various data used in the program and
+contains: labels (`label`), constants (`const`), user-defined types (`type`),
+variables (`var`), procedures (`procedure`), and functions (`function`).
 
-Il blocco delle istruzioni contiene le istruzioni che il programma deve
-eseguire una volta avviato.
+The instruction block contains the instructions that the program must execute
+once started.
 
-Ricapitolando abbiamo la seguente struttura:
+In summary, we have the following structure:
 
 ```pascal
 {intestazione}
@@ -76,20 +77,18 @@ end;
 {fine del programma}
 ```
 
-Anche se è possibile scambiare l'ordine di alcuni elementi nel blocco delle
-dichiarazioni è consigliabile non farlo e rispettare l'ordine predefinito.
+Although it is possible to swap the order of some elements in the declaration
+block, it is advisable not to do so and respect the predefined order.
 
-TIP: Per ricordarsi facilmente l'ordine corretto basta memorizzare la frase 'La
-Cosa Tre Volte Più Facile': le iniziali di ogni parola coincidono con un
-elemento del programma (`label`, `const`, `type`, `var`, `procedure` e
-`function`).
+TIP: To easily remember the correct order, just memorize this sequence of the
+first letters of each section: L-C-T-V-P-F (`label`, `const`, `type`, `var`,
+`procedure`, and `function`).
 
-## Parole riservate
+## Reserved Words
 
-Il Pascal ha una serie di parole riservate che non possono essere utilizzate
-come identificatori.
+Pascal has a series of reserved words that cannot be used as identifiers.
 
-Le parole riservate del Pascal ANSI sono mostrate nella tabella seguente.
+The reserved words of ANSI Pascal are shown in the following table.
 
 |            |           |         |            |
 |------------|-----------|---------|------------|
@@ -103,46 +102,45 @@ Le parole riservate del Pascal ANSI sono mostrate nella tabella seguente.
 |`set`       |`then`     |`to`     |`type`      |
 |`until`     |`var`      |`while`  |`with`      |
 
-## Identificatori
+## Identifiers
 
-Un identificatore è il nome che si assegna ad una parte di un programma Pascal
-quale può essere una variabile, una costante, una funzione, una procedura, o
-una etichetta.
+An identifier is the name assigned to a part of a Pascal program which can be a
+variable, constant, function, procedure, or label.
 
-Un identificatore è costituito da una sequenza qualsiasi di lettere e cifre,
-purché il primo carattere sia una lettera. Non sono ammessi spazi o caratteri
-diversi da numeri e lettere con l'unica eccezione del carattere underscore
-`_`.  Il Pascal è case-insensitive quindi non distingue tra maiuscole e
-minuscole.
+An identifier consists of any sequence of letters and digits, provided that the
+first character is a letter. Spaces or characters other than numbers and
+letters are not allowed, with the only exception of the underscore character
+`_`. Pascal is case-insensitive, so it does not distinguish between uppercase
+and lowercase letters.
 
-.alcuni esempi sugli identificatori
+.some examples of identifiers
 ```pascal
-pippo Pippo21 Pippo34 {identificatori validi}
-PIPPO pippo Pippo {rappresentano tutti lo stesso identificatore}
-12Pippo {non valido in quanto inizia con un numero}
+pippo Pippo21 Pippo34 {valid identifiers}
+PIPPO pippo Pippo {all represent the same identifier}
+12Pippo {not valid as it starts with a number}
 ```
 
-## Tipi di dato
+## Data Types
 
-In Pascal distinguiamo tra tipi di dati semplici e strutturati; vediamo quali
-sono:
+In Pascal, we distinguish between simple and structured data types; let's see
+what they are:
 
-* Dati di tipo semplice:
-  * Tipi Standard 
+* Simple type data:
+  * Standard Types
     * Integer
     * Real
     * Char
     * Boolean
-  * Tipi dichiarati
-    * Enumerati
-    * Sottocampi
-* Dati di tipo stringa
-* Dati strutturati
-  * Record 
+  * Declared Types
+    * Enumerated
+    * Subranges
+* String type data
+* Structured data
+  * Record
   * Array
   * Set
   * File
-* Dati di tipo puntatore
+* Pointer type data
 
 ## Letterali
 
@@ -160,11 +158,10 @@ I numeri interi sono una sequenza di cifre eventualmente preceduta dal segno.
 +22
 ```
 
-I numeri reali contengono un punto decimale oppure un esponente o entrambi
-utilizzando la notazione esponenziale in base 10 dove al posto del 10 si
-utilizza il simbolo `E`.
+Real numbers contain a decimal point or an exponent or both, using exponential
+notation in base 10 where the symbol `E` is used instead of 10.
 
-.numeri reali validi
+.valid real numbers
 ```pascal
 12.3
 434.44 
@@ -174,101 +171,100 @@ utilizza il simbolo `E`.
 8.5E-2 {8.5x10\^-2}
 ```
 
-### Caratteri
+### Characters
 
-Un carattere è rappresentato da un qualsiasi carattere alfanumerico tra apici:
+A character is represented by any alphanumeric character between quotes:
 
 ```pascal
 'a' 'b' 'c' '1' '0'
 ```
 
-### Stringhe
+### Strings
 
-Una stringa è una sequenza di caratteri alfanumerici racchiusa tra apici.
+A string is a sequence of alphanumeric characters enclosed in quotes.
 
 ```pascal
 'Io sono una stringa di testo'
 ```
 
-### Letterali booleani
+### Boolean Literals
 
-Esistono due letterali booleani e sono `true` e `false`.
+There are two boolean literals: `true` and `false`.
 
-### Costanti
+### Constants
 
-Una costante è un oggetto che rimane sempre con lo stesso valore per tutta la
-durata del programma.
+A constant is an object that always remains with the same value throughout the
+duration of the program.
 
-La struttura per dichiarare una costante è la seguente:
+The structure for declaring a constant is as follows:
 
 ```pascal
 const <identificatore> = <valore>;
 ```
 
-.esempio
+.example
 ```pascal
 const settimana = 7;
 const ore = 24;
 ```
 
-### Variabili
+### Variables
 
-Le variabili sono degli oggetti che possono assumere valori di un certo tipo;
-durante l'esecuzione del programma il loro valore può essere modificato ma il
-tipo di dato deve rimanere lo stesso (una variabile `integer` può memorizzare
-solo dati di tipo intero).
+Variables are objects that can assume values of a certain type; during program
+execution their value can be modified but the data type must remain the same (an
+`integer` variable can only store integer type data).
 
-Le variabili vanno dichiarate nel seguente modo:
+Variables must be declared in the following way:
 
 ```pascal
 var <var1>,<var2>, ... : <tipo di dato>;
 ```
 
-.esempio
+.example
 ```pascal
 var nome: string; var numero: integer;
 ```
 
-### Operatore di assegnazione
+### Assignment Operator
 
-Dopo avere dichiarato una variabile ad essa possiamo assegnare un
-valore; per farlo ricorriamo all'operatore di assegnazione.
+After declaring a variable, we can assign a value to it; to do this we use the
+assignment operator.
 
-.assegnazione
+.assignment
 ```pascal
 <nome_variabile> := <espressione>;
 ```
 
-Un'espressione può essere una costante dello stesso tipo della variabile o una
-espressione complessa il cui risultato è dello stesso tipo della variabile.
+An expression can be a constant of the same type as the variable or a complex
+expression whose result is of the same type as the variable.
 
-.esempi
+.examples
 ```pascal
 var n: integer; {dichiarazione}
  ...
 n := 10; {assegnazione semplice}
-n := (10 + 2) \* 5; {assegnazione complessa}
+n := (10 + 2) * 5; {assegnazione complessa}
 ```
 
-# Tipi di dati semplici
+# Simple Data Types
 
-## Numeri
+## Numbers
 
-I numeri interi in Pascal sono rappresentati dal tipo `integer`, mentre i numeri
-in virgola mobile sono del tipo `real`.
+Integer numbers in Pascal are represented by the `integer` type, while floating
+point numbers are of type `real`.
 
-I seguenti operatori sono supportati:
+The following operators are supported:
 
-* `+`: addizione
-* `-`: sottrazione
-* `*`: moltiplicazione
-* `/`: divisione
-* `div`: divisione intera
-* `mod`:  resto della divisone intera
+* `+`: addition
+* `-`: subtraction
+* `*`: multiplication
+* `/`: division
+* `div`: integer division
+* `mod`: remainder of integer division
 
-Questi sono operatori binari (richiedono due operandi) che operano su dati di
-tipo numerico; la divisione `/` genera un dato `real`, mentre gli operatori
-`div` e `mod` operano su `integer` e generano un dato di tipo `integer`.
+These are binary operators (they require two operands) that operate on numeric
+data types; the `/` division generates a `real` data, while the `div` and `mod`
+operators work on `integer` and generate an `integer` data type.
 
 `numeri.pas`
 ```pascal
@@ -295,16 +291,15 @@ begin
 end.
 ```
 
-## Caratteri
+## Characters
 
-Il tipo di dato carattere in Pascal è indicato dalla parola chiave `char`. Una
-variabile di tipo `char` può assumere il valore di uno dei 255 caratteri
-definiti dal codice ASCII.
+The character data type in Pascal is indicated by the keyword `char`. A
+variable of type `char` can take the value of one of the 255 characters defined
+by the ASCII code.
 
-Il carattere può essere assegnato direttamente come letterale (come abbiamo
-visto un letterale di tipo carattere è un qualsiasi carattere alfanumerico
-contenuto tra apici) o direttamente con il suo valore numerico attraverso la
-funzione `chr`.
+The character can be assigned directly as a literal (as we have seen, a
+character literal is any alphanumeric character contained between quotes) or
+directly with its numeric value through the `chr` function.
 
 ```pascal
 var c: char;
@@ -313,29 +308,27 @@ c := 'A';
 c := chr(65);
 ```
 
-In questo esempio entrambe le operazioni di assegnazione producono lo stesso
-risultato.
+In this example, both assignment operations produce the same result.
 
-## Stringhe
+## Strings
 
-Le stringhe di caratteri in Pascal rappresentano un tipo di dato proprio del
-linguaggio: il tipo `string`. Come abbiamo visto una stringa è una qualsiasi
-sequenza di caratteri racchiusa tra apici `''`.
+Character strings in Pascal represent a specific data type of the language:
+the `string` type. As we have seen, a string is any sequence of characters
+enclosed in quotes `''`.
 
-.dichiarazione e assegnazione di una stringa
+.declaration and assignment of a string
 ```pascal
 var str: string; ... str := 'hello, world';
 ```
 
-Una variabile cosi dichiarata può contene al massimo una stringa di 255
-caratteri, ma è possibile dichiarare stringhe con un'ampiezza minore usando la
-seguente forma.
+A variable declared this way can contain a string of up to 255 characters, but
+it is possible to declare strings with a smaller size using the following form.
 
 ```pascal
-var str: string\[10\]; {contiene stringhe di max 10 caratteri}
+var str: string[10]; {contiene stringhe di max 10 caratteri}
 ```
 
-L'operatore di concatenazione `+` permette di fondere più stringhe in una sola.
+The concatenation operator `+` allows you to merge multiple strings into one.
 
 `stringhe.pas`
 ```pascal
@@ -350,46 +343,44 @@ begin
 end.
 ```
 
-## Tipi di dato `boolean` e operatori logici
+## `boolean` Data Type and Logical Operators
 
-In Pascal i valori booleani formano un vero e proprio tipo di dato
-contrassegnato dall'identificatore `boolean`. Gli operatori booleani sono
-`and`, `or` e `not`; sono operatori che restituiscono un dato di tipo
-`boolean` secondo le seguenti tabelle di verità.
+In Pascal, boolean values form a true data type marked by the identifier
+`boolean`. The boolean operators are `and`, `or`, and `not`; they are
+operators that return a `boolean` data according to the following truth tables.
 
-| Primo operando | Secondo Operando |Operatore `and`| Operatore `or` |
+| First operand | Second operand |`and` operator| `or` operator |
 |----------------|------------------|---------------|----------------|
 | `false`        | `false`          | `false`       |`false`         |
 | `false`        | `true`           | `false`       | `true`         | 
 | `true`         | `false`          | `false`       | `true`         |
 | `true`         | `true`           | `true`        | `true`         |
 
-| Operando | Operatore `not`|
+| Operand | `not` operator|
 |----------|----------------|
 | `false`  | `true`         |
 | `true`   | `false`        |
 
-Osserviamo che l'operazione di `and` restituisce un valore vero solo se
-entrambi gli operandi sono veri; l'operatore `or` restituisce un valore vero
-se almeno uno dei due operandi è vero; l'operatore `not` inverte il predicato.
+We observe that the `and` operation returns a true value only if both operands
+are true; the `or` operator returns a true value if at least one of the two
+operands is true; the `not` operator inverts the predicate.
 
-## Operatori logici
+## Logical Operators
 
-Sono operatori che confrontano due espressioni e restituiscono un valore
-booleano (`true` o `false`).
+These are operators that compare two expressions and return a boolean value
+(`true` or `false`).
 
-* Maggiore: `>`
-* Maggiore uguale: `>=`
-* Minore: `<`
-* Minore uguale: `<=`
-* Uguale: `=`
-* Diverso: `<>`
+* Greater than: `>`
+* Greater than or equal: `>=`
+* Less than: `<`
+* Less than or equal: `<=`
+* Equal: `=`
+* Not equal: `<>`
 
-È possibile confrontare tra di loro numeri numeri (anche `integer` con
-`real`), stringhe, caratteri, dati booleani (`false` è minore di `true`) e
-caratteri con stringhe. Per stringhe e caratteri viene rispettato l'ordine
-lessicografico. Non è possibile confrontare stringhe e caratteri con dati
-numerici.
+It is possible to compare numbers (even `integer` with `real`), strings,
+characters, boolean data (`false` is less than `true`), and characters with
+strings. For strings and characters, lexicographic order is respected. It is
+not possible to compare strings and characters with numeric data.
 
 ```pascal
 program bool; 
@@ -404,48 +395,48 @@ begin
   c := not(a and b); {a and b = F; not(false) = T}
   c := ('a' < 'b'); {T} 
   c := ('hello' < 'world'); {T} 
-  c := ('h' \<'world'); 
+  c := ('h' <'world'); 
 end.
 ```
 
-## Condizione
+## Condition
 
-Una condizione è un espressione booleana: nel caso più semplice è una
-variabile o un letterale di tipo `boolean`, ma può anche essere un espressione
-complessa formata da operatori booleani e logici. In ogni caso una condizione
-o è `true` o è `false`.
+A condition is a boolean expression: in the simplest case it is a variable or
+literal of type `boolean`, but it can also be a complex expression formed by
+boolean and logical operators. In any case, a condition is either `true` or
+`false`.
 
 ```pascal
-(10 \< 20) and (a \> b);
+(10 < 20) and (a > b);
 ```
 
-# Input e output
+# Input and Output
 
-I comandi principali per le operazioni di input/output sono due: `read` e
-`write`; il primo legge i dati dal file `input` mentre il secondo scrive sul
-file `output`. I file `input` e `output` sono associati di default alla
-tastiera e allo schermo, ma si può cambiare l'associazione di default
-legandoli a file reali o ad altri dispositivi.
+The main commands for input/output operations are two: `read` and `write`; the
+first reads data from the `input` file while the second writes to the `output`
+file. The `input` and `output` files are by default associated with the
+keyboard and screen, but you can change the default association by binding them
+to real files or other devices.
 
 ```pascal
 read(var1, var2, ...);
 write(exp1, exp2, ...);
 ```
 
-Il comando `read` legge i dati dallo standard input e li memorizza nelle
-variabili indicate; i tipi ammessi sono `char`, `string`, `integer` e `real`.
-Nello standard input i dati sono separati da uno o più spazi o da un carattere
-di fine riga (che si ottiene digitanto `invio` quando lo standard input è la
-tastiera).
+The `read` command reads data from standard input and stores it in the
+indicated variables; the allowed types are `char`, `string`, `integer`, and
+`real`. In standard input, data are separated by one or more spaces or by an
+end-of-line character (which is obtained by pressing `enter` when standard
+input is the keyboard).
 
-Il comando `write` stampa sullo standard output la lista di dati indicata;
-possono essere passate variabili, costanti o espressioni di tipo `string`,
-`char`, `integer` o `real`.
+The `write` command prints the indicated data list to standard output;
+variables, constants, or expressions of type `string`, `char`, `integer`, or
+`real` can be passed.
 
-Esistono due varianti di `read` e `write` che sono rispettivamente `writeln` e
-`readln`; il primo stampa il carattere `EOL` (end of line) dopo i dati, mentre
-il secondo dopo avere letto i dati si sposta alla riga successiva (dopo il
-carattere `EOL`).
+There are two variants of `read` and `write` which are `writeln` and `readln`
+respectively; the first prints the `EOL` (end of line) character after the
+data, while the second, after reading the data, moves to the next line (after
+the `EOL` character).
 
 ```pascal
 program io;
@@ -477,27 +468,26 @@ begin
 end.
 ```
 
-## Formattazione dell'output
+## Output Formatting
 
-È possibile formattare l'output inserendo lo spazio che un certo dato deve
-occupare sullo schermo utilizzando la seguente forma.
+It is possible to format the output by inserting the space that a certain piece
+of data must occupy on the screen using the following form.
 
 ```pascal
 write(exp:spazio);
 ```
 
-Se il dato necessita di più spazio la formattazione viene ignorata, mentre nel
-caso in cui il dato richiede meno spazio, questo viene preservato e il dato
-viene allineato a destra.
+If the data needs more space, the formatting is ignored, while if the data
+requires less space, this is preserved and the data is right-aligned.
 
-Per i dati `real` è possibile specificare un ulteriore campo per indicare
-quante cifre dopo la virgola stampare.
+For `real` data, it is possible to specify an additional field to indicate how
+many digits after the decimal point to print.
 
 ```pascal
 write(exp:spazio:cifre decimali);
 ```
 
-Il codice seguente chiarisce il concetto.
+The following code clarifies the concept.
 
 ```pascal
 program formatted_io;
@@ -521,20 +511,20 @@ begin
 end.
 ```
 
-# Strutture di controllo
+# Control Structures
 
-## Costrutto di scelta: `if`
+## Selection Construct: `if`
 
-Il costrutto `if` consente di eseguire un blocco di codice solo se una
-condizione risulta vera.
+The `if` construct allows you to execute a block of code only if a condition is
+true.
 
 ```pascal
 if (<condizione>) then
   <blocco>
 ```
 
-Esiste la variante `if .. else` in cui se la condizione risulta `false` allora
-viene eseguito il blocco alternativo.
+There is the `if .. else` variant where if the condition is `false` then the
+alternative block is executed.
 
 ```pascal
 if (<condizione>) then
@@ -543,8 +533,8 @@ else
   <blocco alternativo>
 ```
 
-Diversi `if .. else` si possono annidare dando luogo al costrutto `if .. else
-if` che consente di effettuare scelte multiple.
+Different `if .. else` can be nested giving rise to the `if .. else if`
+construct which allows you to make multiple choices.
 
 ```pascal
 if (<condizione>) then
@@ -558,10 +548,10 @@ else
   <blocco alternativo>
 ```
 
-L'ultimo `else` si riferisce sempre all'ultima occorrenza di `if`.
+The last `else` always refers to the last occurrence of `if`.
 
-WARNING: L'ultima istruzione prima della parola chiave `else` non deve essere
-terminata dal punto e virgola.
+WARNING: The last instruction before the `else` keyword must not be terminated
+with a semicolon.
 
 ```pascal
 program if_else;
@@ -578,11 +568,11 @@ begin
 end.
 ```
 
-## Scelta multipla: `case`
+## Multiple Selection: `case`
 
-La struttura `case` permette di effettuare una scelta multipla in base al
-risultato di una espressione oppure al contenuto di una variabile. La forma
-della struttura di controllo `case` è la seguente :
+The `case` structure allows you to make a multiple choice based on the result
+of an expression or the content of a variable. The form of the `case` control
+structure is as follows:
 
 ```pascal
 case (espressione o variabile) of
@@ -594,14 +584,14 @@ case (espressione o variabile) of
 end;
 ```
 
-Viene valutato il valore dell'espressione o della variabile e viene cercato il
-corrispondente valore tra quelli indicati nelle varie liste; se il valore
-viene trovato allora viene eseguito il blocco di codice corrispondente
-altrimenti viene eseguito il blocco `else`. Il blocco `else` è opzionale; in
-questo caso se il valore non viene trovato allora non viene eseguito nessun
-blocco di codice e l'esecuzione prosegue senza problemi.
+The value of the expression or variable is evaluated and the corresponding
+value is searched for among those indicated in the various lists; if the value
+is found then the corresponding code block is executed, otherwise the `else`
+block is executed. The `else` block is optional; in this case, if the value is
+not found, then no code block is executed and execution continues without
+problems.
 
-Scelta multipla usando una variabile:
+Multiple selection using a variable:
 
 ```pascal
 case (i) of
@@ -616,7 +606,7 @@ case (i) of
 end;
 ```
 
-Scelta multipla usando il risultato di una espressione:
+Multiple selection using the result of an expression:
 
 ```pascal
 case (i mod 9) of
@@ -627,7 +617,7 @@ case (i mod 9) of
 end;
 ```
 
-Un semplice menu:
+A simple menu:
 
 `simple_menu.pas`
 
@@ -657,17 +647,17 @@ begin
 end.
 ```
 
-## Ciclo `while`
+## `while` Loop
 
-La struttura `while` esegue un blocco di codice in maniera ciclica fino a
-quando la variabile o l'espressione di controllo rimane `true`.
+The `while` structure executes a code block cyclically as long as the control
+variable or expression remains `true`.
 
 ```pascal
 while (<espressione booleana>) do
 	<blocco>
 ```
 
-Conteggio da 1 a 10:
+Count from 1 to 10:
 
 ```pascal
 i := 1;
@@ -679,10 +669,10 @@ begin
 end;
 ```
 
-NOTE: le procedure `inc(var n: integer)` e `dec(var n: integer)` incrementano
-e decrementano di uno la variabile fornita come argomento.
+NOTE: the procedures `inc(var n: integer)` and `dec(var n: integer)` increment
+and decrement by one the variable provided as argument.
 
-Stampa la tabellina del 3:
+Print the 3 times table:
 
 `tabellina.pas`
 
@@ -701,11 +691,11 @@ begin
 end.
 ```
 
-## Ciclo `repeat`
+## `repeat` Loop
 
-Il ciclo `repeat` è simile al ciclo `while` con la grossa differenza che
-la condizione di uscita dal ciclo viene valutata alla fine dello stesso
-per cui il ciclo viene eseguito almeno una volta.
+The `repeat` loop is similar to the `while` loop with the big difference that
+the exit condition from the loop is evaluated at the end of it, so the loop is
+executed at least once.
 
 ```pascal
 repeat
@@ -713,10 +703,10 @@ repeat
 until <condizione>;
 ```
 
-Il blocco di codice viene eseguito finché la condizione non è vera.  Vediamo
-il conteggio da uno a dieci con il ciclo `repeat`.
+The code block is executed until the condition is true. Let's see counting from
+one to ten with the `repeat` loop.
 
-Conteggio da 1 a 10:
+Count from 1 to 10:
 
 ```pascal
 i := 1;
@@ -729,9 +719,9 @@ end;
 until (i > 10);
 ```
 
-## Ciclo `for`
+## `for` Loop
 
-La struttura `for` esegue un loop un numero prestabilito di volte.
+The `for` structure executes a loop a predetermined number of times.
 
 
 ```pascal
@@ -739,11 +729,11 @@ for <variabile> := <viniziale> to <vfinale> do
 	<blocco>
 ```
 
-La variabile indicata assume tutti i valori tra <viniziale> e <vfinale>
-incrementando ogni volta di 1; il numero di loop eseguito è <vfinale> -
+The indicated variable takes all values between <viniziale> and <vfinale>,
+incrementing by 1 each time; the number of loops executed is <vfinale> -
 <viniziale> + 1.
 
-La seguente variante decrementa di 1 la variabile di controllo.
+The following variant decrements the control variable by 1.
 
 ```pascal
 for <variabile> := <v1> downto <v2> do
@@ -764,15 +754,15 @@ for i := 10 downto 1 do
 	writeln(i);
 ```
 
-# Procedure e funzioni
+# Procedures and Functions
 
-Il Pascal offre due tipi di subroutine: `procedure` e `function`.
+Pascal offers two types of subroutines: `procedure` and `function`.
 
-Dal punto di vista concettuale le `procedure` sono utilizzate quando il
-sottoprogramma deve eseguire delle azioni, le `function` invece sono
-usate per fornire il risultato di un elaborazione.
+From a conceptual point of view, `procedure` are used when the subprogram must
+perform actions, while `function` are used to provide the result of a
+processing.
 
-Dichiarazione di `procedure` e `function`:
+Declaration of `procedure` and `function`:
 
 ```pascal
 procedure <nome>(<lista parametri>);
@@ -782,11 +772,11 @@ function <nome>(<lista parametri>):<tipo restituito>;
     <corpo della funzione>
 ```
 
-## Struttura dei sottoprogrammi
+## Subprogram Structure
 
-Un sottoprogramma Pascal ha la stessa struttura di un programma generico.
+A Pascal subprogram has the same structure as a generic program.
 
-Struttura di una `procedure`:
+Structure of a `procedure`:
 
 ```pascal
 procedure <nome>(<parametri>);
@@ -802,7 +792,7 @@ begin
 end.
 ```
 
-Struttura di una `function`:
+Structure of a `function`:
 
 ```pascal
 function <nome>(<parametri>): <tipo restituito>;
@@ -818,17 +808,17 @@ begin
 end.
 ```
 
-La cosa che si nota immediatamente è che all'interno dei sottoprogrammi è
-possibile definirne altri.
+What is immediately noticeable is that within subprograms it is possible to
+define others.
 
-Per invocare un sottoprogramma si utilizza la seguente forma:
+To invoke a subprogram, the following form is used:
 
 ```pascal
 <procedura>(<parametri>);
 <var> := <funzione>(<parametri>);
 ```
 
-Due semplici subroutine:
+Two simple subroutines:
 
 ```pascal
 function somma(a, b: integer): integer;
@@ -847,16 +837,16 @@ begin
 end.
 ```
 
-## Valore restituito da una `function`
+## Value Returned by a `function`
 
-Abbiamo visto che una funzione restituisce un valore di uscita; il metodo per
-assegnare il valore di uscita dall'interno della funzione è il seguente:
+We have seen that a function returns an output value; the method to assign the
+output value from inside the function is as follows:
 
 ```pascal
 <nome_funzione> := <valore_uscita>;
 ```
 
-`function` che restituisce il quadrato di un numero:
+`function` that returns the square of a number:
 
 ```pascal
 function sqr(a: integer): integer;
@@ -865,28 +855,26 @@ begin
 end;
 ```
 
-## Parametri
+## Parameters
 
-La lista dei parametri è una lista di identificatori raggruppata per
-tipo.
+The parameter list is a list of identifiers grouped by type.
 
 ```pascal
 (p1, p2, ...: tipo1; pJ, pK, ...: tipo2; ...);
 ```
 
-All'interno del sottoprogramma i parametri possono essere utilizzati
-all'interno di espressioni come se fossero delle variabili.
+Within the subprogram, parameters can be used in expressions as if they were
+variables.
 
-Esistono due tipi di parametri: parametri valore e parametri variabile.
+There are two types of parameters: value parameters and variable parameters.
 
-Per i parametri valore viene fatta una copia locale (all'interno del
-sottoprogramma) e quindi eventuali modifiche al parametro non hanno effetto al
-di fuori del sottoprogramma.
+For value parameters, a local copy is made (inside the subprogram) and
+therefore any changes to the parameter have no effect outside the subprogram.
 
-I parametri variabile invece sono passati direttamente al sottoprogramma e
-quindi ogni modifica ad esso si riflette anche all'esterno del sottoprogramma.
+Variable parameters, on the other hand, are passed directly to the subprogram
+and therefore any change to it is also reflected outside the subprogram.
 
-Per dichiarare un parametro variabile si utilizza la parola chiave `var`.
+To declare a variable parameter, the keyword `var` is used.
 
 `parametri.pas`
 
@@ -914,7 +902,7 @@ begin
 end.
 ```
 
-Output di `parametri.pas`:
+Output of `parametri.pas`:
 
 ```
 local a = 100
@@ -925,18 +913,16 @@ global b = 5
 global c = 125
 ```
 
-I valori di `a` e `b` vengono modificati all'interno di `foo`, ma questa
-modifica rimane locale alla `procedure`; al contrario le modifiche a `c` sono
-globali.
+The values of `a` and `b` are modified inside `foo`, but this change remains
+local to the `procedure`; on the contrary, changes to `c` are global.
 
-Facciamo un altra distinzione tra parametri formali e parametri attuali: i
-parametri formali sono quelli dichiarati nell'intestazione, quelli attuali
-invece sono i parametri forniti al momento dell'invocazione. I parametri
-attuali devono rispettare i tipi dei parametri formali, inoltre i parametri
-attuali possono essere passati anche come costanti e non devono rispettare i
-nomi dei parametri formali.
+Let's make another distinction between formal parameters and actual parameters:
+formal parameters are those declared in the header, while actual ones are the
+parameters provided at the time of invocation. Actual parameters must respect
+the types of formal parameters, additionally actual parameters can also be
+passed as constants and do not have to respect the names of formal parameters.
 
-Esempi validi di invocazione di `foo`:
+Valid examples of invocation of `foo`:
 
 ```pascal
 var a, b, c, d, e: integer;
@@ -952,38 +938,38 @@ begin
 end.
 ```
 
-# Dati strutturati
+# Structured Data
 
 ## Array
 
-Un `array` (vettore) può essere visto come come una lista consecutiva di
-dati dello stesso tipo a cui è possibile accedere tramite un indice.
+An `array` (vector) can be seen as a consecutive list of data of the same type
+that can be accessed via an index.
 
 ```pascal
 (a1, a2, a3, ... ,aN)
 ```
 
-Per dichiarare un vettore si usa la seguente notazione.
+To declare an array, the following notation is used.
 
 ```pascal
 var <nome>: array [<range_indice>] of <tipo_di_dato>;
 ```
 
-Il campo `<range indice>` indica valori iniziali e finali dell'indice;
-la dimensione del vettore si calcola quindi:
+The `<range indice>` field indicates the initial and final values of the index;
+the size of the array is therefore calculated as:
 
 ```pascal
 <valore finale> - <valore iniziale> + 1
 ```
 
-Il tipo di un vettore può essere uno qualunque dei tipi semplici o anche
-un tipo definito dall'utente (lo vedremo in seguito).
+The type of an array can be any of the simple types or even a user-defined type
+(we will see this later).
 
-Gli elementi dell'indice devo appartenere ad un tipo ordinale (in cui è
-possibile stabilire una relazione di ordine tra gli elementi):
-`integer`, `char`, sottocampo o `enum`.
+The index elements must belong to an ordinal type (in which it is possible to
+establish an order relationship between elements): `integer`, `char`, subrange,
+or `enum`.
 
-Alcuni vettori validi:
+Some valid arrays:
 
 ```pascal
 var	a: array [1..100] of integer;
@@ -991,14 +977,13 @@ var	a: array [1..100] of integer;
 	giorni: array [1..7] of string;
 ```
 
-Per accedere ad un singolo elemento del vettore si usa la forma:
+To access a single element of the array, the form is used:
 
 ```pascal
 <nome_vettore>[<indice>]
 ```
 
-È possibile assegnare un array ad un altro facendone cosi una copia
-esatta.
+It is possible to assign one array to another, thus making an exact copy.
 
 `vettori.pas`
 ```pascal
@@ -1022,25 +1007,24 @@ begin
 end.
 ```
 
-### Array multidimensionali
+### Multidimensional Arrays
 
-È possibile definire array a due o più dimensioni. Un array bidimensionale
-può essere pensato come una tabella o una matrice.
+It is possible to define arrays with two or more dimensions. A two-dimensional
+array can be thought of as a table or matrix.
 
-Dichiarazione di `array` multidimensionali:
+Declaration of multidimensional `array`:
 
 ```pascal
 var <nome>: array [<range1>, ... ,<rangeN>] of <tipo>
 ```
 
-Per accedere ad un singolo dato del vettore si usa la notazione:
+To access a single element of the array, the notation is used:
 
 ```pascal
 <nome>[<i1>, <i2>, ... ,<iN>]
 ```
 
-Se due vettori hanno le stesse dimensioni è possibile l'operazione di
-assegnazione.
+If two arrays have the same dimensions, the assignment operation is possible.
 
 ```pascal
 program vettori_multi;
@@ -1064,9 +1048,8 @@ end.
 
 ## `type`
 
-La parola chiave `type` consente di dare un nome ad un tipo di dato definito
-dall'utente (ovvero rinominare un tipo già esistente) ed utilizzare questo
-nome all'interno del programma.
+The keyword `type` allows you to give a name to a user-defined data type (i.e.,
+rename an existing type) and use this name within the program.
 
 ```pascal
 type int_array = array [1..100] of integer;
@@ -1079,10 +1062,10 @@ end.
 
 ## Record
 
-Attraverso il meccanismo dei `record` il Pascal ci consente di costruire dei
-tipi di dati complessi che sono formati da più campi.
+Through the `record` mechanism, Pascal allows us to construct complex data
+types that are formed by multiple fields.
 
-La struttura generale di un record è la seguente.
+The general structure of a record is as follows.
 
 ```pascal
 record
@@ -1092,11 +1075,11 @@ record
 end;
 ```
 
-Per accedere ad un certo campo si utilizza la notazione `<nome>.<campo>`.
+To access a certain field, the notation `<nome>.<campo>` is used.
 
-Possiamo ad esempio pensare di volere manipolare i dati di un utente; i dati
-di questo utente sono: nome, cognome e userid. La struttura dati
-corrispondente può essere creata nel seguente modo.
+For example, we can think of wanting to manipulate a user's data; this user's
+data are: name, surname, and userid. The corresponding data structure can be
+created in the following way.
 
 ```pascal
 type utente =
@@ -1114,9 +1097,8 @@ mario.cognome := 'Rossi';
 mario.uid := 001;
 ```
 
-Se si devono manipolare molti campi di un `record` può essere utile la parola
-chiave `with` che ci consente di non specificare ogni volta il nome del
-record.
+If you need to manipulate many fields of a `record`, the keyword `with` can be
+useful as it allows us not to specify the record name every time.
 
 ```pascal
 with mario do
@@ -1127,11 +1109,11 @@ begin
 end;
 ```
 
-### Record varianti
+### Variant Records
 
-Un `record` che varia la sua struttura a seconda del valore di un suo campo
-(campo discriminatore) viene chiamato `record` variante; la forma generale è
-la seguente:
+A `record` that varies its structure according to the value of one of its
+fields (discriminator field) is called a variant `record`; the general form is
+as follows:
 
 ```pascal
 record
@@ -1145,8 +1127,8 @@ record
 end;
 ```
 
-Un `record` può avere una sola parte variante ed essa deve essere dichiarata
-sempre alla fine dopo la parte fissa.
+A `record` can have only one variant part and it must always be declared at the
+end after the fixed part.
 
 ```pascal
 type utente = record
@@ -1160,7 +1142,7 @@ type utente = record
 end;
 ```
 
-Concludiamo con un piccolo esempio.
+We conclude with a small example.
 
 `record_demo.pas`
 
@@ -1217,27 +1199,27 @@ begin
 end.
 ```
 
-## Insiemi
+## Sets
 
-Il Pascal permette di gestire il modello matematico degli insiemi con un
-particolare tipo di dato, chiamato appunto `set` (insieme). Diciamo
-innanzitutto che gli insiemi possono contenere elementi di un certo tipo; i
-tipi possibili nel `set` del Pascal sono: interi, caratteri e enumerati. La
-dichiarazione di un insieme ha la seguente struttura.
+Pascal allows you to manage the mathematical model of sets with a particular
+data type, called precisely `set`. First of all, let's say that sets can
+contain elements of a certain type; the possible types in Pascal's `set` are:
+integers, characters, and enumerations. The declaration of a set has the
+following structure.
 
 ```pascal
 set of <tipo>;
 ```
 
-La prima cosa da imparare per operare con i dati di tipo `set` è
-l'inizializzazione di un insieme, cioè come fare ad assegnare gli elementi ad
-un insieme; l'operazione è molto semplice e si esegue nel seguente modo:
+The first thing to learn to work with `set` type data is the initialization of
+a set, that is, how to assign elements to a set; the operation is very simple
+and is performed as follows:
 
 ```pascal
 <insieme> := [(lista dei dati)] ;
 ```
 
-Dichiarazione e inizializzazione di alcuni insiemi:
+Declaration and initialization of some sets:
 
 ```pascal
 type insiemeinteri = set of integer;
@@ -1260,14 +1242,14 @@ b := [10..100];
 c := [giallo , rosso];
 ```
 
-Se abbiamo molti elementi consecutivi è possibile usare la notazione
-`[<inizio>..<fine>]`, come si vede dall'esempio.
+If we have many consecutive elements, it is possible to use the notation
+`[<inizio>..<fine>]`, as can be seen from the example.
 
-Le corrispondenti operazioni matematiche sugli insiemi sono effettuate da vari
-operatori binari: l'operatore di unione `+`, quello di intersezione `*` e
-quello di differenza tra insiemi `-`.
+The corresponding mathematical operations on sets are performed by various
+binary operators: the union operator `+`, the intersection operator `*`, and
+the set difference operator `-`.
 
-Operazioni sugli insiemi:
+Operations on sets:
 
 ```pascal
 var a,b,c: insiemeinteri;
@@ -1281,11 +1263,11 @@ b := [1,3];
 c := a-b; (* a = [2,4] *)
 ```
 
-Per stabilire se un elemento appartiene o no ad un insieme si usa l'operatore
-di appartenenza `in`. Questo operatore restituisce un valore booleano, `true`
-se l'elemento appartiene all'insieme, `false` nel caso contrario.
+To determine whether an element belongs to a set or not, the membership
+operator `in` is used. This operator returns a boolean value, `true` if the
+element belongs to the set, `false` otherwise.
 
-Appartenenza ad un insieme:
+Membership in a set:
 
 ```pascal
 var a: insiemeinteri;
@@ -1298,16 +1280,16 @@ ris := 3 in a;  (*true*)
 ris := 10 in a; (*false*)
 ```
 
-Tra due insiemi è possibile effettuare un confronto per stabilire se gli
-insiemi sono uguali, diversi oppure se uno dei 2 è sottoinsieme dell'altro. La
-seguente tabella riassume gli operatori corrispondenti.
+Between two sets it is possible to make a comparison to determine whether the
+sets are equal, different, or whether one of the two is a subset of the other.
+The following table summarizes the corresponding operators.
 
 |       |                                                                    |
 |-------|--------------------------------------------------------------------|
-|`=`	|restituisce `true` se i due insiemi sono uguali                     |
-|`<>`	|restituisce `true` se i due insiemi sono diversi.                   |
-|`<=`	|restituisce `true` se il primo insieme è sottoinsieme del secondo.  |
-|`>=`	|restituisce `true` se il secondo insieme è sottoinsieme del primo.  |
+|`=`	|returns `true` if the two sets are equal                            |
+|`<>`	|returns `true` if the two sets are different.                       |
+|`<=`	|returns `true` if the first set is a subset of the second.          |
+|`>=`	|returns `true` if the second set is a subset of the first.          |
 
 ```pascal
 var a: insiemeinteri;
@@ -1318,19 +1300,19 @@ ris := [1,2] <= a;   (*true;*)
 ris := [11,12] <= a; (*false*)
 ```
 
-## Tipi enumerati
+## Enumerated Types
 
-Un tipo enumerato consiste in una sequenza ordinata di identificatori.  Il
-tipo cosi definito è un tipo ordinale ed è possibile effettuare il confronto
-tra questi valori ed utilizzarli come indici per gli `array`.
+An enumerated type consists of an ordered sequence of identifiers. The type
+thus defined is an ordinal type and it is possible to compare these values and
+use them as indices for `array`.
 
-Il tipo enumerato viene definito in questo modo.
+The enumerated type is defined in this way.
 
 ```pascal
 type <nome_tipo> = (<valore1>, <valore2> ...);
 ```
 
-Vediamo un esempio.
+Let's see an example.
 
 `enum_demo.pas`
 
@@ -1357,18 +1339,18 @@ begin
 end.
 ```
 
-## Sottocampi
+## Subranges
 
-Per sottocampo si intende un tipo di dato che include solo una porzione dei
-possibili valori di un dato semplice ordinato.
+A subrange is a data type that includes only a portion of the possible values
+of a simple ordered data.
 
-Il dato si definisce nel seguente modo.
+The data is defined in the following way.
 
 ```pascal
 type <nome> = <v_iniziale> .. <v_finale>;
 ```
 
-Ad esempio.
+For example.
 
 ```pascal
 program subrange;
@@ -1389,55 +1371,52 @@ begin
 end.
 ```
 
-# File
+# Files
 
-## File ad accesso diretto
+## Direct Access Files
 
-Innanzi tutto dobbiamo chiarire due aspetti dei file: l'organizzazione e il
-metodo di accesso.
+First of all, we must clarify two aspects of files: organization and access
+method.
 
-L'organizzazione indica come il file è disposto fisicamente sul disco. Ci sono
-due tipi di organizzazione: quella sequenziale e quella random; come si capisce
-nell'organizzazione sequenziale tutti gli elementi sono appunto disposti in
-modo sequenziale uno dietro l'altro; quelli ad accesso random invece sono disposti in
-modo non sequenziale. Diciamo subito che tutti i file gestiti dal Pascal sono
-organizzati in maniera sequenziale. 
+Organization indicates how the file is physically arranged on disk. There are
+two types of organization: sequential and random; as can be understood, in
+sequential organization all elements are arranged sequentially one after
+another; those with random access are arranged in a non-sequential way. Let's
+say immediately that all files managed by Pascal are organized sequentially.
 
-Il metodo di accesso invece è il modo con cui si accede ai file, e come
-abbiamo visto nella lezione precedente sono due: accesso sequenziale e diretto.
-Nel primo metodo per accedere all'elemento i bisogna leggere tutti gli i-1
-elementi precedenti, invece con l'accesso diretto è possibile leggere
-direttamente l'elemento desiderato. Il Pascal ANSI prevede solo l'uso di file
-sequenziali ad accesso sequenziale, quelli visti nella lezione precedente, ma
-quasi tutte le implementazioni prevedono anche l'uso di file sequenziali ad
-accesso diretto che andiamo ad analizzare adesso.
+The access method, on the other hand, is the way in which files are accessed,
+and as we have seen in the previous lesson, there are two: sequential and
+direct access. In the first method, to access element i, you have to read all
+i-1 preceding elements, while with direct access it is possible to read the
+desired element directly. ANSI Pascal only provides for the use of sequential
+files with sequential access, those seen in the previous lesson, but almost all
+implementations also provide for the use of sequential files with direct access
+which we are going to analyze now.
 
-## File sequenziali ad accesso diretto
+## Sequential Files with Direct Access
 
-I file di questo tipo si comportano esattamente come quelli visti in
-precedenza, quindi tutte le fasi sono uguali e gestite dalle stesse procedure
-e funzioni, l'unica differenza sta in una procedura che è in grado di muovere
-la testina sulla posizione desiderata; la procedura si chiama seek ed ha la
-seguente forma:
+Files of this type behave exactly like those seen previously, so all phases are
+the same and managed by the same procedures and functions, the only difference
+lies in a procedure that is able to move the head to the desired position; the
+procedure is called seek and has the following form:
 
 ```pascal
 procedure seek (var nomeinterno: file; posizione: integer);
 ```
 
-Ricordiamo che le posizioni cominciano da 0 a n-1, dove n è la
-dimensione del file.
+Let's remember that positions start from 0 to n-1, where n is the file size.
 
-Vediamo ora due funzioni utili per la gestione dei file in Pascal:
+Now let's see two useful functions for file management in Pascal:
 
 ```pascal
 function filesize (var nomeinterno: file): integer;
 function pos(var nomeinterno: file): integer;
 ```
 
-Come si intuisce `filesize` restituisce la dimensione del file, invece `pos`
-restituisce la posizione corrente della testina. Con questo concludiamo il
-discorso sui file; in seguito analizzeremo i file di testo. Concludiamo con un
-programma completo che analizza meglio il funzionamento dei file:
+As can be guessed, `filesize` returns the size of the file, while `pos`
+returns the current position of the head. With this we conclude the discussion
+on files; later we will analyze text files. We conclude with a complete program
+that better analyzes the operation of files:
 
 ```pascal
 program files;
@@ -1475,35 +1454,34 @@ begin
 end.
 ```
 
-## File di testo
+## Text Files
 
-Il Pascal permette anche di usare i file di testo, che formano un tipo
-indicato con il nome `text`. I file di tipo `text` si comportano come dei file
-di caratteri quindi scrivere `var f : text` è equivalente a scrivere `var f:
-file of char`.
+Pascal also allows you to use text files, which form a type indicated by the
+name `text`. Files of type `text` behave like character files so writing `var
+f : text` is equivalent to writing `var f: file of char`.
 
-i file di testo si comportano come tutti gli altri file e di conseguenza
-valgono tutte le cose dette in precedenza su di essi. C'è invece da dire che i
-file di testo hanno in più due funzioni che ne permettono l'elaborazione;
-vediamole subito:
+Text files behave like all other files and consequently everything said
+previously about them is valid. There is however to say that text files have
+two additional functions that allow their processing; let's see them
+immediately:
 
 ```pascal
 procedure readln ( var nomeinterno: text);
 procedure writeln( var nomeinterno: text);
 ```
 
-La procedura `writeln` inserisce nel file il carattere di `eoln` (end of line)
-che indica la fine di una riga; di conseguenza la procedura `readln` salta il
-carattere di `eoln` e porta la testina all'inizio della nuova riga. Per sapere
-se la testina si trova o no su un carattere di `eoln` ci viene in aiuto la
-funzione `eoln(f)` che restituisce `true` se la testina è su un carattere di
-`eoln` o `false` nel caso contrario.
+The `writeln` procedure inserts the `eoln` (end of line) character in the file
+which indicates the end of a line; consequently the `readln` procedure skips
+the `eoln` character and brings the head to the beginning of the new line. To
+know whether the head is on an `eoln` character or not, the function `eoln(f)`
+helps us, which returns `true` if the head is on an `eoln` character or `false`
+otherwise.
 
 ```pascal
 function eoln(var t:text) : boolean;
 ```
 
-Esempi:
+Examples:
 
 ```pascal
 (1) var f: text; ...
@@ -1514,12 +1492,12 @@ Esempi:
 (6) close(f);
 ```
 
-in questo esempio si vede come creare (2), aprire in scrittura un file di
-testo (3), come scrivere un carattere (4) e come mettere un marcatore di
-`eoln` con la procedura `writeln` (5) ; infine con l'istruzione (6) chiudiamo
-il file e marchiamo con un `eof`.
+In this example you can see how to create (2), open a text file for writing
+(3), how to write a character (4) and how to put an `eoln` marker with the
+`writeln` procedure (5); finally with instruction (6) we close the file and
+mark it with an `eof`.
 
-Esempi:
+Examples:
 
 ```pascal
 (1) var f: text;
@@ -1531,9 +1509,9 @@ Esempi:
 (5) close(f);
 ```
 
-qui invece vediamo come leggere un carattere da un file di testo (4).
+Here instead we see how to read a character from a text file (4).
 
-mostriamo ora un programma completo :
+We now show a complete program:
 
 ```pascal
 program prova_text;
@@ -1582,38 +1560,34 @@ begin
 end.
 ```
 
-in questo programma sono molto importanti i due cicli `while` che
-mostrano come effettuare un ciclo di lettura o di scrittura su un file
-di testo.
+In this program, the two `while` loops are very important which show how to
+perform a read or write loop on a text file.
 
-# Puntatori
+# Pointers
 
-Semplificando possiamo pensare alla memoria di un computer come ad una
-lista contigua di celle di memoria; ognuna di queste celle è
-identificata da un indirizzo univoco.
+Simplifying, we can think of a computer's memory as a contiguous list of memory
+cells; each of these cells is identified by a unique address.
 
-Il Pascal consente attraverso l'uso degli operatori `^` e `@` di
-utilizzare gli indirizzi delle variabili. In particolare l'operatore di
-indirizzo `@` restituisce l'indirizzo associato ad una variabile, mentre
-l'operatore `^` consente di accedere alla locazione di memoria indicata
-da un indirizzo.
+Pascal allows through the use of the `^` and `@` operators to use variable
+addresses. In particular, the address operator `@` returns the address
+associated with a variable, while the `^` operator allows you to access the
+memory location indicated by an address.
 
-Per utilizzare un puntatore bisogna prima definirne il tipo attraverso
-la seguente notazione.
+To use a pointer, you must first define its type through the following
+notation.
 
 ```pascal
 ^<tipo>
 ```
 
-Questo definisce un puntatore ad una variabile di tipo `<tipo>`.
-Ovviamente si può anche definire il tipo del puntatore attraverso
-`type`.
+This defines a pointer to a variable of type `<tipo>`. Obviously, you can also
+define the pointer type through `type`.
 
 ```pascal
 type <nome_tipo_puntatore> = ^<tipo>
 ```
 
-Vediamo un esempio per capire il funzionamento.
+Let's see an example to understand the operation.
 
 ```pascal
 program pointer_demo2;
@@ -1640,7 +1614,7 @@ begin
 end.
 ```
 
-L'output prodotto è il seguente.
+The output produced is the following.
 
 ```
 num = 20
@@ -1649,22 +1623,21 @@ p2^ = 20
 num = 30
 ```
 
-# Memoria dinamica
+# Dynamic Memory
 
-La memoria può essere allocata/deallocata dinamicamente a runtime (durante
-l'esecuzione del programma) grazie alle funzioni di sistema `new` e `dispose`.
+Memory can be allocated/deallocated dynamically at runtime (during program
+execution) thanks to the system functions `new` and `dispose`.
 
-La funzione `new(<puntatore>)` alloca lo spazio e lo rende accessibile
-attraverso il puntatore (la quantità di memoria allocata dipende dal tipo del
-puntatore), mentre `dispose(<puntatore>)` si occupa di liberare lo spazio,
-rendendolo nuovamente disponibile per successive allocazioni.  È importante
-liberare la memoria quando non serve più in quanto la memoria utilizzata per
-l'allocazione dinamica (conosciuta con il nome di *heap*) è limitata ed il
-Pascal non la pulisce automaticamente.
+The function `new(<puntatore>)` allocates space and makes it accessible through
+the pointer (the amount of memory allocated depends on the type of the
+pointer), while `dispose(<puntatore>)` takes care of freeing the space, making
+it available again for subsequent allocations. It is important to free memory
+when it is no longer needed as the memory used for dynamic allocation (known as
+the *heap*) is limited and Pascal does not clean it automatically.
 
-Vediamo un esempio che sfrutta i puntatori e la memoria dinamica per creare
-una lista concatenata; da notare l'utilizzo del valore `NIL` che rappresenta
-il valore nullo per i puntatori; se un puntatore è `NIL` non punta a nulla.
+Let's see an example that uses pointers and dynamic memory to create a linked
+list; note the use of the value `NIL` which represents the null value for
+pointers; if a pointer is `NIL` it points to nothing.
 
 ```pascal
 program pointer_demo;
@@ -1696,7 +1669,7 @@ begin
 end.
 ```
 
-L'output è il seguente.
+The output is the following.
 
 ```
 l1^.value = 10

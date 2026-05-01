@@ -38,4 +38,8 @@ jobs:
             pascal_tutorial.txt
             pascal_tutorial.pdf
             pascal_tutorial.epub
+            pascal_tutorial.it.html
+            pascal_tutorial.it.txt
+            pascal_tutorial.it.pdf
+            pascal_tutorial.it.epub
             pandoc.css
