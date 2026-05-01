@@ -1,7 +1,6 @@
 ---
 title: Pascal Tutorial
 author: Mariano Bono
-date: 2021/11/01
 ...
 
 # Pascal Tutorial
@@ -11,6 +10,8 @@ illustrating the structure, constructs, control structures, and typical data
 types of the language.
 
 Language: **English** | [Italian version](it/)
+
+Repository: [mbono/pascal_tutorial](https://github.com/mbono/pascal_tutorial)
 
 Available formats: [PDF](pascal_tutorial.pdf), [EPUB](pascal_tutorial.epub),
 [Text](pascal_tutorial.txt).

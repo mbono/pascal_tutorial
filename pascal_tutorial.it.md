@@ -1,7 +1,6 @@
 ---
 title: Tutorial sul Pascal
 author: Mariano Bono
-date: 2021/11/01
 ...
 
 # Tutorial sul Pascal
@@ -11,6 +10,8 @@ programmazione Pascal, illustrando la struttura, i costrutti, le strutture di
 controllo e i tipi di dati tipici del linguaggio.
 
 Lingua: [English](../) | **Italiano**
+
+Repository: [mbono/pascal_tutorial](https://github.com/mbono/pascal_tutorial)
 
 Formati disponibili: [PDF](pascal_tutorial.it.pdf),
 [EPUB](pascal_tutorial.it.epub), [Testo](pascal_tutorial.it.txt).
