@@ -9,12 +9,14 @@ This document contains a brief overview of the Pascal programming language,
 illustrating the structure, constructs, control structures, and typical data
 types of the language.
 
-Language: **English** | [Italian version](it/)
+Language: **English** | [Italian version](https://mbono.github.io/pascal_tutorial/it/)
 
 Repository: [mbono/pascal_tutorial](https://github.com/mbono/pascal_tutorial)
 
-Available formats: [PDF](pascal_tutorial.pdf), [EPUB](pascal_tutorial.epub),
-[Text](pascal_tutorial.txt).
+Available formats:
+[PDF](https://mbono.github.io/pascal_tutorial/pascal_tutorial.pdf),
+[Text](https://mbono.github.io/pascal_tutorial/pascal_tutorial.txt),
+[EPUB](https://mbono.github.io/pascal_tutorial/pascal_tutorial.epub).
 
 # Language Basics
 
