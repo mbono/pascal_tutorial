@@ -50,7 +50,7 @@ The header begins with the keyword `program` followed by the program name and
 terminated by a semicolon.
 
 ```pascal
-program <nome_programma>;
+program <program_name>;
 ```
 
 The declaration block defines the various data used in the program and
@@ -63,9 +63,9 @@ once started.
 In summary, we have the following structure:
 
 ```pascal
-{intestazione}
-program nome_programma;
-{dichiarazioni}
+{header}
+program program_name;
+{declarations}
 label
 const
 type
@@ -73,9 +73,9 @@ var
 procedure
 function
 begin
-{istruzioni}
+{instructions}
 end;
-{fine del programma}
+{end of program}
 ```
 
 Although it is possible to swap the order of some elements in the declaration
@@ -205,8 +205,8 @@ const <identifier> = <value>;
 
 .example
 ```pascal
-const settimana = 7;
-const ore = 24;
+const week = 7;
+const hours = 24;
 ```
 
 ### Variables
@@ -283,11 +283,11 @@ begin
   writeln('d =', d); 
   d := b - c; {d = 23 - (-25) = 48} 
   writeln('d =', d); 
-  d := b div 2; {23 div 2 = 11 divisione intera} 
+  d := b div 2; {23 div 2 = 11 integer division} 
   writeln('d =', d); 
-  d := b mod 2; {1 è il resto di prima} 
+  d := b mod 2; {1 is the previous remainder} 
   writeln('d =', d); 
-  r := b / 2; {r = 23 / 2 =11.5 divisione reale}
+  r := b / 2; {r = 23 / 2 =11.5 real division}
   writeln('r =', r); 
 end.
 ```
@@ -326,7 +326,7 @@ A variable declared this way can contain a string of up to 255 characters, but
 it is possible to declare strings with a smaller size using the following form.
 
 ```pascal
-var str: string[10]; {contiene stringhe di max 10 caratteri}
+var str: string[10]; {contains strings of max 10 characters}
 ```
 
 The concatenation operator `+` allows you to merge multiple strings into one.
@@ -337,7 +337,7 @@ program stringhe;
 var s1,s2,s3: string; 
 begin 
   s1 := 'rossi'; 
-  s2 := ''; {stringa vuota} 
+  s2 := ''; {empty string} 
   s3 := 'carlo'; 
   s2 := s3 + ' ' + s1; {s2='carlo rossi'}
   writeln(s2); 
@@ -445,27 +445,27 @@ var i: integer;
 	r: real; c: char;
 	s: string;
 begin
-	writeln; {stampa una riga vuota}
-	write('inserisci un numero intero :');
+	writeln; {prints an empty line}
+	write('enter an integer number: ');
 	readln(i);
-	writeln('hai inserito : ', i);
+	writeln('you entered: ', i);
 	writeln;
-	write('inserisci un numero reale :');
+	write('enter a real number: ');
 	readln(r);
-	writeln('hai inserito ', r);
-	writeln('hai inserito : ', r:3:4);
+	writeln('you entered ', r);
+	writeln('you entered: ', r:3:4);
 	writeln;
-	write('inserisci un carattere :');
+	write('enter a character: ');
 	readln(c);
-	writeln('hai inserito : ',c);
+	writeln('you entered: ',c);
 	writeln;
-	write('inserisci una stringa :');
+	write('enter a string: ');
 	readln(s);
-	writeln('hai inserito : ',s);
+	writeln('you entered: ',s);
 	writeln;
-	write('inserimento multiplo di intero e reale :');
+	write('multiple input of integer and real: ');
 	readln(i,r);
-	writeln('hai inserito : ',i,' ',r);
+	writeln('you entered: ',i,' ',r);
 end.
 ```
 
@@ -475,7 +475,7 @@ It is possible to format the output by inserting the space that a certain piece
 of data must occupy on the screen using the following form.
 
 ```pascal
-write(exp:spazio);
+write(exp:space);
 ```
 
 If the data needs more space, the formatting is ignored, while if the data
@@ -485,7 +485,7 @@ For `real` data, it is possible to specify an additional field to indicate how
 many digits after the decimal point to print.
 
 ```pascal
-write(exp:spazio:cifre decimali);
+write(exp:space:decimal_digits);
 ```
 
 The following code clarifies the concept.
@@ -500,12 +500,12 @@ begin
 	a4 := 0;
 	a5 := 46;
 	a6 := 555;
-	{testo non formattato}
+	{unformatted text}
 	writeln('tabella:');
 	writeln(a1, ' ', a2, ' ', a3);
 	writeln(a4, ' ', a5, ' ', a6);
 	writeln;
-	{testo formattato}
+	{formatted text}
 	writeln('tabella:');
 	writeln(a1:6, a2:6, a3:6); {6 colonne per dato}
 	writeln(a4:6, a5:6, a6:6);
@@ -520,33 +520,33 @@ The `if` construct allows you to execute a block of code only if a condition is
 true.
 
 ```pascal
-if (<condizione>) then
-  <blocco>
+if (<condition>) then
+  <block>
 ```
 
 There is the `if .. else` variant where if the condition is `false` then the
 alternative block is executed.
 
 ```pascal
-if (<condizione>) then
-  <blocco>
+if (<condition>) then
+  <block>
 else
-  <blocco alternativo>
+  <alternative_block>
 ```
 
 Different `if .. else` can be nested giving rise to the `if .. else if`
 construct which allows you to make multiple choices.
 
 ```pascal
-if (<condizione>) then
-  <blocco>
-else if (<condizione>) then
-  <blocco 2>
-else if (<condizione>) then
-  <blocco 3>
+if (<condition>) then
+  <block>
+else if (<condition>) then
+  <block 2>
+else if (<condition>) then
+  <block 3>
 ...
 else
-  <blocco alternativo>
+  <alternative_block>
 ```
 
 The last `else` always refers to the last occurrence of `if`.
@@ -558,7 +558,7 @@ with a semicolon.
 program if_else;
 var a,b: integer;
 begin
-	writeln('inserisci due numeri: ');
+	writeln('enter two numbers: ');
 	readln(a, b);
 	if (a < b) then
 		writeln(a, ' < ', b)
@@ -627,23 +627,23 @@ A simple menu:
 program simple_menu;
 var scelta: integer;
 begin
-	writeln(' menu principale : ');
+	writeln(' main menu: ');
 	writeln;
-	writeln('1. opzione a');
-	writeln('2. opzione b');
-	writeln('3. opzione c');
+	writeln('1. option a');
+	writeln('2. option b');
+	writeln('3. option c');
 	writeln;
-	write('Cosa scegli? (1..3): ');
+	write('What do you choose? (1..3): ');
 	readln(scelta);
 	case (scelta) of
 	1:
-		writeln('hai scelto l''opzione a !!');
+		writeln('you chose option a !!');
 	2:
-		writeln('hai scelto l''opzione b !!');
+		writeln('you chose option b !!');
 	3:
-		writeln('hai scelto l''opzione c !!')
+		writeln('you chose option c !!')
 	else
-		writeln ('errore : la scelta effettuata non è corretta !!!!');
+		writeln ('error: the selected choice is not valid !!!!');
 	end;
 end.
 ```
@@ -700,8 +700,8 @@ executed at least once.
 
 ```pascal
 repeat
-	<blocco>
-until <condizione>;
+	<block>
+until <condition>;
 ```
 
 The code block is executed until the condition is true. Let's see counting from
@@ -726,29 +726,29 @@ The `for` structure executes a loop a predetermined number of times.
 
 
 ```pascal
-for <variabile> := <viniziale> to <vfinale> do
-	<blocco>
+for <variable> := <initial_value> to <final_value> do
+	<block>
 ```
 
-The indicated variable takes all values between <viniziale> and <vfinale>,
-incrementing by 1 each time; the number of loops executed is <vfinale> -
-<viniziale> + 1.
+The indicated variable takes all values between <initial_value> and
+<final_value>, incrementing by 1 each time; the number of loops executed is
+<final_value> - <initial_value> + 1.
 
 The following variant decrements the control variable by 1.
 
 ```pascal
-for <variabile> := <v1> downto <v2> do
-	<blocco>
+for <variable> := <v1> downto <v2> do
+	<block>
 ```
 
-Conteggio da 1 a 10:
+Count from 1 to 10:
 
 ```pascal
 for i := 1 to 10 do
 	writeln(i);
 ```
 
-Conteggio da 10 a 1:
+Count from 10 to 1:
 
 ```pascal
 for i := 10 downto 1 do
@@ -766,11 +766,11 @@ processing.
 Declaration of `procedure` and `function`:
 
 ```pascal
-procedure <nome>(<lista parametri>);
-	<corpo della procedura>
+procedure <name>(<parameter_list>);
+	<procedure_body>
 
-function <nome>(<lista parametri>):<tipo restituito>;
-    <corpo della funzione>
+function <name>(<parameter_list>):<return_type>;
+    <function_body>
 ```
 
 ## Subprogram Structure
@@ -780,8 +780,8 @@ A Pascal subprogram has the same structure as a generic program.
 Structure of a `procedure`:
 
 ```pascal
-procedure <nome>(<parametri>);
-	{dichiarazioni}
+procedure <name>(<parameters>);
+	{declarations}
 	label
 	const
 	type
@@ -789,15 +789,15 @@ procedure <nome>(<parametri>);
 	procedure
 	function
 begin
-	{istruzioni}
+	{instructions}
 end.
 ```
 
 Structure of a `function`:
 
 ```pascal
-function <nome>(<parametri>): <tipo restituito>;
-	{dichiarazioni}
+function <name>(<parameters>): <return_type>;
+	{declarations}
 	label
 	const 
 	type
@@ -805,7 +805,7 @@ function <nome>(<parametri>): <tipo restituito>;
 	procedure
 	function
 begin
-	{istruzioni}
+	{instructions}
 end.
 ```
 
@@ -815,8 +815,8 @@ define others.
 To invoke a subprogram, the following form is used:
 
 ```pascal
-<procedura>(<parametri>);
-<var> := <funzione>(<parametri>);
+<procedure>(<parameters>);
+<var> := <function>(<parameters>);
 ```
 
 Two simple subroutines:
@@ -844,7 +844,7 @@ We have seen that a function returns an output value; the method to assign the
 output value from inside the function is as follows:
 
 ```pascal
-<nome_funzione> := <valore_uscita>;
+<function_name> := <output_value>;
 ```
 
 `function` that returns the square of a number:
@@ -882,13 +882,13 @@ To declare a variable parameter, the keyword `var` is used.
 ```pascal
 program parametri;
 procedure foo(a,b: integer; var c: integer);
-{a e b sono parametri valore mentre c è variabile}
+{a and b are value parameters while c is variable}
 begin
-	a := a * a;	{modifica locale}
+	a := a * a;	{local modification}
 	writeln('local a = ', a);
-	b := b * b;	{modifica locale}
+	b := b * b;	{local modification}
 	writeln('local b = ', b);
-	c := a + b;	{modifica globale}
+	c := a + b;	{global modification}
 	writeln('local c = ', c);
 end;
 var a, b, c: integer;
@@ -981,7 +981,7 @@ var	a: array [1..100] of integer;
 To access a single element of the array, the form is used:
 
 ```pascal
-<nome_vettore>[<indice>]
+<array_name>[<index>]
 ```
 
 It is possible to assign one array to another, thus making an exact copy.
@@ -1016,13 +1016,13 @@ array can be thought of as a table or matrix.
 Declaration of multidimensional `array`:
 
 ```pascal
-var <nome>: array [<range1>, ... ,<rangeN>] of <tipo>
+var <name>: array [<range1>, ... ,<rangeN>] of <type>
 ```
 
 To access a single element of the array, the notation is used:
 
 ```pascal
-<nome>[<i1>, <i2>, ... ,<iN>]
+<name>[<i1>, <i2>, ... ,<iN>]
 ```
 
 If two arrays have the same dimensions, the assignment operation is possible.
@@ -1070,13 +1070,13 @@ The general structure of a record is as follows.
 
 ```pascal
 record
-	<campo>: <tipo>;
-	<campo>: <tipo>;
+	<field>: <type>;
+	<field>: <type>;
 	...
 end;
 ```
 
-To access a certain field, the notation `<nome>.<campo>` is used.
+To access a certain field, the notation `<name>.<field>` is used.
 
 For example, we can think of wanting to manipulate a user's data; this user's
 data are: name, surname, and userid. The corresponding data structure can be
@@ -1085,16 +1085,16 @@ created in the following way.
 ```pascal
 type utente =
 	record
-		nome: string;
-		cognome: string;
+		name: string;
+		surname: string;
 		uid: integer;
 	end;
 
 ...
 var mario: utente;
 ...
-mario.nome := 'Mario';
-mario.cognome := 'Rossi';
+mario.name := 'Mario';
+mario.surname := 'Rossi';
 mario.uid := 001;
 ```
 
@@ -1104,8 +1104,8 @@ useful as it allows us not to specify the record name every time.
 ```pascal
 with mario do
 begin
-	nome := 'Mario';
-	cognome := 'Rossi';
+	name := 'Mario';
+	surname := 'Rossi';
 	uid := 001;
 end;
 ```
@@ -1118,13 +1118,13 @@ as follows:
 
 ```pascal
 record
-	<campo>: <tipo>;
-	<campo>: <tipo>;
-	<campo>: <tipo>;
+	<field>: <type>;
+	<field>: <type>;
+	<field>: <type>;
 	...
-	case <campo>: <tipo> of
-	<val1>: (campi aggiuntivi);
-	<val2>: (campi aggiuntivi);
+	case <field>: <type> of
+	<val1>: (additional_fields);
+	<val2>: (additional_fields);
 end;
 ```
 
@@ -1133,12 +1133,12 @@ end after the fixed part.
 
 ```pascal
 type utente = record
-	nome: string;
-	cognome: string;
-	case coniugato: boolean of
+	name: string;
+	surname: string;
+	case married: boolean of
 	true:(
-		moglie: string;
-		nfigli: integer;
+		wife: string;
+		children_count: integer;
 	);
 end;
 ```
@@ -1152,51 +1152,51 @@ We conclude with a small example.
 program record_demo;
 
 type utente = record
-	nome: string;
-	cognome: string;
+	name: string;
+	surname: string;
 	uid: integer;
 end;
 
 var mario, luca: utente;
-	{un record si può anche specificare direttamente senza bisogno di
-	definire il tipo con type}
+	{a record can also be specified directly without needing
+	to define the type with type}
 	gianni: record
-		nome: string;
-		cognome: string;
+		name: string;
+		surname: string;
 		uid: integer;
-		case coniugato: boolean of
+		case married: boolean of
 		true:(
-			moglie: string;
-			nfigli: integer;
+			wife: string;
+			children_count: integer;
 			);
 	end;
 
 begin
-	mario.nome := 'Mario';
-	mario.cognome := 'Rossi';
+	mario.name := 'Mario';
+	mario.surname := 'Rossi';
 	mario.uid := 001;
 
-	{utilizzo di with}
+	{use of with}
 	with luca do begin
-		nome := 'Luca';
-		cognome := 'Verdi';
+		name := 'Luca';
+		surname := 'Verdi';
 		uid := 002;
 	end;
 
-	writeln('nome: ' + mario.nome);
-	writeln('nome: ' + luca.nome);
+	writeln('name: ' + mario.name);
+	writeln('name: ' + luca.name);
 
-	gianni.nome := 'Gianni';
-	gianni.coniugato := true;
-	gianni.moglie := 'Maria';
-	gianni.nfigli := 3;
+	gianni.name := 'Gianni';
+	gianni.married := true;
+	gianni.wife := 'Maria';
+	gianni.children_count := 3;
 
-	writeln('nome: ' + gianni.nome);
-	writeln(gianni.nome + ' e'' sposato con ' + gianni.moglie);
+	writeln('name: ' + gianni.name);
+	writeln(gianni.name + ' is married to ' + gianni.wife);
 
-	luca := mario;	{assegnazione}
-	writeln('nome: ' + luca.nome);
-	writeln('cognome: ' + luca.cognome);
+	luca := mario;	{assignment}
+	writeln('name: ' + luca.name);
+	writeln('surname: ' + luca.surname);
 end.
 ```
 
@@ -1209,7 +1209,7 @@ integers, characters, and enumerations. The declaration of a set has the
 following structure.
 
 ```pascal
-set of <tipo>;
+set of <type>;
 ```
 
 The first thing to learn to work with `set` type data is the initialization of
@@ -1217,7 +1217,7 @@ a set, that is, how to assign elements to a set; the operation is very simple
 and is performed as follows:
 
 ```pascal
-<insieme> := [(lista dei dati)] ;
+<set> := [(data_list)] ;
 ```
 
 Declaration and initialization of some sets:
@@ -1310,7 +1310,7 @@ use them as indices for `array`.
 The enumerated type is defined in this way.
 
 ```pascal
-type <nome_tipo> = (<valore1>, <valore2> ...);
+type <type_name> = (<value1>, <value2> ...);
 ```
 
 Let's see an example.
@@ -1348,7 +1348,7 @@ of a simple ordered data.
 The data is defined in the following way.
 
 ```pascal
-type <nome> = <v_iniziale> .. <v_finale>;
+type <name> = <initial_value> .. <final_value>;
 ```
 
 For example.
@@ -1425,28 +1425,28 @@ var
 	f: file of integer;
 	num: integer;
 begin
-	writeln('inserire una serie di numeri ');
-	writeln('per fermarsi inserite 0 ');
-	(*creazione ed apertura in scrittura del file*)
+	writeln('enter a series of numbers ');
+	writeln('enter 0 to stop ');
+	(*create and open the file for writing*)
 	assign(f, 'dati.dat');
 	rewrite(f);
-	(*inserimento dei dati*)
+	(*enter the data*)
 	writeln;
-	write('inserisci numero : ');
+	write('enter number: ');
 	readln(num);
 	while (num <> 0) do begin
 		write(f, num);
-		write('inserisci numero : ');
+		write('enter number: ');
 		readln(num);
 	end;
-	(*chiusura del file*)
+	(*close the file*)
 	close(f);
-	(*apertura in lettura e lettura dei dati*)
+	(*open for reading and read the data*)
 	reset(f);
 	writeln;
-	writeln('hai inserito ', filesize(f), ' numeri');
+	writeln('you entered ', filesize(f), ' numbers');
 	writeln;
-	writeln('lettura dei dati memorizzati :');
+	writeln('reading the stored data:');
 	while (not eof(f)) do begin
 		read(f, num);
 		writeln(num);
@@ -1521,14 +1521,14 @@ var
 	t: text;
 	c: char;
 begin
-	(*creazione e apertura in scrittura*)
-	assign(t,'testo.txt');
+	(*create and open for writing*)
+	assign(t,'text.txt');
 	rewrite(t);
-	(*fase di scrittura testo*)
-	writeln('inserire un testo (premere esc per terminare)');
+	(*text writing phase*)
+	writeln('enter text (press esc to finish)');
 	writeln;
 	c:= readkey;
-	(* #27 e #13 corrispondono a esc ed invio*)
+	(* #27 and #13 correspond to esc and enter *)
 	while (c <> #27) do begin
 		if ( c = #13) then begin
 			writeln(t);
@@ -1541,11 +1541,11 @@ begin
 		c := readkey;
 	end;
 	close(t);
-	(*apertura in lettura*)
+	(*open for reading*)
 	reset(t);
-	(*lettura del testo*)
+	(*read the text*)
 	writeln;
-	writeln('il testo inserito è il seguente :');
+	writeln('the entered text is the following:');
 	writeln;
 	while (not eof(t)) do begin
 		if (eoln(t)) then begin
@@ -1594,23 +1594,23 @@ Let's see an example to understand the operation.
 program pointer_demo2;
 
 type
-	pint = ^integer;	{definisce un puntatore ad integer}
+pint = ^integer;	{defines a pointer to integer}
 
 var
 	num: integer;
-	p1, p2: pint;		{dichiarazione dei puntatori}
-	p3: ^integer;		{dichiarazione diretta senza ricorrere a type}
+	p1, p2: pint;		{pointer declaration}
+	p3: ^integer;		{direct declaration without using type}
 
 begin
 	num := 20;
 	writeln('num = ', num);
-	p1 := @num;		{p1 contiene l'indirizzo di num}
-	writeln('p1^ = ', p1^);	{p1^ ci consente di accedere all'indirizzo
-				contenuto nel puntatore}
-	p2 := p1;		{sia p1 che p2 puntano a num}
+	p1 := @num;		{p1 contains the address of num}
+	writeln('p1^ = ', p1^);	{p1^ allows us to access the address
+				stored in the pointer}
+	p2 := p1;		{both p1 and p2 point to num}
 	writeln('p2^ = ', p2^);
 
-	p1^ := 30;		{modifichiamo num attraverso il suo puntatore}
+	p1^ := 30;		{we modify num through its pointer}
 	writeln('num = ', num);
 end.
 ```
