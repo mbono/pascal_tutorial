@@ -6,6 +6,10 @@ txt: pascal_tutorial.txt
 
 pdf: pascal_tutorial.pdf
 
+# Optional Docker-based build for all tutorial artifacts.
+docker-build:
+	docker compose run --rm tutorial-build
+
 epub: pascal_tutorial.epub
 
 pascal_tutorial.pdf: pascal_tutorial.md
@@ -23,4 +27,4 @@ pascal_tutorial.epub: pascal_tutorial.md
 clean:
 	rm -f *~ *.txt *.html *.pdf *.css *.xml *.epub
 
-.PHONY: all html clean pdf epub txt
+.PHONY: all html clean pdf epub txt docker-build

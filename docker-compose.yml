@@ -1,0 +1,7 @@
+services:
+  tutorial-build:
+    build:
+      context: .
+    working_dir: /workdir
+    volumes:
+      - .:/workdir
