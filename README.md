@@ -1,11 +1,20 @@
 # Pascal tutorial
 
-This repository contains a bilingual Pascal tutorial in Markdown plus the associated Pascal examples. The English tutorial is the main version, while the Italian tutorial is maintained alongside it.
+This repository contains a Pascal tutorial that I originally wrote in Italian
+in the late 1990s and early 2000s while I was in college. At the time I
+created a few websites about Pascal programming, mainly because it was my
+first programming language. Years later those websites were lost, and I
+recovered some of the content using the [Wayback
+Machine](https://web.archive.org/web/20070108032941/http://marianobono.altervista.org/pascal/index.html).
+I then decided that I wanted to translate it into English and publish it.
+
+Now, in the agentic AI era, I am taking advantage of these tools to finally
+accomplish that goal.
 
 Source files:
 
-- `pascal_tutorial.md` - English main tutorial
-- `pascal_tutorial.it.md` - Italian tutorial
+- `pascal_tutorial.md` - English tutorial
+- `pascal_tutorial.it.md` - Italian tutorial (the original one)
 
 ## Local build
 
@@ -45,19 +54,9 @@ For Pages packaging only:
 make docker-pages
 ```
 
-## GitHub Pages publishing
+## GitHub Pages
 
-Publishing is handled by `.github/workflows/pages.yml`.
-
-1. In **Settings > Pages**, set **Build and deployment** to **GitHub Actions**.
-2. Push to `main`, or run the workflow manually.
-3. The site will be published at:
-
-```text
-https://<owner>.github.io/pascal_tutorial/
-```
-
-The English homepage is published as `index.html`; the Italian homepage is published under `it/index.html`. TXT, PDF, and EPUB downloads are available for both languages.
+This is available on [Github Pages](https://mbono.github.io/pascal_tutorial)
 
 ## License
 
