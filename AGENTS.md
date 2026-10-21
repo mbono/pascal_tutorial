@@ -7,7 +7,8 @@
 ## Build and verification commands
 
 - Root tutorial build:
-  - `make all` builds `pascal_tutorial.html`, `pascal_tutorial.txt`, `pascal_tutorial.pdf`, and `pascal_tutorial.epub`
+  - `make all` builds `pascal_tutorial.en.{html,txt,pdf,epub}` and `pascal_tutorial.it.{html,txt,pdf,epub}`
+  - `make pages` assembles the landing page and publishes the tutorials and downloads under `_site/en/` and `_site/it/`
   - `make html`
   - `make txt`
   - `make pdf`
@@ -22,6 +23,7 @@
 ## High-level architecture
 
 - This repository is documentation-first, not an application or library. The main deliverable is the tutorial itself.
+- `pages/` contains the handwritten landing-page sources (`index.html` and `style.css`), copied to the root of `_site/` by `make pages`.
 - `pascal_tutorial.md` is the English main source used by the root `Makefile` and GitHub Actions workflow. `pascal_tutorial.it.md` is the maintained Italian version. Pandoc converts both into published HTML, text, PDF, and EPUB artifacts, and the HTML outputs depend on `pandoc.css`.
 - `examples/` contains standalone Free Pascal programs that mirror tutorial sections and code listings. Each `.pas` file builds to an executable with the same basename through `examples/Makefile`.
 - `pascal_tutorial.asciidoc` is a legacy parallel version of the tutorial content. The current build and CI do not consume it.

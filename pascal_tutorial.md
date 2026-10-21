@@ -1,6 +1,8 @@
 ---
 title: Pascal Tutorial
 author: Mariano Bono
+lang: en
+description: Learn Pascal with runnable examples covering language basics, control flow, procedures, arrays, records, sets, files, and pointers.
 ...
 
 # Pascal Tutorial
@@ -9,14 +11,14 @@ This document contains a brief overview of the Pascal programming language,
 illustrating the structure, constructs, control structures, and typical data
 types of the language.
 
-Language: **English** | [Italian version](https://mbono.github.io/pascal_tutorial/it/)
+[Home](https://mbono.github.io/pascal_tutorial/) | Language: **English** | [Italian version](https://mbono.github.io/pascal_tutorial/it/)
 
 Repository: [mbono/pascal_tutorial](https://github.com/mbono/pascal_tutorial)
 
 Available formats:
-[PDF](https://mbono.github.io/pascal_tutorial/pascal_tutorial.pdf),
-[Text](https://mbono.github.io/pascal_tutorial/pascal_tutorial.txt),
-[EPUB](https://mbono.github.io/pascal_tutorial/pascal_tutorial.epub).
+[PDF](https://mbono.github.io/pascal_tutorial/en/pascal_tutorial.en.pdf),
+[Text](https://mbono.github.io/pascal_tutorial/en/pascal_tutorial.en.txt),
+[EPUB](https://mbono.github.io/pascal_tutorial/en/pascal_tutorial.en.epub).
 
 # Language Basics
 

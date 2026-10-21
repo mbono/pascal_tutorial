@@ -1,6 +1,8 @@
 ---
 title: Tutorial sul Pascal
 author: Mariano Bono
+lang: it
+description: Impara il Pascal con esempi eseguibili su basi del linguaggio, strutture di controllo, procedure, array, record, insiemi, file e puntatori.
 ...
 
 # Tutorial sul Pascal
@@ -9,7 +11,7 @@ Questo documento contiene una breve panoramica sul linguaggio di
 programmazione Pascal, illustrando la struttura, i costrutti, le strutture di
 controllo e i tipi di dati tipici del linguaggio.
 
-Lingua: [English](https://mbono.github.io/pascal_tutorial/) | **Italiano**
+[Pagina iniziale](https://mbono.github.io/pascal_tutorial/) | Lingua: [English](https://mbono.github.io/pascal_tutorial/en/) | **Italiano**
 
 Repository: [mbono/pascal_tutorial](https://github.com/mbono/pascal_tutorial)
 
