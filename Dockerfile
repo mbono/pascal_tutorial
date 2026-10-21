@@ -9,6 +9,7 @@ RUN apt-get update \
         texlive-latex-base \
         texlive-latex-recommended \
         texlive-fonts-recommended \
+        texlive-lang-italian \
         lmodern \
     && rm -rf /var/lib/apt/lists/*
 

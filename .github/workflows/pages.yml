@@ -33,6 +33,7 @@ jobs:
             texlive-latex-base \
             texlive-latex-recommended \
             texlive-fonts-recommended \
+            texlive-lang-italian \
             lmodern
 
       - name: Build Pages site
