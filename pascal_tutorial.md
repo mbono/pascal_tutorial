@@ -31,7 +31,7 @@ simply prints the text string `hello, world` to the screen.
 program hello;
 begin
   writeln('hello, world');
-end;
+end.
 ```
 
 Let's analyze the program line by line: on the first line we find a comment,
@@ -62,7 +62,9 @@ variables (`var`), procedures (`procedure`), and functions (`function`).
 The instruction block contains the instructions that the program must execute
 once started.
 
-In summary, we have the following structure:
+In summary, we have the following structure. This is a schematic outline, not
+a compilable program: the declaration keywords indicate optional sections whose
+contents have been omitted.
 
 ```pascal
 {header}
@@ -76,9 +78,12 @@ procedure
 function
 begin
 {instructions}
-end;
+end.
 {end of program}
 ```
+
+The final `end.` terminates the whole program. A procedure or function declaration
+inside the program ends with `end;` instead.
 
 Although it is possible to swap the order of some elements in the declaration
 block, it is advisable not to do so and respect the predefined order.
@@ -777,7 +782,9 @@ function <name>(<parameter_list>):<return_type>;
 
 ## Subprogram Structure
 
-A Pascal subprogram has the same structure as a generic program.
+A Pascal subprogram has a declaration block and an instruction block, like the
+main program, but its declaration ends with `end;`, not `end.`. The following
+schematic outlines omit the contents of the optional declaration sections.
 
 Structure of a `procedure`:
 
@@ -792,7 +799,7 @@ procedure <name>(<parameters>);
 	function
 begin
 	{instructions}
-end.
+end;
 ```
 
 Structure of a `function`:
@@ -808,7 +815,7 @@ function <name>(<parameters>): <return_type>;
 	function
 begin
 	{instructions}
-end.
+end;
 ```
 
 What is immediately noticeable is that within subprograms it is possible to
@@ -1204,11 +1211,11 @@ end.
 
 ## Sets
 
-Pascal allows you to manage the mathematical model of sets with a particular
-data type, called precisely `set`. First of all, let's say that sets can
-contain elements of a certain type; the possible types in Pascal's `set` are:
-integers, characters, and enumerations. The declaration of a set has the
-following structure.
+Pascal represents mathematical sets with the `set` data type. The base type must
+be ordinal, such as an integer subrange, `char`, `boolean`, or an enumerated type.
+Practical limits on the supported range depend on the implementation; ANSI Pascal
+does not impose a universal 0..255 bound. The examples below use `0..255` as an
+explicitly bounded integer base. The declaration has the following structure.
 
 ```pascal
 set of <type>;
@@ -1219,13 +1226,13 @@ a set, that is, how to assign elements to a set; the operation is very simple
 and is performed as follows:
 
 ```pascal
-<set> := [(data_list)] ;
+<set> := [<element_list>];
 ```
 
 Declaration and initialization of some sets:
 
 ```pascal
-type insiemeinteri = set of integer;
+type insiemeinteri = set of 0..255;
      cifre=0..9;
      insiemecifre = set of cifre;
      insiemelettere = set of char;
@@ -1301,6 +1308,40 @@ var a: insiemeinteri;
 a := [1..10];
 ris := [1,2] <= a;   (*true;*)
 ris := [11,12] <= a; (*false*)
+```
+
+The following complete example demonstrates set difference, membership, union,
+intersection, and subset comparison.
+
+`set_demo.pas`
+
+```pascal
+program setdemo;
+type insiemeinteri = set of 0..255;
+var a, b, c: insiemeinteri;
+begin
+  a := [1,2,3,4];
+  b := [1,3];
+  c := a - b;
+  writeln('difference = [2,4]: ', c = [2,4]);
+  writeln('2 in difference: ', 2 in c);
+  writeln('3 in difference: ', 3 in c);
+  writeln('union = a: ', a + b = a);
+  writeln('intersection = b: ', a * b = b);
+  writeln('b is a subset of a: ', b <= a);
+end.
+```
+
+Example output (the case and field width of Boolean values depend on the
+implementation):
+
+```text
+difference = [2,4]: TRUE
+2 in difference: TRUE
+3 in difference: FALSE
+union = a: TRUE
+intersection = b: TRUE
+b is a subset of a: TRUE
 ```
 
 ## Enumerated Types
@@ -1413,13 +1454,15 @@ Now let's see two useful functions for file management in Pascal:
 
 ```pascal
 function filesize (var nomeinterno: file): integer;
-function pos(var nomeinterno: file): integer;
+function filepos(var nomeinterno: file): Int64;
 ```
 
-As can be guessed, `filesize` returns the size of the file, while `pos`
-returns the current position of the head. With this we conclude the discussion
-on files; later we will analyze text files. We conclude with a complete program
-that better analyzes the operation of files:
+The function `filesize` returns the size of the file, while `filepos` returns
+the current zero-based record position in an open typed file. For example,
+`filepos(f)` returns 0 immediately after `reset(f)`, and 1 after reading the first
+record. The function `pos` searches for a substring and does not return a file
+position. We conclude with a complete file-handling program; text files are
+covered in the next section.
 
 ```pascal
 program files;

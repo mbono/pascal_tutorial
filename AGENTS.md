@@ -1,5 +1,9 @@
 # Repository instructions for `pascal_tutorial`
 
+## Version control
+
+- Do not create Git commits unless the user explicitly requests them for the current task.
+
 ## Build and verification commands
 
 - Root tutorial build:

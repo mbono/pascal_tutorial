@@ -31,7 +31,7 @@ non fa altro che stampare a video la stringa di testo `hello, world`.
 program hello;
 begin
   writeln('hello, world');
-end;
+end.
 ```
 
 Analizziamo il programma riga per riga: alla prima troviamo un commento, il
@@ -63,7 +63,9 @@ e contiene: etichette (`label`), costanti (`const`), tipi definiti dall'utente
 Il blocco delle istruzioni contiene le istruzioni che il programma deve
 eseguire una volta avviato.
 
-Ricapitolando abbiamo la seguente struttura:
+Ricapitolando abbiamo la seguente struttura. Si tratta di uno schema, non di un
+programma compilabile: le parole chiave delle dichiarazioni indicano sezioni
+facoltative il cui contenuto è stato omesso.
 
 ```pascal
 {intestazione}
@@ -77,9 +79,12 @@ procedure
 function
 begin
 {istruzioni}
-end;
+end.
 {fine del programma}
 ```
+
+L'ultimo `end.` termina l'intero programma. La dichiarazione di una procedura o
+funzione all'interno del programma termina invece con `end;`.
 
 Anche se è possibile scambiare l'ordine di alcuni elementi nel blocco delle
 dichiarazioni è consigliabile non farlo e rispettare l'ordine predefinito.
@@ -252,7 +257,7 @@ espressione complessa il cui risultato è dello stesso tipo della variabile.
 var n: integer; {dichiarazione}
  ...
 n := 10; {assegnazione semplice}
-n := (10 + 2) \* 5; {assegnazione complessa}
+n := (10 + 2) * 5; {assegnazione complessa}
 ```
 
 # Tipi di dati semplici
@@ -337,7 +342,7 @@ caratteri, ma è possibile dichiarare stringhe con un'ampiezza minore usando la
 seguente forma.
 
 ```pascal
-var str: string\[10\]; {contiene stringhe di max 10 caratteri}
+var str: string[10]; {contiene stringhe di max 10 caratteri}
 ```
 
 L'operatore di concatenazione `+` permette di fondere più stringhe in una sola.
@@ -409,7 +414,7 @@ begin
   c := not(a and b); {a and b = F; not(false) = T}
   c := ('a' < 'b'); {T} 
   c := ('hello' < 'world'); {T} 
-  c := ('h' \<'world'); 
+  c := ('h' <'world');
 end.
 ```
 
@@ -421,7 +426,7 @@ complessa formata da operatori booleani e logici. In ogni caso una condizione
 o è `true` o è `false`.
 
 ```pascal
-(10 \< 20) and (a \> b);
+(10 < 20) and (a > b);
 ```
 
 # Input e output
@@ -789,7 +794,10 @@ function <nome>(<lista parametri>):<tipo restituito>;
 
 ## Struttura dei sottoprogrammi
 
-Un sottoprogramma Pascal ha la stessa struttura di un programma generico.
+Un sottoprogramma Pascal ha un blocco delle dichiarazioni e uno delle istruzioni,
+come il programma principale, ma la sua dichiarazione termina con `end;`, non con
+`end.`. Gli schemi seguenti omettono il contenuto delle sezioni facoltative delle
+dichiarazioni.
 
 Struttura di una `procedure`:
 
@@ -804,7 +812,7 @@ procedure <nome>(<parametri>);
 	function
 begin
 	{istruzioni}
-end.
+end;
 ```
 
 Struttura di una `function`:
@@ -820,7 +828,7 @@ function <nome>(<parametri>): <tipo restituito>;
 	function
 begin
 	{istruzioni}
-end.
+end;
 ```
 
 La cosa che si nota immediatamente è che all'interno dei sottoprogrammi è
@@ -1224,11 +1232,12 @@ end.
 
 ## Insiemi
 
-Il Pascal permette di gestire il modello matematico degli insiemi con un
-particolare tipo di dato, chiamato appunto `set` (insieme). Diciamo
-innanzitutto che gli insiemi possono contenere elementi di un certo tipo; i
-tipi possibili nel `set` del Pascal sono: interi, caratteri e enumerati. La
-dichiarazione di un insieme ha la seguente struttura.
+Il Pascal rappresenta gli insiemi matematici con il tipo di dato `set`. Il tipo
+base deve essere ordinale, come un sottocampo intero, `char`, `boolean` o un tipo
+enumerato. I limiti pratici sull'intervallo supportato dipendono
+dall'implementazione; il Pascal ANSI non impone un limite universale di 0..255.
+Gli esempi seguenti usano `0..255` come base intera esplicitamente delimitata.
+La dichiarazione ha la seguente struttura.
 
 ```pascal
 set of <tipo>;
@@ -1239,13 +1248,13 @@ l'inizializzazione di un insieme, cioè come fare ad assegnare gli elementi ad
 un insieme; l'operazione è molto semplice e si esegue nel seguente modo:
 
 ```pascal
-<insieme> := [(lista dei dati)] ;
+<insieme> := [<lista_elementi>];
 ```
 
 Dichiarazione e inizializzazione di alcuni insiemi:
 
 ```pascal
-type insiemeinteri = set of integer;
+type insiemeinteri = set of 0..255;
      cifre=0..9;
      insiemecifre = set of cifre;
      insiemelettere = set of char;
@@ -1321,6 +1330,40 @@ var a: insiemeinteri;
 a := [1..10];
 ris := [1,2] <= a;   (*true;*)
 ris := [11,12] <= a; (*false*)
+```
+
+Il seguente esempio completo mostra differenza, appartenenza, unione,
+intersezione e confronto tra sottoinsiemi.
+
+`set_demo.pas`
+
+```pascal
+program setdemo;
+type insiemeinteri = set of 0..255;
+var a, b, c: insiemeinteri;
+begin
+  a := [1,2,3,4];
+  b := [1,3];
+  c := a - b;
+  writeln('difference = [2,4]: ', c = [2,4]);
+  writeln('2 in difference: ', 2 in c);
+  writeln('3 in difference: ', 3 in c);
+  writeln('union = a: ', a + b = a);
+  writeln('intersection = b: ', a * b = b);
+  writeln('b is a subset of a: ', b <= a);
+end.
+```
+
+Esempio di output (maiuscole, minuscole e ampiezza del campo dei valori booleani
+dipendono dall'implementazione):
+
+```text
+difference = [2,4]: TRUE
+2 in difference: TRUE
+3 in difference: FALSE
+union = a: TRUE
+intersection = b: TRUE
+b is a subset of a: TRUE
 ```
 
 ## Tipi enumerati
@@ -1436,13 +1479,15 @@ Vediamo ora due funzioni utili per la gestione dei file in Pascal:
 
 ```pascal
 function filesize (var nomeinterno: file): integer;
-function pos(var nomeinterno: file): integer;
+function filepos(var nomeinterno: file): Int64;
 ```
 
-Come si intuisce `filesize` restituisce la dimensione del file, invece `pos`
-restituisce la posizione corrente della testina. Con questo concludiamo il
-discorso sui file; in seguito analizzeremo i file di testo. Concludiamo con un
-programma completo che analizza meglio il funzionamento dei file:
+La funzione `filesize` restituisce la dimensione del file, mentre `filepos`
+restituisce la posizione corrente, a partire da zero, in un file tipizzato
+aperto. Ad esempio, `filepos(f)` restituisce 0 subito dopo `reset(f)` e 1 dopo la
+lettura del primo elemento. La funzione `pos` cerca una sottostringa e non
+restituisce una posizione nel file. Concludiamo con un programma completo sulla
+gestione dei file; la prossima sezione tratta i file di testo.
 
 ```pascal
 program files;
