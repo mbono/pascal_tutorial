@@ -1,37 +1,77 @@
-/*
- * I add this to html files generated with pandoc.
- */
-
-body {
-  color: #444;
-  font-family: sans-serif;
-  font-size: 12pt;
-  line-height: 1.7;
-  padding: 1em;
-  margin: auto;
-  max-width: 44em;
-  background: #fefefe;
+:root {
+  color-scheme: light dark;
+  --page: #f7f5ef; --surface: #fffdf8; --ink: #232824;
+  --muted: #626e68; --teal: #1d6b61; --line: #d9ded6; --code: #edf2ec;
 }
-
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	padding: 0.3em;
-	align: hcenter;
+@media (prefers-color-scheme: dark) {
+  :root { --page: #151c1a; --surface: #202a26; --ink: #e8eee9;
+    --muted: #aebbb3; --teal: #82cdbd; --line: #43544b; --code: #26352f; }
 }
-
-div.sourceCode {
-	background-color: #f6f8fa;
-	padding: 1em;
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--page); color: var(--ink);
+  font: 1.125rem/1.72 Georgia, Cambria, "Times New Roman", serif; }
+a { color: var(--teal); text-underline-offset: .2em; }
+a:hover { text-decoration-thickness: .13em; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.skip-link { position: absolute; z-index: 5; top: -5rem; left: 1rem; padding: .5rem 1rem; background: var(--surface); }
+.skip-link:focus { top: 1rem; }
+.site-shell { max-width: 76rem; margin: auto; padding: 0 clamp(1rem, 3vw, 2.5rem) 5rem; }
+.site-masthead { display: flex; align-items: center; justify-content: space-between;
+  min-height: 5rem; border-bottom: 1px solid var(--line);
+  font: 700 .8rem/1.2 system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.site-name { color: var(--teal); }
+.toc-toggle { display: none; }
+.reading-layout { display: grid; grid-template-columns: 15rem minmax(0, 48rem); gap: clamp(2rem, 4vw, 4rem); margin-top: 2rem; }
+#TOC { position: sticky; top: 1.25rem; align-self: start; max-height: calc(100vh - 2.5rem);
+  overflow: auto; scrollbar-width: thin; padding: .25rem .8rem 1rem 0;
+  font: .875rem/1.5 system-ui, sans-serif; }
+#TOC h2 { margin: 0 0 1rem; font: 700 .75rem/1.2 system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+#TOC ul { list-style: none; margin: 0; padding: 0; }
+#TOC ul ul { margin: .35rem 0 .7rem .7rem; padding-left: .65rem; border-left: 1px solid var(--line); }
+#TOC li { margin: .1rem 0; }
+#TOC a { display: block; padding: .25rem .35rem; border-radius: .3rem; color: var(--muted); text-decoration: none; }
+#TOC > ul > li > a { color: var(--ink); font-weight: 700; }
+#TOC a:hover, #TOC a:focus-visible { color: var(--teal); background: var(--code); }
+main { min-width: 0; }
+#title-block-header { margin: .4rem 0 2.5rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--line); }
+.title { margin: 0; font: 700 clamp(2.8rem, 5vw, 4.4rem)/1.05 system-ui, sans-serif; letter-spacing: -.055em; }
+.author { margin: 1rem 0 0; color: var(--muted); font: .9rem/1.4 system-ui, sans-serif; }
+main > h1:first-of-type { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+main p { margin: 0 0 1.2em; }
+main h1, main h2, main h3, main h4 { color: var(--ink); font-family: system-ui, sans-serif; line-height: 1.22; letter-spacing: -.025em; scroll-margin-top: 2rem; }
+main h1 { margin: 3.5rem 0 1rem; font-size: 2rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+main h2 { margin: 2.6rem 0 .85rem; font-size: 1.55rem; }
+main h3 { margin: 2rem 0 .7rem; font-size: 1.25rem; }
+main h4 { margin: 1.6rem 0 .5rem; font-size: 1.1rem; }
+main :is(ul, ol) { padding-left: 1.5rem; }
+main li { padding-left: .15rem; }
+main :not(pre) > code { padding: .12em .3em; border-radius: .2rem; background: var(--code);
+  font: .85em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+div.sourceCode, main > pre { margin: 1.4rem 0; padding: 1rem 1.2rem; border: 1px solid var(--line);
+  border-radius: .65rem; background: var(--code); overflow-x: auto; }
+pre, pre code { font: .88rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; }
+pre.sourceCode { margin: 0; }
+table { display: block; max-width: 100%; border-collapse: collapse; overflow-x: auto; margin: 1.5rem 0; font: .9rem/1.5 system-ui, sans-serif; }
+th, td { padding: .65rem .8rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 1.5rem 0; padding: .2rem 1.2rem; border-left: 3px solid var(--teal); color: var(--muted); }
+@media (prefers-color-scheme: dark) {
+  code span.kw, code span.cf, code span.bu { color: #9ddbb1; }
+  code span.st, code span.ch, code span.ss { color: #e1b889; }
+  code span.co, code span.an { color: #a4b6ab; }
+  code span.dv, code span.fl, code span.bn { color: #c5b0ea; }
 }
-
-code {
-	background-color: rgba(175, 184, 193, 0.2);
-	padding: 0.2em;
+@media (max-width: 900px) {
+  .site-shell { padding: 0 1.25rem 4rem; }
+  .site-masthead { min-height: 4rem; }
+  .reading-layout { display: block; margin-top: 1.5rem; }
+  .js .toc-toggle { display: inline-flex; padding: .5rem .7rem; border: 1px solid var(--line); border-radius: .4rem;
+    background: var(--surface); color: var(--ink); font: inherit; letter-spacing: 0; text-transform: none; cursor: pointer; }
+  #TOC { position: static; max-height: min(70vh, 32rem); margin: 0 0 1.5rem; padding: 1rem;
+    border: 1px solid var(--line); border-radius: .65rem; background: var(--surface); }
+  .js #TOC { display: none; }
+  .js #TOC.is-open { display: block; }
+  #title-block-header { margin-top: 0; }
 }
-
-code.sourceCode, code.sourceCode.pascal {
-	background-color: #f6f8fa;
-}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

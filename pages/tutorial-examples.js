@@ -70,6 +70,7 @@
     const batch = $('.example-batch'), input = $('.example-input');
     const terminal = Pas2WasmConsole.create($('.example-console'), {autoFocus: false});
     editor.value = source;
+    editor.rows = Math.min(18, Math.max(8, source.split('\n').length));
     function busy(value) { run.disabled = value; stop.disabled = !value; }
     function showBatch() { batch.hidden = jspiSupport !== false; }
     details.addEventListener('toggle', () => {

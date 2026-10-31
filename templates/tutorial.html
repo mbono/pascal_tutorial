@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(description-meta)$
+  <meta name="description" content="$description-meta$" />
+$endif$
+  <title>$pagetitle$</title>
+  <style>$styles.html()$</style>
+$for(css)$
+  <link rel="stylesheet" href="$css$" />
+$endfor$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+<a class="skip-link" href="#tutorial-content">$skip-label$</a>
+<div class="site-shell">
+  <header class="site-masthead">
+    <span class="site-name">Pascal Tutorial</span>
+    <button type="button" id="toc-toggle" class="toc-toggle" aria-controls="TOC" aria-expanded="false">$toc-title$</button>
+  </header>
+  <div class="reading-layout">
+$if(toc)$
+    <nav id="TOC" role="doc-toc" aria-label="$toc-title$">
+      <h2>$toc-title$</h2>
+      $table-of-contents$
+    </nav>
+$endif$
+    <main id="tutorial-content">
+$if(title)$
+      <header id="title-block-header">
+        <h1 class="title">$title$</h1>
+$for(author)$
+        <p class="author">$author$</p>
+$endfor$
+      </header>
+$endif$
+      $body$
+    </main>
+  </div>
+</div>
+</body>
+</html>

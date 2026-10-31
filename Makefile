@@ -38,6 +38,7 @@ pages: \
 	$(PAGES_DIR)/style.css \
 	$(PAGES_DIR)/tutorial-examples.js \
 	$(PAGES_DIR)/tutorial-examples.css \
+	$(PAGES_DIR)/tutorial-navigation.js \
 	$(PAGES_DIR)/pas2wasm/VERSION \
 	$(EN_PAGES_DIR)/index.html \
 	$(EN_PAGES_DIR)/$(EN_TEXT_OUTPUT) \
@@ -65,11 +66,11 @@ $(EN_TEXT_OUTPUT): $(EN_SOURCE)
 $(IT_TEXT_OUTPUT): $(IT_SOURCE)
 	pandoc -t plain -o $(IT_TEXT_OUTPUT) $(IT_SOURCE)
 
-$(EN_HTML_OUTPUT): $(EN_SOURCE) pandoc.css templates/en-head.html
-	pandoc --standalone --number-section --toc --from markdown --to html5 -o $(EN_HTML_OUTPUT) --css pandoc.css --include-in-header=templates/en-head.html $(EN_SOURCE)
+$(EN_HTML_OUTPUT): $(EN_SOURCE) pandoc.css templates/en-head.html templates/tutorial.html
+	pandoc --standalone --number-section --toc --from markdown --to html5 --template=templates/tutorial.html --metadata toc-title=Contents --metadata "skip-label=Skip to content" -o $(EN_HTML_OUTPUT) --css pandoc.css --include-in-header=templates/en-head.html $(EN_SOURCE)
 
-$(IT_HTML_OUTPUT): $(IT_SOURCE) pandoc.css templates/it-head.html
-	pandoc --standalone --number-section --toc --from markdown --to html5 -o $(IT_HTML_OUTPUT) --css pandoc.css --include-in-header=templates/it-head.html $(IT_SOURCE)
+$(IT_HTML_OUTPUT): $(IT_SOURCE) pandoc.css templates/it-head.html templates/tutorial.html
+	pandoc --standalone --number-section --toc --from markdown --to html5 --template=templates/tutorial.html --metadata toc-title=Indice --metadata "skip-label=Vai al contenuto" -o $(IT_HTML_OUTPUT) --css pandoc.css --include-in-header=templates/it-head.html $(IT_SOURCE)
 
 $(EN_EPUB_OUTPUT): $(EN_SOURCE)
 	pandoc -o $(EN_EPUB_OUTPUT) $(EN_SOURCE)
@@ -92,15 +93,19 @@ $(PAGES_DIR)/tutorial-examples.js: pages/tutorial-examples.js | $(PAGES_DIR)
 $(PAGES_DIR)/tutorial-examples.css: pages/tutorial-examples.css | $(PAGES_DIR)
 	cp $< $@
 
+$(PAGES_DIR)/tutorial-navigation.js: pages/tutorial-navigation.js | $(PAGES_DIR)
+	cp $< $@
+
 $(PAGES_DIR)/pas2wasm/VERSION: $(wildcard vendor/pas2wasm/*) | $(PAGES_DIR)
 	mkdir -p $(PAGES_DIR)/pas2wasm
 	cp vendor/pas2wasm/* $(PAGES_DIR)/pas2wasm/
 
-$(EN_PAGES_DIR)/index.html: $(EN_HTML_OUTPUT) pages/tutorial-examples.js | $(EN_PAGES_DIR)
+$(EN_PAGES_DIR)/index.html: $(EN_HTML_OUTPUT) pages/tutorial-examples.js pages/tutorial-navigation.js | $(EN_PAGES_DIR)
 	cp $< $@
 	sed -i -e '/<\/head>/i\<link rel="stylesheet" href="../tutorial-examples.css">' \
 	  -e '/<\/head>/i\<script defer src="../pas2wasm/engine.js"></script>' \
 	  -e '/<\/head>/i\<script defer src="../pas2wasm/console.js"></script>' \
+	  -e '/<\/head>/i\<script defer src="../tutorial-navigation.js"></script>' \
 	  -e '/<\/head>/i\<script defer src="../tutorial-examples.js"></script>' $@
 
 $(EN_PAGES_DIR)/$(EN_TEXT_OUTPUT): $(EN_TEXT_OUTPUT) | $(EN_PAGES_DIR)
@@ -115,11 +120,12 @@ $(EN_PAGES_DIR)/$(EN_EPUB_OUTPUT): $(EN_EPUB_OUTPUT) | $(EN_PAGES_DIR)
 $(EN_PAGES_DIR)/pandoc.css: pandoc.css | $(EN_PAGES_DIR)
 	cp $< $@
 
-$(IT_PAGES_DIR)/index.html: $(IT_HTML_OUTPUT) pages/tutorial-examples.js | $(IT_PAGES_DIR)
+$(IT_PAGES_DIR)/index.html: $(IT_HTML_OUTPUT) pages/tutorial-examples.js pages/tutorial-navigation.js | $(IT_PAGES_DIR)
 	cp $(IT_HTML_OUTPUT) $(IT_PAGES_DIR)/index.html
 	sed -i -e '/<\/head>/i\<link rel="stylesheet" href="../tutorial-examples.css">' \
 	  -e '/<\/head>/i\<script defer src="../pas2wasm/engine.js"></script>' \
 	  -e '/<\/head>/i\<script defer src="../pas2wasm/console.js"></script>' \
+	  -e '/<\/head>/i\<script defer src="../tutorial-navigation.js"></script>' \
 	  -e '/<\/head>/i\<script defer src="../tutorial-examples.js"></script>' $@
 
 $(IT_PAGES_DIR)/$(IT_TEXT_OUTPUT): $(IT_TEXT_OUTPUT) | $(IT_PAGES_DIR)

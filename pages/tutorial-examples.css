@@ -1,21 +1,23 @@
-.tutorial-example { margin: .5rem 0 2rem; border: 1px solid #c9d2cc; border-radius: 8px; padding: .5rem 1rem; }
-.tutorial-example summary { cursor: pointer; font-weight: 650; }
-.example-workspace { display: grid; gap: .55rem; margin-top: 1rem; }
-.example-workspace label { font-weight: 600; }
-.example-workspace textarea { box-sizing: border-box; width: 100%; font: .95rem/1.5 monospace; padding: .55rem; }
-.example-source { min-height: 15rem; resize: vertical; }
-.example-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
-.example-controls button { padding: .5rem .9rem; cursor: pointer; }
-.example-controls button:disabled { cursor: default; }
-.example-status { margin: .2rem 0; }
+.tutorial-example { margin: .7rem 0 2.2rem; border: 1px solid var(--line); border-radius: .8rem; background: var(--surface); overflow: hidden; font: .95rem/1.5 system-ui, sans-serif; }
+.tutorial-example summary { cursor: pointer; padding: .85rem 1rem; color: var(--teal); font-weight: 700; list-style-position: inside; }
+.tutorial-example summary:hover { background: var(--code); }
+.tutorial-example[open] summary { border-bottom: 1px solid var(--line); }
+.example-workspace { display: grid; gap: .7rem; padding: 1rem; }
+.example-workspace label { font-size: .82rem; font-weight: 700; color: var(--muted); letter-spacing: .02em; }
+.example-workspace textarea { box-sizing: border-box; width: 100%; padding: .8rem 1rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--code); color: var(--ink); font: .86rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; resize: vertical; tab-size: 2; }
+.example-source { max-height: 27rem; }
+.example-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; }
+.example-controls button, .example-escape { min-height: 2.4rem; padding: .45rem .85rem; border: 1px solid var(--line); border-radius: .45rem; background: var(--surface); color: var(--ink); font: 650 .85rem/1.2 system-ui, sans-serif; cursor: pointer; }
+.example-controls .example-run { border-color: var(--teal); background: var(--teal); color: var(--page); }
+.example-controls button:hover:not(:disabled), .example-escape:hover { filter: brightness(.92); }
+.example-controls button:disabled { cursor: default; opacity: .5; }
+.example-status { justify-self: start; margin: .1rem 0; padding: .25rem .55rem; border-radius: 999px; background: var(--code); color: var(--muted); font: 650 .78rem/1.25 system-ui, sans-serif; }
+.example-console { --p2w-console-background: var(--code); --p2w-console-color: var(--ink); --p2w-console-caret-color: var(--teal); --p2w-console-font: .86rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; --p2w-console-min-height: 5rem; --p2w-console-max-height: 18rem; }
+.example-console .p2w-console-terminal { border: 1px solid var(--line) !important; }
 .example-batch { display: grid; gap: .5rem; }
 .example-batch[hidden] { display: none; }
-.example-batch-hint { margin: 0; }
-.example-escape { justify-self: start; padding: .4rem .7rem; cursor: pointer; }
-.example-diagnostic { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
-.example-diagnostic { color: #9b2828; }
+.example-batch-hint { margin: 0; color: var(--muted); font-size: .86rem; }
+.example-escape { justify-self: start; }
+.example-diagnostic { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; color: #a12d28; font: .84rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
 .example-diagnostic:empty { display: none; }
-@media (prefers-color-scheme: dark) {
-  .tutorial-example { border-color: #637068; }
-  .example-diagnostic { color: #ff9d9d; }
-}
+@media (prefers-color-scheme: dark) { .example-diagnostic { color: #ffaaa0; } }

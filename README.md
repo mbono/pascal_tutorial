@@ -53,6 +53,7 @@ The `pages` target creates `_site/` with:
 - `it/pascal_tutorial.it.epub`
 - `it/pandoc.css`
 - `tutorial-examples.js` and `tutorial-examples.css` - shared inline example interface
+- `tutorial-navigation.js` - mobile contents menu
 - `pas2wasm/` - pinned browser compiler, runtime, console, license, and notices
 
 The twenty complete code examples in each language page run when opened and can then be edited and rerun inline.
@@ -61,6 +62,11 @@ Browsers without JSPI automatically retry in batch mode and show an optional inp
 For programs that read input, enter all input before rerunning; the Escape button can
 terminate the text-file example. Short syntax fragments remain static. Open the published site over HTTP(S),
 not `file://`, because the compiler loads same-origin static assets.
+
+The HTML tutorials use `templates/tutorial.html` for the reading layout and
+`pandoc.css` for the shared colors and typography. The contents list is a
+sidebar on desktop and a menu on smaller screens. The PDF, text, and EPUB
+editions are generated directly from the Markdown sources.
 
 The browser assets in `vendor/pas2wasm/` are pinned to `v0.6.0`. To update them, build
 one Pas2Wasm release with `make site`, copy its `engine.js`, `console.js`,
