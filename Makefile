@@ -12,6 +12,7 @@ IT_PDF_OUTPUT := pascal_tutorial.it.pdf
 IT_EPUB_OUTPUT := pascal_tutorial.it.epub
 
 PAGES_DIR := _site
+PAGE_PORT ?= 8000
 EN_PAGES_DIR := $(PAGES_DIR)/en
 IT_PAGES_DIR := $(PAGES_DIR)/it
 
@@ -35,6 +36,9 @@ epub: $(EN_EPUB_OUTPUT) $(IT_EPUB_OUTPUT)
 pages: \
 	$(PAGES_DIR)/index.html \
 	$(PAGES_DIR)/style.css \
+	$(PAGES_DIR)/tutorial-examples.js \
+	$(PAGES_DIR)/tutorial-examples.css \
+	$(PAGES_DIR)/pas2wasm/VERSION \
 	$(EN_PAGES_DIR)/index.html \
 	$(EN_PAGES_DIR)/$(EN_TEXT_OUTPUT) \
 	$(EN_PAGES_DIR)/$(EN_PDF_OUTPUT) \
@@ -45,6 +49,9 @@ pages: \
 	$(IT_PAGES_DIR)/$(IT_PDF_OUTPUT) \
 	$(IT_PAGES_DIR)/$(IT_EPUB_OUTPUT) \
 	$(IT_PAGES_DIR)/pandoc.css
+
+serve-pages: pages
+	python3 -m http.server $(PAGE_PORT) --directory $(PAGES_DIR)
 
 $(EN_PDF_OUTPUT): $(EN_SOURCE)
 	pandoc -o $(EN_PDF_OUTPUT) $(EN_SOURCE)
@@ -79,8 +86,22 @@ $(PAGES_DIR)/index.html: pages/index.html | $(PAGES_DIR)
 $(PAGES_DIR)/style.css: pages/style.css | $(PAGES_DIR)
 	cp $< $@
 
-$(EN_PAGES_DIR)/index.html: $(EN_HTML_OUTPUT) | $(EN_PAGES_DIR)
+$(PAGES_DIR)/tutorial-examples.js: pages/tutorial-examples.js | $(PAGES_DIR)
 	cp $< $@
+
+$(PAGES_DIR)/tutorial-examples.css: pages/tutorial-examples.css | $(PAGES_DIR)
+	cp $< $@
+
+$(PAGES_DIR)/pas2wasm/VERSION: $(wildcard vendor/pas2wasm/*) | $(PAGES_DIR)
+	mkdir -p $(PAGES_DIR)/pas2wasm
+	cp vendor/pas2wasm/* $(PAGES_DIR)/pas2wasm/
+
+$(EN_PAGES_DIR)/index.html: $(EN_HTML_OUTPUT) pages/tutorial-examples.js | $(EN_PAGES_DIR)
+	cp $< $@
+	sed -i -e '/<\/head>/i\<link rel="stylesheet" href="../tutorial-examples.css">' \
+	  -e '/<\/head>/i\<script defer src="../pas2wasm/engine.js"></script>' \
+	  -e '/<\/head>/i\<script defer src="../pas2wasm/console.js"></script>' \
+	  -e '/<\/head>/i\<script defer src="../tutorial-examples.js"></script>' $@
 
 $(EN_PAGES_DIR)/$(EN_TEXT_OUTPUT): $(EN_TEXT_OUTPUT) | $(EN_PAGES_DIR)
 	cp $< $@
@@ -94,8 +115,12 @@ $(EN_PAGES_DIR)/$(EN_EPUB_OUTPUT): $(EN_EPUB_OUTPUT) | $(EN_PAGES_DIR)
 $(EN_PAGES_DIR)/pandoc.css: pandoc.css | $(EN_PAGES_DIR)
 	cp $< $@
 
-$(IT_PAGES_DIR)/index.html: $(IT_HTML_OUTPUT) | $(IT_PAGES_DIR)
+$(IT_PAGES_DIR)/index.html: $(IT_HTML_OUTPUT) pages/tutorial-examples.js | $(IT_PAGES_DIR)
 	cp $(IT_HTML_OUTPUT) $(IT_PAGES_DIR)/index.html
+	sed -i -e '/<\/head>/i\<link rel="stylesheet" href="../tutorial-examples.css">' \
+	  -e '/<\/head>/i\<script defer src="../pas2wasm/engine.js"></script>' \
+	  -e '/<\/head>/i\<script defer src="../pas2wasm/console.js"></script>' \
+	  -e '/<\/head>/i\<script defer src="../tutorial-examples.js"></script>' $@
 
 $(IT_PAGES_DIR)/$(IT_TEXT_OUTPUT): $(IT_TEXT_OUTPUT) | $(IT_PAGES_DIR)
 	cp $(IT_TEXT_OUTPUT) $(IT_PAGES_DIR)/$(IT_TEXT_OUTPUT)
@@ -115,4 +140,4 @@ clean:
 		$(IT_TEXT_OUTPUT) $(IT_HTML_OUTPUT) $(IT_PDF_OUTPUT) $(IT_EPUB_OUTPUT) \
 		*.xml $(PAGES_DIR)
 
-.PHONY: all html clean pdf epub txt docker-build docker-pages pages
+.PHONY: all html clean pdf epub txt docker-build docker-pages pages serve-pages

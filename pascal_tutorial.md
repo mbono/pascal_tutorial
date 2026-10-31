@@ -28,7 +28,7 @@ Let's start with the classic `hello world` program written in Pascal. This code
 simply prints the text string `hello, world` to the screen.
 
 `hello.pas`
-```pascal
+```{.pascal .runnable data-example="hello.pas"}
 {hello.pas: write the string "hello, world"}
 program hello;
 begin
@@ -277,7 +277,7 @@ data types; the `/` division generates a `real` data, while the `div` and `mod`
 operators work on `integer` and generate an `integer` data type.
 
 `numeri.pas`
-```pascal
+```{.pascal .runnable data-example="numeri.pas"}
 program numeri;
 var a, b, c, d: integer; 
 r: real; 
@@ -341,7 +341,7 @@ var str: string[10]; {contains strings of max 10 characters}
 The concatenation operator `+` allows you to merge multiple strings into one.
 
 `stringhe.pas`
-```pascal
+```{.pascal .runnable data-example="stringhe.pas"}
 program stringhe; 
 var s1,s2,s3: string; 
 begin 
@@ -392,7 +392,7 @@ characters, boolean data (`false` is less than `true`), and characters with
 strings. For strings and characters, lexicographic order is respected. It is
 not possible to compare strings and characters with numeric data.
 
-```pascal
+```{.pascal .runnable data-example="bool.pas"}
 program bool; 
 var a,b,c: boolean; 
 begin 
@@ -448,7 +448,7 @@ respectively; the first prints the `EOL` (end of line) character after the
 data, while the second, after reading the data, moves to the next line (after
 the `EOL` character).
 
-```pascal
+```{.pascal .runnable data-example="io.pas"}
 program io;
 var i: integer;
 	r: real; c: char;
@@ -499,7 +499,7 @@ write(exp:space:decimal_digits);
 
 The following code clarifies the concept.
 
-```pascal
+```{.pascal .runnable data-example="formatted_io.pas"}
 program formatted_io;
 var a1,a2,a3,a4,a5,a6: integer;
 begin
@@ -563,7 +563,7 @@ The last `else` always refers to the last occurrence of `if`.
 WARNING: The last instruction before the `else` keyword must not be terminated
 with a semicolon.
 
-```pascal
+```{.pascal .runnable data-example="if_else.pas"}
 program if_else;
 var a,b: integer;
 begin
@@ -631,7 +631,7 @@ A simple menu:
 
 `simple_menu.pas`
 
-```pascal
+```{.pascal .runnable data-example="simple_menu.pas"}
 
 program simple_menu;
 var scelta: integer;
@@ -686,7 +686,7 @@ Print the 3 times table:
 
 `tabellina.pas`
 
-```pascal
+```{.pascal .runnable data-example="tabellina.pas"}
 
 program tabellina;
 var i: integer;
@@ -890,7 +890,7 @@ To declare a variable parameter, the keyword `var` is used.
 
 `parametri.pas`
 
-```pascal
+```{.pascal .runnable data-example="parametri.pas"}
 program parametri;
 procedure foo(a,b: integer; var c: integer);
 {a and b are value parameters while c is variable}
@@ -998,7 +998,7 @@ To access a single element of the array, the form is used:
 It is possible to assign one array to another, thus making an exact copy.
 
 `vettori.pas`
-```pascal
+```{.pascal .runnable data-example="vettori.pas"}
 program vettori;
 var a,b: array [1..10] of integer;
 	i: integer;
@@ -1038,7 +1038,7 @@ To access a single element of the array, the notation is used:
 
 If two arrays have the same dimensions, the assignment operation is possible.
 
-```pascal
+```{.pascal .runnable data-example="vettori_multi.pas"}
 program vettori_multi;
 const
 	n = 10;
@@ -1158,7 +1158,7 @@ We conclude with a small example.
 
 `record_demo.pas`
 
-```pascal
+```{.pascal .runnable data-example="record_demo.pas"}
 
 program record_demo;
 
@@ -1317,7 +1317,7 @@ intersection, and subset comparison.
 
 `set_demo.pas`
 
-```pascal
+```{.pascal .runnable data-example="set_demo.pas"}
 program setdemo;
 type insiemeinteri = set of 0..255;
 var a, b, c: insiemeinteri;
@@ -1362,7 +1362,7 @@ Let's see an example.
 
 `enum_demo.pas`
 
-```pascal
+```{.pascal .runnable data-example="enum_demo.pas"}
 
 program enum_demo;
 
@@ -1398,7 +1398,7 @@ type <name> = <initial_value> .. <final_value>;
 
 For example.
 
-```pascal
+```{.pascal .runnable data-example="subrange.pas"}
 program subrange;
 
 type
@@ -1466,7 +1466,7 @@ record. The function `pos` searches for a substring and does not return a file
 position. We conclude with a complete file-handling program; text files are
 covered in the next section.
 
-```pascal
+```{.pascal .runnable data-example="files.pas"}
 program files;
 var
 	f: file of integer;
@@ -1561,7 +1561,7 @@ Here instead we see how to read a character from a text file (4).
 
 We now show a complete program:
 
-```pascal
+```{.pascal .runnable data-example="textfiles.pas"}
 program prova_text;
 uses crt;
 var
@@ -1637,7 +1637,7 @@ type <nome_tipo_puntatore> = ^<tipo>
 
 Let's see an example to understand the operation.
 
-```pascal
+```{.pascal .runnable data-example="pointer_demo2.pas"}
 program pointer_demo2;
 
 type
@@ -1687,7 +1687,7 @@ Let's see an example that uses pointers and dynamic memory to create a linked
 list; note the use of the value `NIL` which represents the null value for
 pointers; if a pointer is `NIL` it points to nothing.
 
-```pascal
+```{.pascal .runnable data-example="pointer_demo.pas"}
 program pointer_demo;
 
 type

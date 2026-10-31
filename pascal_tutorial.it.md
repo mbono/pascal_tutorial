@@ -28,7 +28,7 @@ Partiamo il classico programma `hello world` scritto in Pascal. Questo codice
 non fa altro che stampare a video la stringa di testo `hello, world`.
 
 `hello.pas`
-```pascal
+```{.pascal .runnable data-example="hello.pas"}
 {hello.pas: write the string "hello, world"}
 program hello;
 begin
@@ -283,7 +283,7 @@ tipo numerico; la divisione `/` genera un dato `real`, mentre gli operatori
 `div` e `mod` operano su `integer` e generano un dato di tipo `integer`.
 
 `numeri.pas`
-```pascal
+```{.pascal .runnable data-example="numeri.pas"}
 program numeri;
 var a, b, c, d: integer; 
 r: real; 
@@ -350,7 +350,7 @@ var str: string[10]; {contiene stringhe di max 10 caratteri}
 L'operatore di concatenazione `+` permette di fondere più stringhe in una sola.
 
 `stringhe.pas`
-```pascal
+```{.pascal .runnable data-example="stringhe.pas"}
 program stringhe; 
 var s1,s2,s3: string; 
 begin 
@@ -403,7 +403,7 @@ caratteri con stringhe. Per stringhe e caratteri viene rispettato l'ordine
 lessicografico. Non è possibile confrontare stringhe e caratteri con dati
 numerici.
 
-```pascal
+```{.pascal .runnable data-example="bool.pas"}
 program bool; 
 var a,b,c: boolean; 
 begin 
@@ -459,7 +459,7 @@ Esistono due varianti di `read` e `write` che sono rispettivamente `writeln` e
 il secondo dopo avere letto i dati si sposta alla riga successiva (dopo il
 carattere `EOL`).
 
-```pascal
+```{.pascal .runnable data-example="io.pas"}
 program io;
 var i: integer;
 	r: real; c: char;
@@ -511,7 +511,7 @@ write(exp:spazio:cifre decimali);
 
 Il codice seguente chiarisce il concetto.
 
-```pascal
+```{.pascal .runnable data-example="formatted_io.pas"}
 program formatted_io;
 var a1,a2,a3,a4,a5,a6: integer;
 begin
@@ -575,7 +575,7 @@ L'ultimo `else` si riferisce sempre all'ultima occorrenza di `if`.
 WARNING: L'ultima istruzione prima della parola chiave `else` non deve essere
 terminata dal punto e virgola.
 
-```pascal
+```{.pascal .runnable data-example="if_else.pas"}
 program if_else;
 var a,b: integer;
 begin
@@ -643,7 +643,7 @@ Un semplice menu:
 
 `simple_menu.pas`
 
-```pascal
+```{.pascal .runnable data-example="simple_menu.pas"}
 
 program simple_menu;
 var scelta: integer;
@@ -698,7 +698,7 @@ Stampa la tabellina del 3:
 
 `tabellina.pas`
 
-```pascal
+```{.pascal .runnable data-example="tabellina.pas"}
 
 program tabellina;
 var i: integer;
@@ -905,7 +905,7 @@ Per dichiarare un parametro variabile si utilizza la parola chiave `var`.
 
 `parametri.pas`
 
-```pascal
+```{.pascal .runnable data-example="parametri.pas"}
 program parametri;
 procedure foo(a,b: integer; var c: integer);
 {a e b sono parametri valore mentre c è variabile}
@@ -1016,7 +1016,7 @@ Per accedere ad un singolo elemento del vettore si usa la forma:
 esatta.
 
 `vettori.pas`
-```pascal
+```{.pascal .runnable data-example="vettori.pas"}
 program vettori;
 var a,b: array [1..10] of integer;
 	i: integer;
@@ -1057,7 +1057,7 @@ Per accedere ad un singolo dato del vettore si usa la notazione:
 Se due vettori hanno le stesse dimensioni è possibile l'operazione di
 assegnazione.
 
-```pascal
+```{.pascal .runnable data-example="vettori_multi.pas"}
 program vettori_multi;
 const
 	n = 10;
@@ -1179,7 +1179,7 @@ Concludiamo con un piccolo esempio.
 
 `record_demo.pas`
 
-```pascal
+```{.pascal .runnable data-example="record_demo.pas"}
 
 program record_demo;
 
@@ -1339,7 +1339,7 @@ intersezione e confronto tra sottoinsiemi.
 
 `set_demo.pas`
 
-```pascal
+```{.pascal .runnable data-example="set_demo.pas"}
 program setdemo;
 type insiemeinteri = set of 0..255;
 var a, b, c: insiemeinteri;
@@ -1384,7 +1384,7 @@ Vediamo un esempio.
 
 `enum_demo.pas`
 
-```pascal
+```{.pascal .runnable data-example="enum_demo.pas"}
 
 program enum_demo;
 
@@ -1420,7 +1420,7 @@ type <nome> = <v_iniziale> .. <v_finale>;
 
 Ad esempio.
 
-```pascal
+```{.pascal .runnable data-example="subrange.pas"}
 program subrange;
 
 type
@@ -1491,7 +1491,7 @@ lettura del primo elemento. La funzione `pos` cerca una sottostringa e non
 restituisce una posizione nel file. Concludiamo con un programma completo sulla
 gestione dei file; la prossima sezione tratta i file di testo.
 
-```pascal
+```{.pascal .runnable data-example="files.pas"}
 program files;
 var
 	f: file of integer;
@@ -1587,7 +1587,7 @@ qui invece vediamo come leggere un carattere da un file di testo (4).
 
 mostriamo ora un programma completo :
 
-```pascal
+```{.pascal .runnable data-example="textfiles.pas"}
 program prova_text;
 uses crt;
 var
@@ -1667,7 +1667,7 @@ type <nome_tipo_puntatore> = ^<tipo>
 
 Vediamo un esempio per capire il funzionamento.
 
-```pascal
+```{.pascal .runnable data-example="pointer_demo2.pas"}
 program pointer_demo2;
 
 type
@@ -1718,7 +1718,7 @@ Vediamo un esempio che sfrutta i puntatori e la memoria dinamica per creare
 una lista concatenata; da notare l'utilizzo del valore `NIL` che rappresenta
 il valore nullo per i puntatori; se un puntatore è `NIL` non punta a nulla.
 
-```pascal
+```{.pascal .runnable data-example="pointer_demo.pas"}
 program pointer_demo;
 
 type

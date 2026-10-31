@@ -1,0 +1,17 @@
+.tutorial-example { margin: .5rem 0 2rem; border: 1px solid #c9d2cc; border-radius: 8px; padding: .5rem 1rem; }
+.tutorial-example summary { cursor: pointer; font-weight: 650; }
+.example-workspace { display: grid; gap: .55rem; margin-top: 1rem; }
+.example-workspace label { font-weight: 600; }
+.example-workspace textarea { box-sizing: border-box; width: 100%; font: .95rem/1.5 monospace; padding: .55rem; }
+.example-source { min-height: 15rem; resize: vertical; }
+.example-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
+.example-controls button { padding: .5rem .9rem; cursor: pointer; }
+.example-controls button:disabled { cursor: default; }
+.example-status { margin: .2rem 0; }
+.example-diagnostic { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
+.example-diagnostic { color: #9b2828; }
+.example-diagnostic:empty { display: none; }
+@media (prefers-color-scheme: dark) {
+  .tutorial-example { border-color: #637068; }
+  .example-diagnostic { color: #ff9d9d; }
+}
