@@ -57,7 +57,9 @@ The `pages` target creates `_site/` with:
 
 The twenty complete code examples in each language page run when opened and can then be edited and rerun inline.
 They compile and execute in browser workers using [Pas2Wasm](https://github.com/mbono/pas2wasm).
-Interactive input requires browser JSPI support. Short syntax fragments remain static. Open the published site over HTTP(S),
+Browsers without JSPI automatically retry in batch mode and show an optional input field.
+For programs that read input, enter all input before rerunning; the Escape button can
+terminate the text-file example. Short syntax fragments remain static. Open the published site over HTTP(S),
 not `file://`, because the compiler loads same-origin static assets.
 
 The browser assets in `vendor/pas2wasm/` are pinned to `v0.6.0`. To update them, build

@@ -2,18 +2,22 @@
 (() => {
   const strings = {
     en: {try: 'Try this example', source: 'Pascal source', run: 'Run', stop: 'Stop',
-      reset: 'Reset', output: 'Output',
+      reset: 'Reset', output: 'Output', batchInput: 'Input for the next run',
+      batchHint: 'This browser needs all input before Run. Enter each readln response on a separate line.',
+      addEscape: 'Add Escape key',
       loading: 'Loading compiler…', ready: 'Ready', compiling: 'Compiling…',
       stopped: 'Stopped', failed: 'Failed', completed: 'Completed',
-      unsupported: 'Interactive input is unavailable in this browser.'},
+      unsupported: 'Live input is unavailable in this browser. Enter all input below, then press Run again.'},
     it: {try: 'Prova questo esempio', source: 'Codice Pascal', run: 'Esegui', stop: 'Ferma',
-      reset: 'Ripristina', output: 'Output',
+      reset: 'Ripristina', output: 'Output', batchInput: 'Input per la prossima esecuzione',
+      batchHint: 'Questo browser richiede tutto l’input prima di Esegui. Inserisci ogni risposta a readln su una riga separata.',
+      addEscape: 'Aggiungi tasto Esc',
       loading: 'Caricamento compilatore…', ready: 'Pronto', compiling: 'Compilazione…',
       stopped: 'Fermato', failed: 'Errore', completed: 'Completato',
-      unsupported: 'Input interattivo non disponibile in questo browser.'}
+      unsupported: 'Input interattivo non disponibile in questo browser. Inserisci tutto l’input qui sotto e premi di nuovo Esegui.'}
   };
   const t = strings[document.documentElement.lang === 'it' ? 'it' : 'en'];
-  let enginePromise, active, generation = 0;
+  let enginePromise, active, generation = 0, jspiSupport = null;
 
   function diagnostic(value) {
     const place = value.line ? `${value.line}:${value.column || 1}: ` : '';
@@ -49,6 +53,12 @@
         </div>
         <p class="example-status" role="status" aria-live="polite">${t.ready}</p>
         <div class="example-console" aria-label="${t.output}"></div>
+        <div class="example-batch" hidden>
+          <label for="${id}-input">${t.batchInput}</label>
+          <p class="example-batch-hint">${t.batchHint}</p>
+          <textarea id="${id}-input" class="example-input" rows="4"></textarea>
+          <button type="button" class="example-escape">${t.addEscape}</button>
+        </div>
         <pre class="example-diagnostic" aria-live="polite"></pre>
       </div>`;
     original.after(details);
@@ -57,17 +67,23 @@
     const run = $('.example-run'), stop = $('.example-stop');
     const status = $('.example-status');
     const error = $('.example-diagnostic');
+    const batch = $('.example-batch'), input = $('.example-input');
     const terminal = Pas2WasmConsole.create($('.example-console'), {autoFocus: false});
     editor.value = source;
     function busy(value) { run.disabled = value; stop.disabled = !value; }
+    function showBatch() { batch.hidden = jspiSupport !== false; }
     details.addEventListener('toggle', () => {
-      if (details.open) { original.hidden = true; run.click(); }
+      if (details.open) { original.hidden = true; showBatch(); run.click(); }
       else { original.hidden = false; if (active?.details === details) stopActive(); busy(false); }
+    });
+    $('.example-escape').addEventListener('click', () => {
+      input.setRangeText('\x1b', input.selectionStart, input.selectionEnd, 'end');
+      input.focus();
     });
     stop.addEventListener('click', () => { if (active?.details === details) stopActive(); busy(false); status.textContent = t.stopped; });
     $('.example-reset').addEventListener('click', () => {
       if (active?.details === details) stopActive();
-      editor.value = source; error.textContent = '';
+      editor.value = source; input.value = ''; error.textContent = '';
       terminal.clear(); busy(false); status.textContent = t.ready;
     });
     run.addEventListener('click', async () => {
@@ -84,19 +100,29 @@
         const compiled = await engine.compile(editor.value, {signal: abort.signal});
         if (token !== generation) return;
         if (compiled.diagnostic) { error.textContent = diagnostic(compiled.diagnostic); status.textContent = t.failed; return; }
-        const handlers = terminal.createHandlers();
-        const session = engine.run(compiled.binary, {
-          mode: 'interactive',
-          onOutput: handlers.onOutput,
-          onInputRequest: handlers.onInputRequest,
-          onStateChange(state) { handlers.onStateChange(state); status.textContent = state; },
-          onCapabilities({jspi}) { if (!jspi) error.textContent = t.unsupported; }
-        });
-        active.session = session;
-        const outcome = await session.done;
-        if (token !== generation) return;
-        status.textContent = t[outcome.status] || outcome.status;
-        if (outcome.diagnostic) error.textContent = `${error.textContent ? error.textContent + '\n' : ''}${diagnostic(outcome.diagnostic)}`;
+        let mode = jspiSupport === false ? 'batch' : 'interactive';
+        for (;;) {
+          const handlers = terminal.createHandlers();
+          const session = engine.run(compiled.binary, {
+            mode, input: mode === 'batch' ? input.value : '',
+            onOutput: handlers.onOutput,
+            onInputRequest: handlers.onInputRequest,
+            onStateChange(state) { handlers.onStateChange(state); status.textContent = state; },
+            onCapabilities({jspi}) { jspiSupport = jspi; showBatch(); }
+          });
+          active.session = session;
+          const outcome = await session.done;
+          if (token !== generation) return;
+          if (mode === 'interactive' && jspiSupport === false &&
+              outcome.status === 'failed' && outcome.diagnostic?.code === 'E_JSPI') {
+            mode = 'batch';
+            terminal.clear();
+            continue;
+          }
+          status.textContent = t[outcome.status] || outcome.status;
+          if (outcome.diagnostic) error.textContent = `${jspiSupport === false && mode === 'batch' ? t.unsupported + '\n' : ''}${diagnostic(outcome.diagnostic)}`;
+          break;
+        }
       } catch (e) {
         if (token !== generation) return;
         if (e.name !== 'AbortError') { error.textContent = diagnostic(e); status.textContent = t.failed; }

@@ -8,6 +8,10 @@
 .example-controls button { padding: .5rem .9rem; cursor: pointer; }
 .example-controls button:disabled { cursor: default; }
 .example-status { margin: .2rem 0; }
+.example-batch { display: grid; gap: .5rem; }
+.example-batch[hidden] { display: none; }
+.example-batch-hint { margin: 0; }
+.example-escape { justify-self: start; padding: .4rem .7rem; cursor: pointer; }
 .example-diagnostic { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
 .example-diagnostic { color: #9b2828; }
 .example-diagnostic:empty { display: none; }
