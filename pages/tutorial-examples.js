@@ -68,7 +68,7 @@
     const status = $('.example-status');
     const error = $('.example-diagnostic');
     const batch = $('.example-batch'), input = $('.example-input');
-    const terminal = Pas2WasmConsole.create($('.example-console'), {autoFocus: false});
+    const terminal = Pas2WasmConsole.create($('.example-console'), {autoFocus: true});
     editor.value = source;
     editor.rows = Math.min(18, Math.max(8, source.split('\n').length));
     function busy(value) { run.disabled = value; stop.disabled = !value; }
