@@ -73,7 +73,7 @@ function createPas2WasmRuntime(input, emit, limits = {}, requestLine = null) {
     // Files own bounded snapshots; bindings own names, modes/cursors and checked lifetimes.
     const virtualFiles = new Map(), fileBindings = new Map();
     let fileSequence = 0, fileBytes = 0, openFiles = 0;
-    let fileResults = [], fileLoadAllowed = false;
+    let fileResultsReady = false, fileLoadAllowed = false;
 
     let memory = null, position = 0, offset = 0, outputBytes = 0;
     let closed = !requestLine, inputBytes = encoder.encode(input).length;
@@ -83,7 +83,7 @@ function createPas2WasmRuntime(input, emit, limits = {}, requestLine = null) {
     let terminated = lines.map((_, i) => i < lines.length - 1 || input.endsWith('\n'));
     /* Throw a diagnostic-bearing error; callers must render its fields as text. */
     function fail(code, message, line = 0, column = 0) {
-        finishFiles(); fileResults = []; fileLoadAllowed = false;
+        finishFiles(); fileResultsReady = false; fileLoadAllowed = false;
         const error = new Error(message);
         error.code = code; error.line = line; error.column = column;
         throw error;
@@ -762,20 +762,17 @@ function createPas2WasmRuntime(input, emit, limits = {}, requestLine = null) {
         closeFile(binding); fileBindings.delete(binding.id);
         if (binding.owner.kind === 'frame') binding.owner.files.delete(binding.id);
     }
-    /* Completion/failure discards all run-owned bytes and handles, without touching
+    /* Disposal/failure discards all run-owned bytes and handles, without touching
      * Pascal memory used by diagnostic/atomicity assertions. Stop drops the worker. */
     function finishFiles() {
         for (const binding of fileBindings.values()) dropFileBinding(binding);
         virtualFiles.clear(); fileBytes = 0; openFiles = 0;
     }
-    /* Successful main completion transfers bounded text snapshots out of the live
-     * filesystem. Unchanged inputs and internal typed snapshots are not results. */
+    /* Completion retires handles, retaining every named file until attach/disposal.
+     * The host may copy the completed filesystem before releasing its worker. */
     function completeFiles() {
-        fileResults = [];
-        for (const [name, file] of virtualFiles)
-            if (file.kind && file.generated)
-                fileResults.push({name, data:file.data.slice(0, file.length)});
-        fileLoadAllowed = false; finishFiles();
+        for (const binding of fileBindings.values()) dropFileBinding(binding);
+        fileLoadAllowed = false; fileResultsReady = true;
     }
     /* Seed one fresh attachment atomically. Preflight all metadata before copying
      * at most 1 MiB, then validate the owned bytes without changing their encoding. */
@@ -809,13 +806,13 @@ function createPas2WasmRuntime(input, emit, limits = {}, requestLine = null) {
         }
         for (const file of prepared)
             virtualFiles.set(file.name, {kind:1,type:0,size:0,data:file.data,length:file.data.length,
-                readers:new Set(),writer:0,text:null,generated:false});
+                readers:new Set(),writer:0,text:null});
         fileBytes = total; fileLoadAllowed = false;
     }
     /* Abandoning a worker/embedding releases accepted typeahead as well as files.
      * File-only finish stays separate so virtual I/O never changes console state. */
     function finishRuntime() {
-        finishFiles(); fileResults = []; fileLoadAllowed = false; keyQueue = ''; keyOffset = 0;
+        finishFiles(); fileResultsReady = false; fileLoadAllowed = false; keyQueue = ''; keyOffset = 0;
         lines = []; terminated = []; position = offset = 0; closed = true;
     }
     /* Stale heap owners release their bindings before any capacity/open-mode check.
@@ -894,7 +891,7 @@ function createPas2WasmRuntime(input, emit, limits = {}, requestLine = null) {
                 fail('R_FILE_LIMIT','Named virtual file budget exhausted.',line,column);
             const oldLength = file?.length || 0;
             file = {kind:binding.kind,type:binding.type,size:binding.size,data:new Uint8Array(0),
-                length:0,readers:new Set(),writer:binding.id,text:null,generated:true};
+                length:0,readers:new Set(),writer:binding.id,text:null};
             virtualFiles.set(binding.name,file); fileBytes -= oldLength;
             binding.mode = 1; binding.cursor = 0;
         } else {
@@ -1254,11 +1251,17 @@ function createPas2WasmRuntime(input, emit, limits = {}, requestLine = null) {
         }
     };
     return {imports, finish:finishRuntime, loadFiles,
-        /* Consume results once. The caller owns their buffers independently of finish. */
-        takeFiles() { const result = fileResults; fileResults = []; return result; },
+        /* Consume one completed filesystem snapshot, including untouched uploads.
+         * Copies outlive disposal; typed data retains its backend-owned binary layout. */
+        takeFiles() {
+            if (!fileResultsReady) return [];
+            fileResultsReady = false;
+            return Array.from(virtualFiles, ([name, file]) => ({name,
+                kind:file.kind ? 'text' : 'typed', data:file.data.slice(0, file.length)}));
+        },
         /* Bind only the freshly instantiated generated program's bounded memory. */
         attach(instance) {
-            finishFiles(); fileResults = []; fileLoadAllowed = false; fileSequence = 0;
+            finishFiles(); fileResultsReady = false; fileLoadAllowed = false; fileSequence = 0;
             memory = instance.exports.memory;
             variantSchemas.clear(); variantSchemaBytes = 0;
             references.clear(); referenceKeys.clear(); frames.clear(); referenceSequence = 0;

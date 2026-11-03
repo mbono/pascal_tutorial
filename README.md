@@ -68,7 +68,7 @@ The HTML tutorials use `templates/tutorial.html` for the reading layout and
 sidebar on desktop and a menu on smaller screens. The PDF, text, and EPUB
 editions are generated directly from the Markdown sources.
 
-The browser assets in `vendor/pas2wasm/` are pinned to `v0.6.0`. To update them, build
+The browser assets in `vendor/pas2wasm/` are pinned to `v0.7.0`. To update them, build
 one Pas2Wasm release with `make site`, copy its `engine.js`, `console.js`,
 `pas2wasm.js`, `pas2wasm.wasm`, `compiler-worker.js`, `LICENSE`, and
 `THIRD_PARTY_NOTICES.txt` from its `build/` directory together, update `VERSION`,
