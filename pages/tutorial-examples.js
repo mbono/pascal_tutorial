@@ -3,6 +3,7 @@
   const strings = {
     en: {try: 'Try this example', source: 'Pascal source', run: 'Run', stop: 'Stop',
       reset: 'Reset', output: 'Output', batchInput: 'Input for the next run',
+      files: 'Generated files', download: 'Download',
       batchHint: 'This browser needs all input before Run. Enter each readln response on a separate line.',
       addEscape: 'Add Escape key',
       loading: 'Loading compiler…', ready: 'Ready', compiling: 'Compiling…',
@@ -10,6 +11,7 @@
       unsupported: 'Live input is unavailable in this browser. Enter all input below, then press Run again.'},
     it: {try: 'Prova questo esempio', source: 'Codice Pascal', run: 'Esegui', stop: 'Ferma',
       reset: 'Ripristina', output: 'Output', batchInput: 'Input per la prossima esecuzione',
+      files: 'File generati', download: 'Scarica',
       batchHint: 'Questo browser richiede tutto l’input prima di Esegui. Inserisci ogni risposta a readln su una riga separata.',
       addEscape: 'Aggiungi tasto Esc',
       loading: 'Caricamento compilatore…', ready: 'Pronto', compiling: 'Compilazione…',
@@ -53,6 +55,10 @@
         </div>
         <p class="example-status" role="status" aria-live="polite">${t.ready}</p>
         <div class="example-console" aria-label="${t.output}"></div>
+        <section class="example-files" aria-label="${t.files}" hidden>
+          <h4>${t.files}</h4>
+          <ul></ul>
+        </section>
         <div class="example-batch" hidden>
           <label for="${id}-input">${t.batchInput}</label>
           <p class="example-batch-hint">${t.batchHint}</p>
@@ -68,14 +74,36 @@
     const status = $('.example-status');
     const error = $('.example-diagnostic');
     const batch = $('.example-batch'), input = $('.example-input');
+    const files = $('.example-files'), fileList = files.querySelector('ul');
+    let fileUrls = [];
     const terminal = Pas2WasmConsole.create($('.example-console'), {autoFocus: true});
     editor.value = source;
     editor.rows = Math.min(18, Math.max(8, source.split('\n').length));
     function busy(value) { run.disabled = value; stop.disabled = !value; }
+    function clearFiles() {
+      fileUrls.forEach(url => URL.revokeObjectURL(url));
+      fileUrls = []; fileList.replaceChildren(); files.hidden = true;
+    }
+    function showFiles(artifacts) {
+      clearFiles();
+      if (!artifacts?.length) return;
+      for (const artifact of artifacts) {
+        const url = URL.createObjectURL(new Blob([artifact.data], {
+          type: artifact.kind === 'text' ? 'text/plain;charset=utf-8' : 'application/octet-stream'
+        }));
+        fileUrls.push(url);
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = url; link.download = artifact.name; link.textContent = `${t.download} ${artifact.name}`;
+        item.append(link);
+        fileList.append(item);
+      }
+      files.hidden = false;
+    }
     function showBatch() { batch.hidden = jspiSupport !== false; }
     details.addEventListener('toggle', () => {
       if (details.open) { original.hidden = true; showBatch(); run.click(); }
-      else { original.hidden = false; if (active?.details === details) stopActive(); busy(false); }
+      else { original.hidden = false; if (active?.details === details) stopActive(); busy(false); clearFiles(); }
     });
     $('.example-escape').addEventListener('click', () => {
       input.setRangeText('\x1b', input.selectionStart, input.selectionEnd, 'end');
@@ -85,7 +113,7 @@
     $('.example-reset').addEventListener('click', () => {
       if (active?.details === details) stopActive();
       editor.value = source; input.value = ''; error.textContent = '';
-      terminal.clear(); busy(false); status.textContent = t.ready;
+      terminal.clear(); clearFiles(); busy(false); status.textContent = t.ready;
     });
     run.addEventListener('click', async () => {
       stopActive();
@@ -93,7 +121,7 @@
       const abort = new AbortController();
       active = {details, abort, session: null, cleanup() { busy(false); status.textContent = t.stopped; }};
       busy(true); status.textContent = t.loading; error.textContent = '';
-      terminal.clear();
+      terminal.clear(); clearFiles();
       try {
         const engine = await getEngine();
         if (token !== generation) return;
@@ -121,6 +149,7 @@
             continue;
           }
           status.textContent = t[outcome.status] || outcome.status;
+          if (outcome.status === 'completed') showFiles(outcome.files);
           if (outcome.diagnostic) error.textContent = `${jspiSupport === false && mode === 'batch' ? t.unsupported + '\n' : ''}${diagnostic(outcome.diagnostic)}`;
           break;
         }
@@ -133,6 +162,12 @@
     });
   });
   window.addEventListener('pagehide', event => {
-    if (!event.persisted) { stopActive(); enginePromise?.then(engine => engine.dispose()); }
+    if (!event.persisted) {
+      stopActive();
+      document.querySelectorAll('.tutorial-example').forEach(details => {
+        details.querySelectorAll('.example-files a').forEach(link => URL.revokeObjectURL(link.href));
+      });
+      enginePromise?.then(engine => engine.dispose());
+    }
   });
 })();

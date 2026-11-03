@@ -14,6 +14,11 @@
 .example-status { justify-self: start; margin: .1rem 0; padding: .25rem .55rem; border-radius: 999px; background: var(--code); color: var(--muted); font: 650 .78rem/1.25 system-ui, sans-serif; }
 .example-console { --p2w-console-background: var(--code); --p2w-console-color: var(--ink); --p2w-console-caret-color: var(--teal); --p2w-console-font: .86rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; --p2w-console-min-height: 5rem; --p2w-console-max-height: 18rem; }
 .example-console .p2w-console-terminal { border: 1px solid var(--line) !important; }
+.example-files { padding: .65rem .8rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--code); }
+.example-files h4 { margin: 0 0 .35rem; font: 700 .85rem/1.4 system-ui, sans-serif; color: var(--muted); }
+.example-files ul { margin: 0; padding-left: 1.2rem; }
+.example-files a { color: var(--teal); overflow-wrap: anywhere; }
+.example-files[hidden] { display: none; }
 .example-batch { display: grid; gap: .5rem; }
 .example-batch[hidden] { display: none; }
 .example-batch-hint { margin: 0; color: var(--muted); font-size: .86rem; }
